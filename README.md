@@ -18,13 +18,7 @@ It is designed to be a 100% feature-complete clone of classic UniKey, but built 
 
 The application uses an O(1) shared memory IPC model (`Local\UniKeyTSF_SharedConfig`) to communicate instantly between the Manager GUI and the injected TSF DLLs without JSON parsing or named pipe overhead.
 
-```mermaid
-graph TD
-    A["UniKeyTSF.exe<br>Manager & Tray"] -->|Writes Config| B[("Shared Memory IPC<br>Zero-Overhead struct")]
-    B -->|Reads Config O(1)| C("uktsf_core64.dll<br>64-bit TSF COM")
-    B -->|Reads Config O(1)| D("uktsf_core32.dll<br>32-bit TSF COM")
-    A --> E["Config Layer<br>blacklist.txt, macros.ukm"]
-```
+![Architecture Diagram](./docs/tech/architecture.png)
 
 ### Tech Stack
 - **Language:** C++17 (MSVC)
