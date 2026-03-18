@@ -1,0 +1,11 @@
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\main.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\main.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\ui\tray_icon.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\tray_icon.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\ui\settings_dialog.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\settings_dialog.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\config\ipc_manager.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\ipc_manager.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\config\blacklist.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\blacklist.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\engine\hook_manager.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\hook_manager.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\engine\tsf_registration.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\tsf_registration.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\engine\vn_engine.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\vn_engine.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\engine\vn_ortho.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\vn_ortho.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\engine\macro.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\macro.obj
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\src\toolkit\clipboard.cpp;C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\UniKeyTSF.dir\Release\clipboard.obj

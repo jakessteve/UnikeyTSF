@@ -1,0 +1,3 @@
+C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
+C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/_deps/googletest-subbuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/_deps/googletest-subbuild/CMakeFiles/ZERO_CHECK.dir

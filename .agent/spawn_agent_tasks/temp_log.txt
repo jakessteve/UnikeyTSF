@@ -1,0 +1,10 @@
+=== Spawn Agent: GEMINI ===
+Timestamp: 2026-03-18 10:18:25
+Mode: auto_edit
+Prompt preview: # Task: Phase 2.1 - Vietnamese Spell Check & Smart Typo Restoration
+
+## Architecture Context
+The project is a C++ TSF / Global Keyboard Hook engine for Vietnamese typing (UniKeyTSF Reborn).
+The core t...
+================================
+

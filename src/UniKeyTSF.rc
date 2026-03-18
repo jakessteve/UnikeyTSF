@@ -1,0 +1,87 @@
+// Resource script — UniKey TSF Reborn
+#pragma code_page(65001)
+#include "resource.h"
+#include <windows.h>
+
+// Application icon (shown in Explorer, taskbar, Alt+Tab)
+IDI_APP_ICON    ICON    "app.ico"
+
+// Version info
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     0,1,0,0
+PRODUCTVERSION  0,1,0,0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEFLAGS       0
+FILEOS          VOS__WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName",      "UniKey TSF Reborn"
+            VALUE "FileDescription",  "UniKey TSF - Vietnamese Input Method"
+            VALUE "FileVersion",      "0.1.0.0"
+            VALUE "InternalName",     "UniKeyTSF"
+            VALUE "LegalCopyright",   "GPL-3.0"
+            VALUE "OriginalFilename", "UniKeyTSF.exe"
+            VALUE "ProductName",      "UniKey TSF Reborn"
+            VALUE "ProductVersion",   "0.1.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1200
+    END
+END
+
+// =============================================================================
+// Settings Dialog — Dark Theme with Tabs (v5: Spacious)
+// =============================================================================
+// Pure black background, white text, proper spacing with breathing room.
+// Dialog size: 300 x 270 DLU
+// =============================================================================
+
+IDD_SETTINGS_DIALOG DIALOGEX 0, 0, 300, 335
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "UniKey TSF Reborn"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    AUTOCHECKBOX    "Bật gõ tiếng Việt", IDC_CHK_VIETNAMESE, 12, 10, 130, 14
+
+    GROUPBOX        "Cơ bản", IDC_STATIC, 10, 30, 280, 50
+    LTEXT           "Kiểu gõ:", IDC_LBL_INPUT_METHOD, 18, 44, 48, 12
+    COMBOBOX        IDC_CBO_INPUT_METHOD, 72, 42, 210, 100, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    LTEXT           "Bảng mã:", IDC_LBL_CHARSET, 18, 62, 48, 12
+    COMBOBOX        IDC_CBO_CHARSET, 72, 60, 210, 100, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    GROUPBOX        "Phím chuyển", IDC_GRP_TOGGLE_KEY, 10, 86, 135, 34
+    AUTORADIOBUTTON "Ctrl+Shift", IDC_RAD_CTRL_SHIFT, 20, 100, 55, 12, WS_GROUP
+    AUTORADIOBUTTON "Alt+Z", IDC_RAD_ALT_Z, 85, 100, 50, 12
+
+    GROUPBOX        "Kiểu dấu", IDC_GRP_TONE_TYPE, 155, 86, 135, 34
+    AUTORADIOBUTTON "Mới (hoá)", IDC_RAD_MODERN_TONE, 165, 100, 52, 12, WS_GROUP
+    AUTORADIOBUTTON "Cũ (hóa)", IDC_RAD_CLASSIC_TONE, 230, 100, 54, 12
+
+    GROUPBOX        "Tùy chọn", IDC_GRP_OPTIONS, 10, 126, 280, 68
+    AUTOCHECKBOX    "Kiểm tra chính tả", IDC_CHK_SPELL_CHECK, 20, 140, 120, 12
+    AUTOCHECKBOX    "Bỏ dấu tự do", IDC_CHK_FREE_TONE, 155, 140, 120, 12
+    AUTOCHECKBOX    "Bật gõ tắt (Macro)", IDC_CHK_MACRO, 20, 154, 120, 12
+    AUTOCHECKBOX    "Khởi động cùng Windows", IDC_CHK_AUTO_START, 155, 154, 120, 12
+
+    LTEXT           "Macro:", IDC_LBL_MACRO_FILE, 20, 174, 30, 12
+    EDITTEXT        IDC_TXT_MACRO_FILE, 55, 172, 195, 14, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDC_BTN_MACRO_FILE, 255, 172, 25, 14
+
+    GROUPBOX        "Danh sách loại trừ (Blacklist)", IDC_GRP_BLACKLIST, 10, 200, 280, 95
+    LISTBOX         IDC_LST_BLACKLIST, 20, 214, 195, 60, WS_VSCROLL | WS_TABSTOP | LBS_NOTIFY | LBS_NOINTEGRALHEIGHT | WS_BORDER
+    EDITTEXT        IDC_TXT_BLACKLIST_ADD, 20, 276, 175, 14, ES_AUTOHSCROLL
+    PUSHBUTTON      "...", IDC_BTN_BLACKLIST_BROWSE, 200, 276, 20, 14
+    PUSHBUTTON      "Xóa", IDC_BTN_BLACKLIST_DEL, 225, 214, 55, 16
+    PUSHBUTTON      "Thêm", IDC_BTN_BLACKLIST_ADD, 225, 276, 55, 16
+
+    LTEXT           "Ctrl+Shift+F6: Chuyển mã    Ctrl+Shift+F9: Bỏ dấu", IDC_LBL_SHORTCUT1, 10, 310, 200, 12
+    DEFPUSHBUTTON   "Đóng", IDOK, 225, 305, 65, 20
+END

@@ -1,0 +1,10 @@
+^C:\USERS\HEOCOP\DOWNLOADS\PROJECTS\UNIKEYTSF\BUILD32\CMAKEFILES\9DDFED39FEA7A0049393AB22908C2D22\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\18\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/HeoCop/Downloads/Projects/UnikeyTSF -BC:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/UniKeyTSF.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

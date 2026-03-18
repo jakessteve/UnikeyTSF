@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/UniKeyTests[1]_tests.cmake")
+  include("C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/UniKeyTests[1]_tests.cmake")
+else()
+  add_test(UniKeyTests_NOT_BUILT UniKeyTests_NOT_BUILT)
+endif()

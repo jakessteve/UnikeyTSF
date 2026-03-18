@@ -1,0 +1,51 @@
+﻿=== Spawn Agent: GEMINI ===
+Timestamp: 2026-03-17 20:32:25
+Mode: yolo
+Prompt preview: # Task: Round 2 Functional Review (@qc)
+## Goal: Perform a functional and edge-case review of the updated TSF integration. Focus on how backspace behaves with the new VnEngine _raw buffer, how async e...
+================================
+
+I will begin by reading the source files specified in the task to understand the current implementation of TSF integration and the Vietnamese engine.
+
+I have completed the functional review of the TSF integration and the Vietnamese engine. Below is a summary of the conceptual edge cases and potential failure points identified during the review.
+
+### 1. Backspace Behavior & `_raw` Buffer Sync
+*   **Issue:** In `VnEngine::RemoveLastChar()`, the engine merely pops the last character from `_raw` and sets `_composition = _raw`. It fails to re-run the Vietnamese transformation rules (`ApplyTelexRules` or `ApplyVniRules`) on the remaining buffer.
+*   **UX Impact:** If a user types "aas" (resulting in "ß║Ñ") and presses backspace, the composition should revert to "├ó" (Telex). Currently, it reverts to "aa" (literal), breaking the expected "recursive" backspace behavior common in Vietnamese IMEs.
+*   **Root Cause:** `VnEngine` does not persist the current `InputMethod`. It is passed as a parameter to `ProcessKey` but is unavailable during `RemoveLastChar`.
+
+### 2. Async Edit Session State Drift
+*   **Issue:** `CUniKeyTextService` captures `this` in lambdas for edit sessions. If a `TF_ES_SYNC` request fails and falls back to an asynchronous session, the lambda executes later.
+*   **Race Condition:** If a second key is pressed before the first (now async) edit session executes:
+    1. `_engine` state is updated by the second key.
+    2. The first edit session runs and calls `_engine.GetCompositionString()`, which now returns the result for the *second* key.
+    3. The second edit session runs and does the same.
+*   **Failure Point:** While redundant updates to the same text are usually harmless, a critical failure occurs if the first session was intended to `EndComposition` (e.g., on a word terminator like Space) and the second session was intended to `StartComposition` for a new word. The async order could lead to the new word's composition being ended prematurely or merged incorrectly.
+
+### 3. IPC Mutex & UI Blocking
+*   **Issue:** `_UpdateConfig()` is called on every `OnTestKeyDown` and `OnKeyDown`. It performs `OpenMutexW`, `OpenFileMappingW`, and a `WaitForSingleObject` (10ms timeout) every time.
+*   **UX Impact:** 10ms is small but cumulative. If the configuration tool (GUI) holds the mutex, every keystroke in every application using the TSF service will lag by 10ms. On high-polling rate keyboards or fast typists, this can lead to "stuttering" input.
+*   **Efficiency:** Repeatedly opening and closing kernel object handles (Mutex/FileMapping) for every keystroke is significantly more expensive than caching the handles and only performing the `MapViewOfFile`/`UnmapViewOfFile` (or even caching the view).
+
+### 4. TSF Synchronization Edge Cases
+*   **Composition Range Management:** `CCompositionManager::UpdateComposition` uses `pRange->SetText(ec, 0, ...)` which replaces the entire range. This is generally safe for simple Vietnamese composition where the whole word is a single "unit". However, it doesn't handle cases where the application might have moved the selection *inside* our composition range (though TSF usually prevents this if the range is locked).
+*   **Placeholder Start:** `CCompositionManager::StartComposition` is currently a placeholder and the real work happens inside `UpdateComposition`. If `UpdateComposition` fails to start the composition (e.g., `pIAS` query fails), the engine will continue to "eat" keys while the application sees nothing, leading to lost input.
+
+### Summary of Failure Points
+| Area | Failure Point | Severity |
+| :--- | :--- | :--- |
+| **TSF** | Race conditions in async edit sessions for word-breaks. | Medium (Potential text corruption) |
+| **Engine** | Backspace doesn't re-apply Vietnamese rules. | High (UX Regression) |
+| **IPC** | Mutex wait and handle churn on every keystroke. | Medium (Performance/Input Lag) |
+| **TSF** | Simplistic composition start might fail silently. | Low (Stability) |
+
+[ERROR] [ImportProcessor] Failed to import biz: ENOENT: no such file or directory, access 'c:\users\heocop\.gemini\biz'
+YOLO mode is enabled. All tool calls will be automatically approved.
+[ERROR] [ImportProcessor] Failed to import biz: ENOENT: no such file or directory, access 'c:\users\heocop\.gemini\biz'
+Loaded cached credentials.
+YOLO mode is enabled. All tool calls will be automatically approved.
+
+
+================================
+Exit code: 0
+Completed: 2026-03-17 20:33:06

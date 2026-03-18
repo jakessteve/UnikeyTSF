@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/ClipboardTests[1]_tests.cmake")
+  include("C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/ClipboardTests[1]_tests.cmake")
+else()
+  add_test(ClipboardTests_NOT_BUILT ClipboardTests_NOT_BUILT)
+endif()

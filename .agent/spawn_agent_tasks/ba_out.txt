@@ -1,0 +1,85 @@
+﻿=== Spawn Agent: GEMINI ===
+Timestamp: 2026-03-17 20:32:19
+Mode: yolo
+Prompt preview: # Task: Round 2 Architecture Review (@ba)
+## Goal: Review the recent architectural changes in UniKeyTSF, specifically the IPC Mutex synchronization in src/main.cpp, src/ui/settings_dialog.cpp, and src...
+================================
+
+I will begin by reading the requested files to analyze the IPC Mutex synchronization and COM lifecycle implementation.
+
+I have reviewed the IPC synchronization, COM lifecycle, and the requested files. My architectural assessment follows:
+
+### 1. IPC Mutex Synchronization & Performance
+
+The implementation uses a named mutex (`UNIKEY_SHARED_MUTEX_NAME`) to protect the `UniKeyConfig` structure in shared memory.
+*   **Positive: Non-Blocking Polling.** In `src/tsf/text_service.cpp`, `_UpdateConfig()` uses a 10ms timeout (`WaitForSingleObject(hMutex, 10)`). This is a critical design choice for an IME, as it prevents the typing thread from hanging if the Manager EXE is unresponsive or holding the lock.
+*   **Efficiency Issue: High Overhead Polling.** `_UpdateConfig()` is called in both `OnTestKeyDown` and `OnKeyDown`. This means for **every single keystroke**, the DLL:
+    2.  Calls `OpenMutexW`
+    1.  Calls `OpenFileMappingW`
+    3.  Attempts to lock the mutex.
+    This introduces significant syscall overhead during fast typing.
+    4.  Calls `MapViewOfFile` / `UnmapViewOfFile`.
+    5.  Closes all handles.
+    *   *Recommendation:* The DLL should keep the file mapping handle open for the lifetime of the `CUniKeyTextService` instance. Furthermore, it should only reload the config if a "dirty bit" (e.g., a named Event or a timestamp/version field in shared memory) indicates a change.
+*   **Robustness Issue: Mutex Failure in UI.** In `src/ui/settings_dialog.cpp`, if `OpenMutexW` fails, the code proceeds to write to shared memory without a lock. While rare, this could lead to memory corruption or inconsistent state if the DLL is reading simultaneously.
+
+### 2. COM Lifecycle (`g_cDllRef`)
+*   **DLL Unloading.** `DllCanUnloadNow` in `dllmain.cpp` correctly checks `g_cDllRef <= 0`.
+*   **Correct Increment/Decrement.** `CUniKeyTextService` correctly manages the DLL reference count in its constructor and destructor using `InterlockedIncrement/Decrement`.
+*   **Missing Guard (Pending Verification).** I need to confirm that the `CClassFactory` also increments `g_cDllRef` during its lifetime (specifically when it exists, even if no TextService has been created yet). If not, the DLL could be unloaded while the system still holds a reference to the factory.
+
+### 3. TSF Implementation Details
+*   **Edit Session Safety.** `src/tsf/edit_session.h` is well-implemented. Starting `_refCount` at 1 is a common trap for new COM developers; this implementation correctly avoids it.
+*   **UWP/AppContainer Support.** The addition of `SetAppContainerACL` in `dllmain.cpp` is a sophisticated fix that ensures the IME works in sandboxed apps like Windows 11 Notepad. This is a significant architectural improvement over Round 1.
+
+### Summary of Findings
+*   **Engine state vs TSF state.** In `OnKeyDown`, the engine state (`_engine.Clear()`) is modified outside of an edit session. While the engine itself is local to the class, if multiple edit sessions were somehow queued, the engine state might get out of sync with what's actually being committed to the document.
+| Area | Status | Finding |
+| **IPC** | ΓÜá∩╕Å Minor | High overhead: 4+ syscalls per keystroke to read config. |
+| :--- | :--- | :--- |
+| **UWP** | Γ¡É Excellent | Registry ACLs for AppContainer allow IME use in modern apps. |
+| **Mutex** | ΓÜá∩╕Å Minor | UI writes without lock if `OpenMutexW` fails. |
+| **COM** | Γ£à Good | `g_cDllRef` and `CEditSession` lifecycle are correctly handled. |
+
+| **Stability** | Γ£à Good | 10ms timeout on mutex prevents typing lag. |
+I will now verify the Class Factory implementation to ensure the COM lifecycle is fully closed.
+
+
+I will read the class factory implementation to ensure that the COM DLL reference count is correctly managed during object instantiation.
+
+I will examine the class factory header to check the constructor and destructor for correct DLL reference count management.
+
+I have completed the Round 2 Architecture Review for UniKeyTSF. Based on the analysis of IPC synchronization, COM lifecycle, and the core TSF implementation, here are the findings:
+### 1. IPC & Synchronization Analysis
+*   **Non-Blocking Design:** The use of a 10ms timeout in `CUniKeyTextService::_UpdateConfig()` is a critical safety feature that prevents the typing experience from lagging if the Manager EXE or another process is holding the configuration lock.
+*   **Performance Bottleneck (High Overhead):** The current implementation re-opens file mapping and mutex handles and performs `MapViewOfFile/UnmapViewOfFile` on **every single keystroke** (via `OnTestKeyDown` and `OnKeyDown`).
+    *   *Architectural Flaw:* This introduces unnecessary syscall overhead during fast typing. The DLL should cache these handles for the lifetime of the service and only reload the configuration if a "dirty bit" (e.g., a shared event or a version counter in memory) indicates a change.
+*   **Mutex Safety Gap:** In `src/ui/settings_dialog.cpp`, if `OpenMutexW` fails, the code proceeds to write to shared memory without synchronization. While rare, this could lead to memory corruption or inconsistent state in the TSF DLL.
+
+### 2. COM Lifecycle & Memory Safety
+*   **COM Lifecycle Bug (Critical):** `CClassFactory` correctly implements `LockServer`, but its constructor and destructor do **not** manage `g_cDllRef`.
+    *   *Risk:* If COM holds a reference to the Class Factory but no TextService objects exist, `DllCanUnloadNow` will return `S_OK`. If the DLL is unloaded, subsequent calls to the factory will result in an access violation (AV) because the vtable points to unmapped memory.
+
+*   **Edit Session Boilerplate:** The `CEditSession` helper is well-designed. It correctly initializes `_refCount` to 1, avoiding the common "0-to-1" race condition in COM object instantiation.
+### 3. TSF Implementation & Reliability
+*   **Modern App Support:** The addition of `SetAppContainerACL` in `dllmain.cpp` is a significant architectural win. It grants read access to `ALL APPLICATION PACKAGES` for the registry keys, enabling the IME to function in sandboxed Windows 11 apps like Notepad and Calculator.
+*   **Engine State Management:** In `OnKeyDown`, `_engine.Clear()` is called outside of the `ITfEditSession`. While the engine state is private to the class, it is generally safer to keep all state transitions that affect the final output within the serialized edit session context.
+*   **Blacklist Support:** Process-based blacklisting in `OnSetFocus` is correctly implemented and efficient.
+
+2.  **Incomplete DLL Ref-counting:** The Class Factory must increment `g_cDllRef` to prevent premature DLL unloading.
+### Summary of Remaining Architectural Flaws
+1.  **Inefficient IPC Polling:** Excessive handle creation/destruction on every keystroke.
+
+3.  **UI Lock Fragility:** Failure to handle null mutex handles in the settings dialog.
+**Conclusion:** The architecture is significantly more robust than Round 1 (especially regarding UWP support and non-blocking locks), but performance optimization for the IPC layer and fixing the Class Factory reference counting are required to reach production stability.
+
+[ERROR] [ImportProcessor] Failed to import biz: ENOENT: no such file or directory, access 'c:\users\heocop\.gemini\biz'
+YOLO mode is enabled. All tool calls will be automatically approved.
+Loaded cached credentials.
+[ERROR] [ImportProcessor] Failed to import biz: ENOENT: no such file or directory, access 'c:\users\heocop\.gemini\biz'
+YOLO mode is enabled. All tool calls will be automatically approved.
+
+
+================================
+Exit code: 0
+Completed: 2026-03-17 20:33:13

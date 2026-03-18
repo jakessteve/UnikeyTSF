@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\x64\Release\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\ClipboardTests.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\UniKeyTSF.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\UniKeyTests.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\uktsf_core64.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\x64\Release\ALL_BUILD</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>
