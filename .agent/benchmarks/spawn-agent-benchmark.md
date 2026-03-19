@@ -52,12 +52,11 @@
 
 | Date | Task | Agent | Mode | Prompt Size | Duration | Timeout | Exit | Status |
 |------|------|-------|------|-------------|----------|---------|------|--------|
-| 2026-03-17 | phase-3-vietnamese-typing-engine | GEMINI | auto_edit | 4746 chars | 401s | 400s | 124 | ⏰ |
-| 2026-03-17 | test_ba | GEMINI | yolo | 622 chars | 89.4s | 120s | 0 | ✅ |
-| 2026-03-17 | test_dev | GEMINI | yolo | 609 chars | 120.9s | 120s | 124 | ⏰ |
-| 2026-03-17 | round2_qc | GEMINI | yolo | 596 chars | 41.2s | 120s | 0 | ✅ |
-| 2026-03-17 | round2_ba | GEMINI | yolo | 607 chars | 54.8s | 120s | 0 | ✅ |
-| 2026-03-17 | round2_dev | GEMINI | yolo | 603 chars | 74.4s | 120s | 0 | ✅ |
-| 2026-03-18 | phase2-1-spellcheck | GEMINI | auto_edit | 1911 chars | 301.3s | 300s | 124 | ⏰ |
-| 2026-03-18 | unikey-improvements | GEMINI | --approval-mode auto_edit | 1776 chars | 213.9s | None (wait forever) | 0 | ✅ |
-| 2026-03-18 | decompose-main | GEMINI | --approval-mode auto_edit | 2626 chars | 598.5s | None (wait forever) | 0 | ✅ |
+| 2026-03-19 | debug-track-sa | GEMINI | --approval-mode auto_edit | 3089 chars | 61.3s | None (wait forever) | 0 | ✅ |
+| 2026-03-19 | debug-track-ba | GEMINI | --approval-mode auto_edit | 3099 chars | 66.3s | None (wait forever) | 0 | ✅ |
+| 2026-03-19 | debug-track-qc | GEMINI | --approval-mode auto_edit | 3132 chars | 108.8s | None (wait forever) | 0 | ✅ |
+| 2026-03-19 | debug-track-sa | GEMINI | --approval-mode auto_edit | 3089 chars | 152.8s | None (wait forever) | 0 | ✅ |
+| 2026-03-19 | debug-track-dev | GEMINI | --approval-mode auto_edit | 3067 chars | 170.3s | None (wait forever) | 0 | ✅ |
+| 2026-03-19 | debug-track-sec | GEMINI | --approval-mode auto_edit | 3180 chars | 275.2s | None (wait forever) | 0 | ✅ |
+| 2026-03-19 | debug-spawn-scripts | GEMINI | --approval-mode auto_edit | 1845 chars | 245.9s | 300s | 1 | ❌ |
+| 2026-03-19 | perf-spawn-scripts | GEMINI | --approval-mode auto_edit | 1180 chars | 139.9s | 120s | 124 | ⏰ |

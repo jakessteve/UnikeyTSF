@@ -48,7 +48,7 @@ This Skill should be used when the task involves **UI structure, visual design d
 
 5. **Reuse over reinvent:** Compose from existing primitives before creating new classes.
 6. **Consistency:** Font sizes: `10–15px` scale. Spacing: TailwindCSS utilities. Radius: `rounded-lg/xl/2xl`. Transitions: `all 0.2s ease`.
-7. **Responsive:** Mobile-first (375px, 768px, 1024px). Tử Vi grid min-width: 700px with scroll.
+7. **Responsive:** Mobile-first (375px, 768px, 1024px). Complex grids may need min-width with scroll.
 8. **Accessibility:** Contrast ≥ 4.5:1, 44×44px touch targets, focus-visible outlines.
 
 ## Phase 3–6 — IMPLEMENT & VERIFY

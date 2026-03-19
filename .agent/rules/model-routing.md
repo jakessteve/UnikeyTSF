@@ -46,7 +46,7 @@ description: Model Routing — unified reference for AI model selection by task 
 | **S** — Specification | @ba, @pm | `GEMINI-H/Plan` | Research + content, large context |
 | **P** — Pseudocode | @sa | `OPUS/Plan` | Algorithm design, deep reasoning |
 | **A** — Architecture | @sa, @designer | `OPUS/Plan` | API contracts, trade-offs |
-| **R** — Refinement | @dev, @qc | `SONNET/Fast` | Coding + testing |
+| **R** — Refinement | @dev-fe, @dev-be, @qc | `SONNET/Fast` | Coding + testing |
 | **C** — Completion | @devops, @ba | `GEMINI-H/Plan` | Release notes, SOT updates |
 
 ---
@@ -59,7 +59,8 @@ description: Model Routing — unified reference for AI model selection by task 
 | @biz | `GEMINI-H/Plan` | Content, marketing, research; `OPUS/Plan` for strategy |
 | @ba | `GEMINI-H/Plan` | Research, content; `OPUS/Plan` for deep analysis |
 | @sa | `OPUS/Plan` | Architecture, system design |
-| @dev | `SONNET/Fast` | Coding, implementation |
+| @dev-fe | `SONNET/Fast` | Frontend coding, UI implementation |
+| @dev-be | `SONNET/Fast` | Backend coding, API/service implementation |
 | @qc | `SONNET/Fast` | Testing, verification |
 | @devops | `SONNET/Fast` | CI/CD, security code, deployment |
 | @designer | `SONNET/Fast` | UI/UX, CSS, visual code |
@@ -96,13 +97,16 @@ description: Model Routing — unified reference for AI model selection by task 
 
 ## 6.1 Enforcement for CLI Workers
 
-| Task Complexity | `-Agent` Flag | `-ApprovalMode` | `-Timeout` | Context File |
-|----------------|--------------|-----------------|-----------|---------------|
-| **Mechanical** (lint, typo, rename, ≤2 files) | `gemini` | `Yolo` | `60` | `.agent/indexes/AGENTS-LITE.md` |
-| **Integration** (multi-file impl, patterns) | `gemini` | `AutoEdit` | `300` | `.agent/indexes/AGENTS-LITE.md` |
-| **Architecture/Review** (design, security audit) | `codex` | `AutoEdit` | `600` | `.agent/indexes/AGENTS-LITE.md` |
+> [!NOTE]
+> `-Agent` is NOT enforced by ModelTier — the orchestrator chooses the best CLI agent for each task. ModelTier only sets approval mode and timeout.
 
-The orchestrator MUST pass `-ModelTier` (`Mechanical`, `Integration`, `Architecture`) to `spawn-agent.ps1` to enforce these defaults.
+| Task Complexity | `-ApprovalMode` | `-Timeout` | Context File |
+|----------------|-----------------|-----------|---------------|
+| **Mechanical** (lint, typo, rename, ≤2 files) | `Yolo` | `60` | `.agent/indexes/AGENTS-LITE-{role}.md` |
+| **Integration** (multi-file impl, patterns) | `AutoEdit` | `300` | `.agent/indexes/AGENTS-LITE-{role}.md` |
+| **Architecture/Review** (design, security audit) | `AutoEdit` | `600` | `.agent/indexes/AGENTS-LITE-{role}.md` |
+
+The orchestrator SHOULD pass `-ModelTier` (`Mechanical`, `Integration`, `Architecture`) to `spawn-agent.ps1` to enforce approval mode and timeout defaults. Agent selection is independent.
 
 ---
 

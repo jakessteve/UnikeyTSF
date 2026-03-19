@@ -100,16 +100,16 @@ Real users don't open the app in a vacuum — they have **moods and motivations*
 
 | Tag | Emotion | Persona Fit | UX Implications |
 |---|---|---|---|
-| **Anxious** | Worried, seeking reassurance | Chị Lan (before a big decision), Bác Tư (health/family) | Needs calming language, clear yes/no answers, no ambiguity |
-| **Curious** | Exploring for fun, no urgency | Linh (learning astrology), Anh Minh (browsing) | Tolerates complexity, enjoys depth, wants "wow" moments |
-| **Urgent** | Needs an answer NOW | Anh Minh (before a meeting), Chị Lan (wedding date) | Zero patience for loading, needs answer above the fold, minimal steps |
-| **Distracted** | Half-paying attention (bus, cooking) | Chị Lan (commuting), Linh (multitasking) | Needs scannable layout, large tap targets, no precision required |
-| **Skeptical** | Doesn't trust the app yet | Cô Mai (always), Bác Tư (first visit) | Needs credibility signals, transparency, value before asking for data |
+| **Anxious** | Worried, seeking reassurance | Users facing high-stakes decisions | Needs calming language, clear yes/no answers, no ambiguity |
+| **Curious** | Exploring for fun, no urgency | New users, browsing users | Tolerates complexity, enjoys depth, wants "wow" moments |
+| **Urgent** | Needs an answer NOW | Users under time pressure | Zero patience for loading, needs answer above the fold, minimal steps |
+| **Distracted** | Half-paying attention | Users multitasking or on the go | Needs scannable layout, large tap targets, no precision required |
+| **Skeptical** | Doesn't trust the app yet | First-time visitors, cautious users | Needs credibility signals, transparency, value before asking for data |
 
 **How to apply:** Before running a task test, state the emotional context:
-> *"Testing T4 (View Tử Vi chart) as Chị Lan in Anxious mode — she's checking her year before deciding on a house purchase."*
+> *"Testing [Task ID] ([Task description]) as [Persona] in [Emotional tag] mode — [scenario context]."*
 
-This changes the scoring emphasis: in Anxious mode, a Score 3 in Usefulness becomes unacceptable (she needs strong, clear guidance), even though the same score is fine in Curious mode.
+This changes the scoring emphasis: in Anxious mode, a Score 3 in Usefulness becomes unacceptable (they need strong, clear guidance), even though the same score is fine in Curious mode.
 
 ## 5. Task Completion Testing
 
@@ -125,20 +125,17 @@ Define tasks based on the persona's goals, then measure:
 | **Friction Points** | Specific moments of confusion or frustration |
 | **Emotional Fit** | Did the UX match the persona's emotional context? |
 
-### Standard Task Library (Lịch Việt)
+### Standard Task Library
+Define project-specific tasks based on the PRD and user stories:
 
 | Task ID | Task Description | Expected Steps |
 |---|---|---|
-| T1 | Check today's lunar date | 1 (open app) |
-| T2 | Find lucky activities for today | 2 (open → Dụng Sự) |
-| T3 | Check if today is good for a specific activity | 3 (open → Dụng Sự → select activity) |
-| T4 | View Tử Vi chart | 3 (open → Tử Vi → enter birth data) |
-| T5 | Read Western horoscope | 3 (open → Chiêm Tinh → enter birth data) |
-| T6 | Perform Mai Hoa divination | 3 (open → Mai Hoa → input) |
-| T7 | Change to dark mode | 2 (open settings → toggle) |
-| T8 | Navigate to a specific past date | 2 (calendar → select date) |
-| T9 | Find what lunar month it is | 1 (open app, visible on calendar) |
-| T10 | Register an account | 3 (open → register → fill form) |
+| T1 | _[Core task 1 — primary user flow]_ | _[N steps]_ |
+| T2 | _[Core task 2 — secondary flow]_ | _[N steps]_ |
+| T3 | _[Settings / configuration task]_ | _[N steps]_ |
+| T4 | _[Data entry / input task]_ | _[N steps]_ |
+| T5 | _[Search / discovery task]_ | _[N steps]_ |
+| T6 | _[Account / profile task]_ | _[N steps]_ |
 
 ## 6. Trend Tracking
 
@@ -149,9 +146,9 @@ When previous feedback reports exist:
 
 | Page | Dimension | Previous | Current | Δ | Trend |
 |------|-----------|----------|---------|---|-------|
-| Calendar | Speed | 3 | 4 | +1 | Improved |
-| Tử Vi | Usability | 2 | 2 | 0 | Unchanged |
-| Dụng Sự | UI/UX | 4 | 3 | -1 | Regressed |
+| [Page 1] | Speed | 3 | 4 | +1 | Improved |
+| [Page 2] | Usability | 2 | 2 | 0 | Unchanged |
+| [Page 3] | UI/UX | 4 | 3 | -1 | Regressed |
 
 ### Notable Changes
 - [What improved and why it matters to users]

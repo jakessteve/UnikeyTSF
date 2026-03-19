@@ -1,29 +1,52 @@
-# Deployment Guide — UniKey TSF Reborn
+# Deployment Guide
 
-## Prerequisites
-- Windows 10/11 (x64)
-- Visual Studio 2022 with C++ Desktop workload
-- CMake 3.20+
+## Environments
 
-## Build Commands
-```powershell
-# Configure
-cmake -B build -G "Visual Studio 17 2022" -A x64
+| Environment | URL | Purpose | Deploy Method |
+|-------------|-----|---------|---------------|
+| Development | _[local dev URL]_ | Local dev | _[dev command]_ |
+| Staging | _[staging URL]_ | Pre-release QA | Manual / CI |
+| Production | _[production URL]_ | Public release | CI/CD pipeline |
 
-# Build Release
-cmake --build build --config Release
+## Build Process
 
-# Output
-#   build\Release\UniKeyTSF.exe
+### Prerequisites
+- _[Runtime/toolchain and version]_
+- _[Package manager and version, if applicable]_
+
+### Build Commands
+```
+[install command]       # Install dependencies
+[build command]         # Production build
+[preview command]       # Preview production build locally (if applicable)
 ```
 
-## Deployment (User Machine)
-1. Copy `UniKeyTSF.exe` to a permanent location (e.g., `C:\Program Files\UniKeyTSF\`)
-2. (Phase 2) Copy `uktsf_core64.dll` and `uktsf_core32.dll` alongside the EXE
-3. Run `UniKeyTSF.exe` — it auto-registers the COM DLLs and creates the tray icon
-4. (Optional) Add to `HKCU\...\Run` for auto-start on login
+### Build Output
+- Output directory: _[build output path]_
+- _[Any optimization notes]_
 
-## Uninstall
-1. Exit `UniKeyTSF.exe` from the tray menu
-2. (Phase 2) Run `UniKeyTSF.exe /unregister` to remove COM entries
-3. Delete the installation directory
+## Deployment Checklist
+
+### Pre-Deploy
+- [ ] All tests pass (`[test command]`)
+- [ ] Build/compile clean (`[build/type-check command]`)
+- [ ] Production build succeeds
+- [ ] Binary/bundle size within performance budget
+- [ ] Security scan clean
+
+### Deploy Steps
+1. Merge to main branch
+2. CI/CD triggers build
+3. Run smoke tests against staging
+4. Promote to production
+5. Monitor error rates for 30 minutes
+
+### Post-Deploy
+- [ ] Verify critical user flows
+- [ ] Check error monitoring dashboard
+- [ ] Update CHANGELOG.md in `docs/log/`
+
+## Rollback Procedure
+1. Revert to previous deployment
+2. Verify rollback succeeded
+3. Create incident report in `docs/log/INCIDENT_LOG.md`

@@ -27,7 +27,7 @@ The most common conflict: @qc finds a bug, @dev needs to fix it.
 2. DIAGNOSE — @dev reads the failing test, identifies root cause
 3. FIX — @dev patches the code
 4. VERIFY — @qc re-runs the test
-5. REPORT — Only report to @pm when GREEN 
+5. REPORT — Only report to @pm when GREEN
 ```
 
 **Rules:**
@@ -114,4 +114,3 @@ Two agents produced solutions for the same problem because their scopes overlapp
 2. Pick the better one based on: correctness → test coverage → simplicity.
 3. Discard the other. Don't merge two solutions — pick one.
 4. Log in conflict log with root cause: "Role overlap between @X and @Y on [file]."
-

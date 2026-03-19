@@ -25,9 +25,9 @@ Categorize competitors into tiers:
 
 | Tier | Description | How to Find | Example |
 |---|---|---|---|
-| **Direct** | Same product, same market | Search app stores, Google | Rival astrology apps |
-| **Indirect** | Different product, same need | Think: "otherwise they'd use..." | Paper almanacs, fortune tellers |
-| **Potential** | Could enter your market | Monitor adjacent players | Calendar apps adding astrology |
+| **Direct** | Same product, same market | Search app stores, Google | Rival apps in same category |
+| **Indirect** | Different product, same need | Think: "otherwise they'd use..." | Traditional alternatives, manual processes |
+| **Potential** | Could enter your market | Monitor adjacent players | Adjacent apps entering your market |
 | **Substitutes** | Different solution, same job-to-be-done | Ask: "what do users do today?" | Web searches, YouTube videos |
 
 **Research sources:**

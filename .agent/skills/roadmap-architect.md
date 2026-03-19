@@ -1,5 +1,5 @@
 ---
-description: Roadmap Architect — decompose a project into Phases, Epics, and Sprints with timelines
+description: Roadmap Architect ï¿½ decompose a project into Phases, Epics, and Sprints with timelines
 ---
 
 # SKILL: ROADMAP ARCHITECT
@@ -24,25 +24,25 @@ Break every project into exactly 3 levels:
 A Phase is a **major milestone** that delivers independently deployable value.
 
 ```markdown
-## Phase 1: Core MVP (Weeks 1–4)
+## Phase 1: Core MVP (Weeks 1ï¿½4)
 **Goal:** [What the user gets at the end of this phase]
 **Success Metric:** [How we know it's done]
 
-## Phase 2: Enhanced Experience (Weeks 5–8)
+## Phase 2: Enhanced Experience (Weeks 5ï¿½8)
 **Goal:** [What improves]
 **Success Metric:** [Measurable outcome]
 ```
 
 **Rules:**
 - Each phase MUST be independently deployable and testable.
-- Max 3–4 phases for any project. If more ? the project is too big, split it.
+- Max 3ï¿½4 phases for any project. If more ? the project is too big, split it.
 - Phase 1 is always the MVP (Rule `engineering-mindset.md`).
 
 ### Level 2: Epics
-An Epic is a **feature area** within a phase. Each epic contains 2–5 related stories.
+An Epic is a **feature area** within a phase. Each epic contains 2ï¿½5 related stories.
 
 ```markdown
-### Epic 1.1: Lunar Calendar Engine
+### Epic 1.1: Core Engine Module
 - S-001: Solar-to-Lunar date conversion
 - S-002: Solar term calculation
 - S-003: Good/bad day assessment
@@ -59,19 +59,19 @@ An Epic is a **feature area** within a phase. Each epic contains 2–5 related sto
 - Epics within a phase can be parallelized if they don't share dependencies.
 
 ### Level 3: Stories (Sprints)
-Stories are individual **implementable tasks** sized for 1–3 day completion. Follow Rule `agile-user-stories.md` for format.
+Stories are individual **implementable tasks** sized for 1ï¿½3 day completion. Follow Rule `agile-user-stories.md` for format.
 
-Group stories into sprints (1–2 week cycles):
+Group stories into sprints (1ï¿½2 week cycles):
 
 ```markdown
-#### Sprint 1 (Week 1–2)
-- [S-001] Solar-to-Lunar conversion — @dev — Size: M
-- [S-004] Month grid view — @designer + @dev — Size: M
+#### Sprint 1 (Week 1ï¿½2)
+- [S-001] Solar-to-Lunar conversion ï¿½ @dev ï¿½ Size: M
+- [S-004] Month grid view ï¿½ @designer + @dev ï¿½ Size: M
 
-#### Sprint 2 (Week 3–4)
-- [S-002] Solar terms — @dev — Size: S
-- [S-003] Good/bad day — @dev — Size: M
-- [S-005] Day detail panel — @designer + @dev — Size: M
+#### Sprint 2 (Week 3ï¿½4)
+- [S-002] Solar terms ï¿½ @dev ï¿½ Size: S
+- [S-003] Good/bad day ï¿½ @dev ï¿½ Size: M
+- [S-005] Day detail panel ï¿½ @designer + @dev ï¿½ Size: M
 ```
 
 ---
@@ -88,8 +88,8 @@ Save to `.hc/roadmap.md`:
 ## Timeline Overview
 | Phase | Timeline | Goal | Status |
 |-------|---------|------|--------|
-| Phase 1: MVP | Wk 1–4 | [Goal] | ?? In Progress |
-| Phase 2: Enhanced | Wk 5–8 | [Goal] | ? Not Started |
+| Phase 1: MVP | Wk 1ï¿½4 | [Goal] | ?? In Progress |
+| Phase 2: Enhanced | Wk 5ï¿½8 | [Goal] | ? Not Started |
 
 ## Phase 1: [Name]
 ### Epic 1.1: [Name]
@@ -107,9 +107,9 @@ Save to `.hc/roadmap.md`:
 
 | Size | Story Points | Time Estimate | Files Changed |
 |------|-------------|---------------|---------------|
-| **S (Small)** | 1–2 | = 1 day | = 3 files |
-| **M (Medium)** | 3–5 | 2–3 days | 4–8 files |
-| **L (Large)** | 8+ | 4–5 days | 9+ files ? **MUST split** |
+| **S (Small)** | 1ï¿½2 | = 1 day | = 3 files |
+| **M (Medium)** | 3ï¿½5 | 2ï¿½3 days | 4ï¿½8 files |
+| **L (Large)** | 8+ | 4ï¿½5 days | 9+ files ? **MUST split** |
 
 **Buffer rule:** Add 20% buffer to total estimates for unknowns and bugs.
 

@@ -2,6 +2,7 @@
 #include <shlobj.h>
 #include <sddl.h>
 #include <fstream>
+#include <memory>
 
 // --- Globals (defined in ipc_manager.h) ---
 UniKeyConfig* g_pConfig      = nullptr;
@@ -61,30 +62,36 @@ bool SaveConfigToFile(const UniKeyConfig* pConfig)
 
 bool InitSharedMemory()
 {
-    // Create security descriptor restricted to current user
+    // Create security descriptor restricted to current user and AppContainer
     SECURITY_ATTRIBUTES sa = {};
     sa.nLength = sizeof(SECURITY_ATTRIBUTES);
     sa.bInheritHandle = FALSE;
-    sa.lpSecurityDescriptor = nullptr;
 
-    PSECURITY_DESCRIPTOR pSD = nullptr;
-    // SDDL: Owner=current user, DACL grants full access to current user only
-    // D:(A;;GA;;;CU) = Allow, Generic All, Current User
+    PSECURITY_DESCRIPTOR rawSD = nullptr;
+    // SDDL: Owner=current user. DACL: Full access to Current User (CU) and All Application Packages (AC)
+    // D:(A;;GA;;;CU)(A;;GA;;;AC) = Allow, Generic All, Current User + Allow, Generic All, All App Packages
+    // AC needs GA (or at least GRGW) to acquire the Mutex (MUTEX_MODIFY_STATE)
     if (ConvertStringSecurityDescriptorToSecurityDescriptorW(
-            L"D:(A;;GA;;;CU)", SDDL_REVISION_1, &pSD, nullptr)) {
-        sa.lpSecurityDescriptor = pSD;
+            L"D:(A;;GA;;;CU)(A;;GRGW;;;AC)", SDDL_REVISION_1, &rawSD, nullptr)) {
+        sa.lpSecurityDescriptor = rawSD;
     }
+
+    // RAII for SD
+    struct ScopedLocalFree {
+        HLOCAL ptr;
+        ScopedLocalFree(HLOCAL p) : ptr(p) {}
+        ~ScopedLocalFree() { if (ptr) LocalFree(ptr); }
+    };
+    ScopedLocalFree autoFreeSD(rawSD);
 
     g_hMapFile = CreateFileMappingW(
         INVALID_HANDLE_VALUE,   // Use paging file
-        &sa,                    // ACL: current user only
+        &sa,                    // ACL: current user + AppContainer read
         PAGE_READWRITE,
         0,
         sizeof(UniKeyConfig),
         UNIKEY_SHARED_MEMORY_NAME
     );
-
-    if (pSD) LocalFree(pSD);
 
     if (!g_hMapFile) return false;
 
@@ -98,23 +105,25 @@ bool InitSharedMemory()
         return false;
     }
 
-    g_hSharedMutex = CreateMutexW(nullptr, FALSE, UNIKEY_SHARED_MUTEX_NAME);
+    // Mutex must also have the Security Descriptor so UWP can open/wait it
+    g_hSharedMutex = CreateMutexW(&sa, FALSE, UNIKEY_SHARED_MUTEX_NAME);
 
     // Initial load (shared mutex is already created)
-    LockConfig();
-    if (!LoadConfigFromFile(g_pConfig)) {
-        g_pConfig->version         = UNIKEY_CONFIG_VERSION;
-        g_pConfig->inputEnabled    = 1;   // Vietnamese ON by default
-        g_pConfig->inputMethod     = IM_VNI;   // VNI by user preference
-        g_pConfig->charset         = CS_UNICODE;
-        g_pConfig->toneType        = TONE_MODERN;
-        g_pConfig->spellCheck      = 1;
-        g_pConfig->macroEnabled    = 0;
-        g_pConfig->freeToneMarking = 1;
-        g_pConfig->toggleKey       = TK_CTRL_SHIFT;
-        g_pConfig->macroFilePath[0] = L'\0';
+    if (LockConfig()) {
+        if (!LoadConfigFromFile(g_pConfig)) {
+            g_pConfig->version         = UNIKEY_CONFIG_VERSION;
+            g_pConfig->inputEnabled    = 1;   // Vietnamese ON by default
+            g_pConfig->inputMethod     = IM_VNI;   // VNI by user preference
+            g_pConfig->charset         = CS_UNICODE;
+            g_pConfig->toneType        = TONE_MODERN;
+            g_pConfig->spellCheck      = 1;
+            g_pConfig->macroEnabled    = 0;
+            g_pConfig->freeToneMarking = 1;
+            g_pConfig->toggleKey       = TK_CTRL_SHIFT;
+            g_pConfig->macroFilePath[0] = L'\0';
+        }
+        UnlockConfig();
     }
-    UnlockConfig();
 
     return true;
 }
@@ -140,11 +149,18 @@ void CleanupSharedMemory()
 // Access Synchronization
 // =============================================================================
 
-void LockConfig()
+bool LockConfig()
 {
     if (g_hSharedMutex) {
-        WaitForSingleObject(g_hSharedMutex, INFINITE);
+        // Use timeout to prevent deadlock if another process crashes while holding lock
+        DWORD waitResult = WaitForSingleObject(g_hSharedMutex, 500);
+        if (waitResult == WAIT_TIMEOUT || waitResult == WAIT_FAILED) {
+            // Lock acquisition failed, do not barge into critical section
+            return false;
+        }
+        return true;
     }
+    return false;
 }
 
 void UnlockConfig()

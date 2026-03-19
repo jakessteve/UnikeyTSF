@@ -31,7 +31,7 @@ echo.
 
 REM --- Step 1: Build x64 ---
 echo [1/3] Configuring x64...
-"!CMAKE!" -B build64 -A x64 >nul 2>&1
+"!CMAKE!" -B build64 -A x64
 if errorlevel 1 (
     echo FAILED: x64 configure
     exit /b 1
@@ -46,7 +46,7 @@ if errorlevel 1 (
 
 REM --- Step 2: Build Win32 (32-bit DLL only) ---
 echo [3/3] Configuring Win32...
-"!CMAKE!" -B build32 -A Win32 -DBUILD_32BIT=ON >nul 2>&1
+"!CMAKE!" -B build32 -A Win32 -DBUILD_32BIT=ON
 if errorlevel 1 (
     echo FAILED: Win32 configure
     exit /b 1
@@ -77,8 +77,25 @@ echo.
 
 REM --- Run tests ---
 echo Running unit tests...
+set "TESTS_FAILED=0"
+
+echo [Test 1] Core Engine
 build64\Release\UniKeyTests.exe --gtest_brief=1
-if errorlevel 1 (
+if errorlevel 1 set "TESTS_FAILED=1"
+
+echo [Test 2] IPC Manager
+build64\Release\IPCTests.exe --gtest_brief=1
+if errorlevel 1 set "TESTS_FAILED=1"
+
+echo [Test 3] Clipboard Toolkit
+build64\Release\ClipboardTests.exe --gtest_brief=1
+if errorlevel 1 set "TESTS_FAILED=1"
+
+echo [Test 4] Settings UI (E2E)
+build64\Release\SettingsUITests.exe --gtest_brief=1
+if errorlevel 1 set "TESTS_FAILED=1"
+
+if "!TESTS_FAILED!"=="1" (
     echo WARNING: Some tests failed!
 ) else (
     echo All tests passed.

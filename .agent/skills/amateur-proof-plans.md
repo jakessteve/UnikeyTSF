@@ -64,7 +64,7 @@ graph LR
  B -->|clean data| C[PillarCalculator]
  C -->|four pillars| D[TenGodDeriver]
  D -->|annotated pillars| E[Output: BaziChart]
- 
+
  C -.->|error| F[ValidationError]
  D -.->|edge case| G[UnknownStemWarning]
 ```
@@ -229,19 +229,19 @@ This skill connects to the following framework components:
 
 | Component | Type | Integration |
 |---|---|---|
-| [`decision-routing.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/rules/decision-routing.md) | Rule | Determines when this skill activates (Medium+ tasks) |
-| [`model-routing.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/rules/model-routing.md) | Rule | Selects per-phase model (cheaper models for simple phases) |
-| [`execution-protocol.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/rules/execution-protocol.md) | Rule | SPARC Specification phase is where plans are generated |
-| [`decision-routing.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/rules/decision-routing.md) | Rule | Each phase gets a confidence score at completion |
-| [`anti-patterns.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/rules/anti-patterns-core.md) | Rule | §4 Context Reset → save phase state; §7 File Ownership → phase file disjointness |
-| [`execution-protocol.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/rules/execution-protocol.md) | Rule | §5 Tool budgets per phase; §6 CLI worker spawn limits |
-| [`worker-delegate.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/skills/worker-delegate.md) | Skill | Phase files become worker prompts — all mandatory sections satisfied |
-| [`critical-thinking-models.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/skills/critical-thinking-models.md) | Skill | Run before phase decomposition for Medium+ features |
-| [`structured-analysis-frameworks.md`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/skills/structured-analysis-frameworks.md) | Skill | MECE decomposition for phase breakdown |
-| [`/handoff`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/workflows/handoff.md) | Workflow | Phase files ARE the handoff payload for cross-model delegation |
-| [`/receive-handoff`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/workflows/receive-handoff.md) | Workflow | Receiving agent reads phase files as execution instructions |
-| [`/hc-sdlc`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/workflows/hc-sdlc.md) | Workflow | Phase plans generated during SPARC S→P phases |
-| [`/delegate-task`](file:///c:/Users/HeoCop/Downloads/Projects/Antigravity/.agent/workflows/delegate-task.md) | Workflow | Phase files used as CLI worker prompts |
+| [`decision-routing.md`](.agent/rules/decision-routing.md) | Rule | Determines when this skill activates (Medium+ tasks) |
+| [`model-routing.md`](.agent/rules/model-routing.md) | Rule | Selects per-phase model (cheaper models for simple phases) |
+| [`execution-protocol.md`](.agent/rules/execution-protocol.md) | Rule | SPARC Specification phase is where plans are generated |
+| [`decision-routing.md`](.agent/rules/decision-routing.md) | Rule | Each phase gets a confidence score at completion |
+| [`anti-patterns-core.md`](.agent/rules/anti-patterns-core.md) | Rule | §4 Context Reset → save phase state; §7 File Ownership → phase file disjointness |
+| [`execution-protocol.md`](.agent/rules/execution-protocol.md) | Rule | §5 Tool budgets per phase; §6 CLI worker spawn limits |
+| [`worker-delegate.md`](.agent/skills/worker-delegate.md) | Skill | Phase files become worker prompts — all mandatory sections satisfied |
+| [`critical-thinking-models.md`](.agent/skills/critical-thinking-models.md) | Skill | Run before phase decomposition for Medium+ features |
+| [`structured-analysis-frameworks.md`](.agent/skills/structured-analysis-frameworks.md) | Skill | MECE decomposition for phase breakdown |
+| [`/handoff`](.agent/workflows/handoff.md) | Workflow | Phase files ARE the handoff payload for cross-model delegation |
+| [`/receive-handoff`](.agent/workflows/receive-handoff.md) | Workflow | Receiving agent reads phase files as execution instructions |
+| [`/hc-sdlc`](.agent/workflows/hc-sdlc.md) | Workflow | Phase plans generated during SPARC S→P phases |
+| [`/delegate-task`](.agent/workflows/delegate-task.md) | Workflow | Phase files used as CLI worker prompts |
 
 ---
 

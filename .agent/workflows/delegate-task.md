@@ -8,7 +8,7 @@ Triggered when the orchestrator decides to delegate a scoped task to a Gemini CL
 
 ## Prerequisites
 - Gemini CLI installed globally (`gemini --version`)
-- spawn-agent skill available at `~/.gemini/antigravity/skills/spawn-agent/`
+- spawn-agent skill available at `~/.gemini/<project>/skills/spawn-agent/`
 - Task passes the Decision Gate in `worker-delegate` skill
 
 ## Steps

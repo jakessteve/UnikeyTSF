@@ -38,7 +38,7 @@ interface ChartGenerated {
  type: 'ChartGenerated';
  timestamp: Date;
  userId: string;
- chartType: 'tuvi' | 'battu' | 'numerology';
+ chartType: 'typeA' | 'typeB' | 'typeC';
  inputData: BirthData;
  resultSummary: string;
  engineVersion: string; // For reproducibility

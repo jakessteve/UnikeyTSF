@@ -58,7 +58,7 @@ Query: [specific, detailed question]
 | React | `/facebook/react` | v19 — check for new APIs |
 | Vite | `/vitejs/vite` | v7 — check plugin API changes |
 | TailwindCSS v4 | Resolve via `tailwindcss` | v4 has breaking changes from v3 |
-| iztro (紫微斗数) | Resolve via `iztro` | Check latest star data |
+| [project-specific lib] | Resolve via library name | Check latest API docs |
 | react-router-dom | Resolve via `react-router` | v7 — new data router patterns |
 | Zod | Resolve via `zod` | — |
 | Tauri | Resolve via `tauri` | v2 — new plugin system |

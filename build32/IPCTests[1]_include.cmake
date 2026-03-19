@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/IPCTests[1]_tests.cmake")
+  include("C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/IPCTests[1]_tests.cmake")
+else()
+  add_test(IPCTests_NOT_BUILT IPCTests_NOT_BUILT)
+endif()

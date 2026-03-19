@@ -68,15 +68,15 @@ When @dev or @qc encounters a bug, failing test, or unexpected behavior. **NEVER
 H1 (70%) ──PASS──→ Phase 4
  │
  FAIL
- 
+
 H2 (20%) ──PASS──→ Phase 4
  │
  FAIL
- 
+
 H3 (10%) ──PASS──→ Phase 4
  │
  FAIL
- 
+
  ESCALATE to @pm with full hypothesis report
 ```
 

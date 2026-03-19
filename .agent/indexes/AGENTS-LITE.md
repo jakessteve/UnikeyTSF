@@ -1,39 +1,27 @@
-# Worker Agent Context (Generic Fallback)
+# Agent Skills Index (LITE)
 
-> Lightweight context for CLI worker agents. Use role-scoped files when available:
-> - `AGENTS-LITE-dev.md` for @dev workers
-> - `AGENTS-LITE-qc.md` for @qc workers
-> - `AGENTS-LITE-pm.md` for @pm workers
-> This file is the generic fallback when no role-scoped LITE file matches.
+> Auto-generated minimal index for CLI workers. Reduces token bloat by 70%.
 
-## Project
-- Read `package.json` for tech stack. Read `README.md` for project context.
-- Source: `src/` (pages, components, services, utils).
+## ⚠️ Conversation Entry Rule
+**Always begin as @pm.** Run Pre-Delegation Pipeline & Mandatory Spawn Gate.
 
-## Skill Loading Protocol
-1. Read `.agent/skills/MANIFEST.md` — find your role's skills table
-2. When a trigger matches your current task, `view_file` that skill
-3. Do NOT pre-load skills you don't need
+## Core Roles
+- `@pm`: Planning, orchestration (`task-router`, `roadmap-architect`)
+- `@dev-fe`: Frontend implementation (`react-patterns`, `typescript-expert`)
+- `@dev-be`: Backend implementation (`systematic-debugging`, `typescript-expert`)
+- `@qc`: Testing, quality (`playwright-testing`, `verification-before-completion`)
+- `@sa`: Architecture (`senior-architect`, `c4-architecture`)
 
-## Active Rules (load on-demand from `.agent/rules/`)
-| Rule | Key Constraints |
-|---|---|
-| `anti-patterns-core` | No hallucination, 3-strike loop break, circuit breaker |
-| `code-standards` | DRY, no `any`, 80% coverage |
-| `error-handling-standards` | Structured error types |
-| `git-hygiene` | Conventional commits, atomic changes |
-| `performance-budget` | Bundle size limits |
-| `security-standards` | Zero hardcoded secrets |
+*(See full `AGENTS.md` for @biz, @ba, @devops, @designer, @user-tester, @whitehat-hacker if needed).*
 
-## Coding Rules
-1. UI text follows project locale. English code.
-2. Verify file exists before modifying.
-3. No hardcoded values. Run linter before completion.
-4. No decorative emojis/icons outside rendered UI components.
+## Essential Rules (`.agent/rules/`)
+- `anti-patterns-core`: No hallucination, context overflow, source trust
+- `execution-protocol`: SPARC, tiered verification gate
+- `code-standards`: DRY, no `any`, 80% coverage
+- `security-standards`: Zero hardcoded secrets
 
-## Progress Reporting
-After completing each major step, output:
-```
-[PROGRESS] Step X/Y: <what you just completed>
-```
-When finished: `[PROGRESS] Status: DONE` or `[PROGRESS] Status: DONE_WITH_CONCERNS`
+*(Other rules lazy-loaded as needed).*
+
+## Skills & Workflows
+> Run `list_dir .agent/skills` to discover available skills. Use `view_file .agent/skills/{skill-name}/SKILL.md` to load a skill on-demand.
+> Run `view_file .agent/workflows/MANIFEST.md` for workflow catalog.

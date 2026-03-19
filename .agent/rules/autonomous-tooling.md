@@ -56,13 +56,12 @@ If you are unsure about ANYTHING:
 
 ## Domain-Specific Auto-Search Triggers
 When encountering these topics, autonomously search without prompting:
-- **Vietnamese astrology:** Tử Vi, Tứ Hóa, Cục, Nạp Âm, Sao chủ, Thiên Can, Địa Chi
-- **Lunar calendar:** Solar term calculation, leap month rules, Hiệp Kỷ
-- **Phong thủy:** Feng Shui concepts, directional rules, Phi Tinh, Huyền Không
-- **Mai Hoa:** Plum Blossom Numerology, Dịch Số, trigram references
+- **Project domain:** Consult docs/tech/ARCHITECTURE.md for domain terminology
+- **Domain-specific concepts:** Project-specific calculation rules, business logic patterns
+- **Specialized domain references:** Industry standards, academic references
 - **Unknown error messages:** Stack traces, error codes, library-specific errors
 
-**Preferred sources:** Official docs > MDN > Vietnamese reference sites > GitHub issues > Blog posts
+**Preferred sources:** Official docs > MDN > GitHub issues > Stack Overflow > Blog posts
 
 ---
 

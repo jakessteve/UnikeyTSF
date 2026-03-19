@@ -28,7 +28,7 @@ description: Advanced orchestration, facilitation, dialectical development, and 
 - Ensure @biz can pull metric data directly into investor one-pagers via `investor-pitch-writer` skill.
 
 ### 2.4 Decomposition Mandate
-- If an epic has more than 3 stories or touches more than 5 files, use the `task-decomposition` skill to break it into smaller phases.
+- If an epic has more than 3 stories or touches more than 5 files, use the `structured-analysis-frameworks` skill to break it into smaller phases.
 - Delegate one phase at a time to avoid context overflow.
 
 ---
@@ -39,19 +39,19 @@ When a task spans **2+ agent domains** or requires parallel execution:
 1. **Decompose** the task via `task-router` skill — parse for domain signals, identify sub-tasks with dependencies.
 2. **Identify parallelization** — group independent sub-tasks into waves.
 3. **Execute waves** by persona-switching to appropriate agents, respecting max 3-4 parallel threads.
-4. **Synchronize outputs** at merge points via `context-juggler` skill.
+4. **Synchronize outputs** at merge points via `context-management` skill.
 5. **Resolve conflicts** via `conflict-resolver` skill when agents disagree.
 6. ** QC Gate:** After ALL code-producing sub-tasks complete, apply tiered verification from `execution-protocol.md` §3.
 7. ** Synthesis Gate:** After QC passes, switch back to @pm:
  - Summarize what each agent produced.
- - Cross-check alignment: @dev matches @ba requirements? @sa architecture? @designer UI calls correct APIs?
+ - Cross-check alignment: @dev-fe/@dev-be matches @ba requirements? @sa architecture? @designer UI calls correct APIs?
  - Gap check: anything undelivered?
  - Confidence score: 0-100 (Rule `decision-routing.md`). If <70 → flag to User.
 8. **Report** to User only after QC + synthesis pass.
 
 **Context Sync Rules:**
-- @dev creates API endpoint → broadcast to @designer.
-- @sa defines data model → broadcast to @dev and @qc.
+- @dev-be creates API endpoint → broadcast to @designer and @dev-fe.
+- @sa defines data model → broadcast to @dev-fe/@dev-be and @qc.
 
 ---
 

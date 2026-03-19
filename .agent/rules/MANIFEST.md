@@ -8,6 +8,7 @@
 |---|---|---|
 | anti-patterns-core | rules/anti-patterns-core.md | ~7 KB |
 | engineering-mindset | rules/engineering-mindset.md | 2.1 KB |
+| context-budget | rules/context-budget.md | 2.3 KB |
 
 ## Conditional Rules (loaded on trigger only)
 | Rule | Path | Trigger | Size |
@@ -16,14 +17,23 @@
 
 ## Role-Scoped Rules
 
-### @dev (+ universal)
+### @dev-fe (+ universal)
 | Rule | Path | Size |
 |---|---|---|
 | code-standards | rules/code-standards.md | 2.2 KB |
 | git-hygiene | rules/git-hygiene.md | 1.4 KB |
-| error-handling-standards | rules/error-handling-standards.md | 1.4 KB |
 | performance-budget | rules/performance-budget.md | 1.0 KB |
+| anti-slop-ui | rules/anti-slop-ui.md | 1.5 KB |
+
+### @dev-be (+ universal)
+| Rule | Path | Size |
+|---|---|---|
+| backend-standards | rules/backend-standards.md | ~4.5 KB |
+| code-standards | rules/code-standards.md | 2.2 KB |
+| git-hygiene | rules/git-hygiene.md | 1.4 KB |
+| error-handling-standards | rules/error-handling-standards.md | 1.4 KB |
 | security-standards | rules/security-standards.md | 1.5 KB |
+| api-contract-first | rules/api-contract-first.md | 1.0 KB |
 
 ### @qc (+ universal)
 | Rule | Path | Size |
@@ -52,6 +62,7 @@
 | ui-design-system | rules/ui-design-system.md | 2.5 KB |
 | a11y-standards | rules/a11y-standards.md | 2.7 KB |
 | performance-budget | rules/performance-budget.md | 1.0 KB |
+| anti-slop-ui | rules/anti-slop-ui.md | 1.5 KB |
 
 ### @devops (+ universal)
 | Rule | Path | Size |
@@ -83,9 +94,9 @@
 | user-feedback-format | rules/user-feedback-format.md | 4.1 KB |
 
 ## Orchestrator-Only Rules (interactive @pm sessions, not workers)
-| Rule | Path | Note |
-|---|---|---|
-| model-routing | rules/model-routing.md | Model selection for delegation |
-| dialectical-development | rules/dialectical-development.md | Novelty gate |
-| autonomous-tooling | rules/autonomous-tooling.md | Tool usage patterns |
-| spawn-governance | rules/spawn-governance.md | Pre-spawn validation + timeout handling |
+| Rule | Path | Size | Note |
+|---|---|---|---|
+| model-routing | rules/model-routing.md | 5.5 KB | Model selection for delegation |
+| dialectical-development | rules/dialectical-development.md | 2.6 KB | Novelty gate |
+| autonomous-tooling | rules/autonomous-tooling.md | 2.5 KB | Tool usage patterns |
+| spawn-governance | rules/spawn-governance.md | 2.8 KB | Pre-spawn validation + timeout handling |

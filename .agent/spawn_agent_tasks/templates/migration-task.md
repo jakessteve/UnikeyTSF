@@ -1,4 +1,6 @@
 # Migration Task
+> **Performance Rule:** Do not load the full AGENTS.md. Load only the relevant .agent/indexes/AGENTS-LITE-<role>.md and lazy-load specific skills as needed.
+
 
 > For dependency upgrades, schema changes, config migrations, and API version bumps.
 
@@ -8,15 +10,15 @@
 ## Goal
 [1-2 sentences — what migration to perform and why]
 
-Example: "Upgrade iztro from v2.x to v3.x — breaking changes in star naming
-API require updating all Tử Vi service consumers."
+Example: "Upgrade [library] from vX to vY — breaking changes in API
+API require updating all service consumers."
 
 ## Architecture Context
-- **Project type**: Vite 7 + React 19 + TypeScript SPA (strict mode)
-- **Styling**: TailwindCSS v4 with `@theme` tokens. Dark mode mandatory.
+- **Project type**: Read `package.json`, `tsconfig.json`, and build config to detect stack
+- **Styling**: Read project config to determine CSS framework and conventions
 - **State**: Zustand
 - **Conventions**: UI text follows project locale. English code. No `any` types. DRY principle.
-- **Package manager**: pnpm
+- **Package manager**: [project package manager]
 
 ## Migration Details
 
@@ -42,7 +44,7 @@ API require updating all Tử Vi service consumers."
 
 ### Files to READ (context only — DO NOT modify)
 | File | Why read |
-|------|---------| 
+|------|---------|
 | `src/path/to/consumer.ts` | Understand current usage |
 
 ### Off-limits (MUST NOT touch)
@@ -64,7 +66,7 @@ API require updating all Tử Vi service consumers."
 
 ## Rollback Plan
 If migration fails or introduces regressions:
-1. [Step to revert — e.g., `git checkout -- src/services/tuvi/`]
+1. [Step to revert — e.g., `git checkout -- [affected-directory]/`]
 2. [How to restore previous dependency version]
 3. [Any data/config that needs reverting]
 

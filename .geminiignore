@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+vendor/
+packages/
+.pnp
+.pnp.js
+
+# Build Outputs
+build/
+build32/
+build64/
+dist/
+out/
+bin/
+obj/
+installer/
+release/
+production/
+target/
+.next/
+.nuxt/
+.output/
+
+# Logs & Databases
+*.log
+*.sqlite
+*.db
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# IDEs & OS Files
+.vscode/
+.idea/
+.vs/
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+
+# Cache directories
+.eslintcache
+.stylelintcache
+.npm
+.yarn

@@ -13,7 +13,7 @@ description: Test-Driven Development - Red-Green-Refactor cycle enforcement with
 - Building utility functions with defined input/output.
 - Fixing bugs (write a failing test FIRST, then fix).
 - Refactoring existing code (ensure tests pass before AND after).
-- Implementing engine logic (Tử Vi, Bát Tự, Lunar Calendar, QMDJ).
+- Implementing engine / business logic (always use TDD for core logic).
 
 ## When NOT to Use
 - Exploratory prototyping (spike first, then TDD on the solution).
@@ -30,20 +30,20 @@ description: Test-Driven Development - Red-Green-Refactor cycle enforcement with
 3. Run the test — it MUST fail. If it passes, the test is wrong or the feature already exists.
 
 ```typescript
-// Example: Testing a lunar day calculation
-describe('getLunarDay', () => {
- it('should return correct lunar day for a known date', () => {
- const result = getLunarDay(new Date(2025, 0, 29));
- expect(result).toEqual({ day: 1, month: 1, year: 2025, leap: false });
+// Example: Testing a date conversion utility
+describe('convertToBusinessDate', () => {
+ it('should return correct business date for a known input', () => {
+ const result = convertToBusinessDate(new Date(2025, 0, 29));
+ expect(result).toEqual({ day: 29, period: 'Q1', year: 2025, adjusted: false });
  });
 
- it('should handle leap month correctly', () => {
- const result = getLunarDay(new Date(2025, 6, 25));
- expect(result.leap).toBe(true);
+ it('should handle period boundary correctly', () => {
+ const result = convertToBusinessDate(new Date(2025, 3, 1));
+ expect(result.period).toBe('Q2');
  });
 
  it('should throw for dates before supported range', () => {
- expect(() => getLunarDay(new Date(1800, 0, 1))).toThrow('Date out of range');
+ expect(() => convertToBusinessDate(new Date(1800, 0, 1))).toThrow('Date out of range');
  });
 });
 ```
@@ -72,8 +72,8 @@ describe('getLunarDay', () => {
 | Data transformations | Unit test | ≥ 85% | Critical |
 | Service/business logic | Unit test | ≥ 80% | High |
 | React hooks (custom) | Unit test | ≥ 80% | High |
-| React components | Behavior test | Key interactions | High |
-| API endpoints | Integration test | All paths | High |
+| UI components | Behavior test | Key interactions | High |
+| API endpoints / handlers | Integration test | All paths | High |
 | CSS / layout | Visual test | Use `browser-visual-testing` | Standard |
 
 ## What NOT to Test
@@ -93,11 +93,11 @@ When fixing a bug:
 
 ```typescript
 // Step 1: Reproduce the bug in a test
-it('should not duplicate Tả Phụ star in cung Mão (bug #42)', () => {
- const chart = generateChart(buggyBirthData);
- const maoStars = chart.palaces['Mão'].stars;
- const taPhus = maoStars.filter(s => s.name === 'Tả Phụ');
- expect(taPhus).toHaveLength(1); // Was returning 2 — bug!
+it('should not produce duplicate entries in results (bug #42)', () => {
+ const chart = processInput(buggyInputData);
+ const items = result.items;
+ const filteredItems = items.filter(i => i.name === 'TargetItem');
+ expect(filteredItems).toHaveLength(1); // Was returning 2 — bug!
 });
 ```
 
@@ -116,4 +116,4 @@ Before marking TDD cycle complete:
 - **Test behavior, not implementation.** Tests should survive refactoring.
 - **One test at a time.** Write one failing test, make it pass, repeat.
 - **Fast feedback.** If tests take >5 seconds, optimize the test suite.
-- **Engine code MUST use TDD.** No exceptions for Tử Vi, Bát Tự, Lunar Calendar, QMDJ engines.
+- **Core business logic MUST use TDD.** No exceptions for critical calculation engines or data processing modules.

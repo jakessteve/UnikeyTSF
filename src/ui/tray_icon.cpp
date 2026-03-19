@@ -167,9 +167,10 @@ void CleanupTrayResources()
 
 void ToggleInputState()
 {
-    LockConfig();
-    g_pConfig->inputEnabled = g_pConfig->inputEnabled ? 0 : 1;
-    UnlockConfig();
+    if (LockConfig()) {
+        g_pConfig->inputEnabled = g_pConfig->inputEnabled ? 0 : 1;
+        UnlockConfig();
+    }
     UpdateTrayIcon();
 }
 
@@ -216,23 +217,14 @@ void ShowContextMenu(HWND hWnd)
     addItem(hMenu, L"  Ti\x1ebfng Vi\x1ec7t", IDM_TOGGLE_VE, isViet);
     addSep(hMenu);
 
-    HMENU hSubIM = CreatePopupMenu();
-    addItem(hSubIM, L"  Telex", IDM_INPUT_TELEX, g_pConfig->inputMethod == IM_TELEX);
-    addItem(hSubIM, L"  VNI", IDM_INPUT_VNI, g_pConfig->inputMethod == IM_VNI);
-    addItem(hSubIM, L"  VIQR", IDM_INPUT_VIQR, g_pConfig->inputMethod == IM_VIQR);
-    {
-        MenuItemData* item = AllocMenuItem(L"  Ki\x1ec3u g\x00f5", 0, false, false, true);
-        AppendMenuW(hMenu, MF_OWNERDRAW | MF_POPUP, reinterpret_cast<UINT_PTR>(hSubIM), (LPCWSTR)item);
-    }
+    addItem(hMenu, L"  G\x00f5: Telex", IDM_INPUT_TELEX, g_pConfig->inputMethod == IM_TELEX);
+    addItem(hMenu, L"  G\x00f5: VNI", IDM_INPUT_VNI, g_pConfig->inputMethod == IM_VNI);
+    addItem(hMenu, L"  G\x00f5: VIQR", IDM_INPUT_VIQR, g_pConfig->inputMethod == IM_VIQR);
+    addSep(hMenu);
 
-    HMENU hSubCS = CreatePopupMenu();
-    addItem(hSubCS, L"  Unicode", IDM_CHARSET_UNICODE, g_pConfig->charset == CS_UNICODE);
-    addItem(hSubCS, L"  TCVN3 (ABC)", IDM_CHARSET_TCVN3, g_pConfig->charset == CS_TCVN3);
-    addItem(hSubCS, L"  VNI Windows", IDM_CHARSET_VNI, g_pConfig->charset == CS_VNI_WIN);
-    {
-        MenuItemData* item = AllocMenuItem(L"  B\x1ea3ng m\x00e3", 0, false, false, true);
-        AppendMenuW(hMenu, MF_OWNERDRAW | MF_POPUP, reinterpret_cast<UINT_PTR>(hSubCS), (LPCWSTR)item);
-    }
+    addItem(hMenu, L"  M\x00e3: Unicode", IDM_CHARSET_UNICODE, g_pConfig->charset == CS_UNICODE);
+    addItem(hMenu, L"  M\x00e3: TCVN3 (ABC)", IDM_CHARSET_TCVN3, g_pConfig->charset == CS_TCVN3);
+    addItem(hMenu, L"  M\x00e3: VNI Windows", IDM_CHARSET_VNI, g_pConfig->charset == CS_VNI_WIN);
 
     addSep(hMenu);
     addItem(hMenu, L"  B\x1ea3ng \x0111i\x1ec3u khi\x1ec3n...", IDM_SETTINGS);

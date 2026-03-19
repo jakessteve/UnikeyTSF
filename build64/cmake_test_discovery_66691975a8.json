@@ -1,0 +1,32 @@
+{
+  "tests": 4,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "SettingsUITest",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "VerifyInitialStateFromConfig",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\e2e\\settings_ui_test.cpp",
+          "line": 122
+        },
+        {
+          "name": "ChangeSettingsAndSave",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\e2e\\settings_ui_test.cpp",
+          "line": 135
+        },
+        {
+          "name": "MacroUIEnableDisable",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\e2e\\settings_ui_test.cpp",
+          "line": 178
+        },
+        {
+          "name": "BlacklistAddRemove",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\e2e\\settings_ui_test.cpp",
+          "line": 196
+        }
+      ]
+    }
+  ]
+}

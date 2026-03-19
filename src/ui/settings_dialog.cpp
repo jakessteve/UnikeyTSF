@@ -9,6 +9,8 @@
 #include "../resource.h"
 #include "../shared_config.h"
 #include "../config/blacklist.h"
+#include <windows.h>
+#include <winreg.h>
 #include <windowsx.h>
 #include <commctrl.h>
 #include <uxtheme.h>
@@ -17,22 +19,35 @@
 #pragma comment(lib, "comctl32.lib")
 
 // =============================================================================
-// Pure Black Color Palette
+// Color Palettes
 // =============================================================================
 
-static const COLORREF CLR_BG           = RGB(0, 0, 0);       // Pure black
-static const COLORREF CLR_BG_CONTROL   = RGB(28, 28, 28);    // Input fields
-static const COLORREF CLR_BG_HOVER     = RGB(45, 45, 45);    // Hover
-static const COLORREF CLR_BORDER       = RGB(60, 60, 60);    // Borders
-static const COLORREF CLR_BORDER_FOCUS = RGB(0, 120, 215);   // Focus ring
-static const COLORREF CLR_TEXT         = RGB(235, 235, 235);  // White text
-static const COLORREF CLR_TEXT_DIM     = RGB(150, 150, 150);  // Secondary
-static const COLORREF CLR_ACCENT       = RGB(0, 120, 215);   // Blue accent
-static const COLORREF CLR_GROUP_BORDER = RGB(50, 50, 50);    // Group borders
-static const COLORREF CLR_BTN_BG      = RGB(45, 45, 45);     // Button
-static const COLORREF CLR_BTN_PRIMARY = RGB(0, 100, 200);    // Primary button
-static const COLORREF CLR_TAB_SEL     = RGB(0, 0, 0);        // Selected tab (same as bg)
-static const COLORREF CLR_TAB_UNSEL   = RGB(20, 20, 20);     // Unselected tab
+// Dark
+static const COLORREF DARK_BG           = RGB(0, 0, 0);
+static const COLORREF DARK_BG_CONTROL   = RGB(16, 16, 16);
+static const COLORREF DARK_BG_HOVER     = RGB(38, 38, 38);
+static const COLORREF DARK_BORDER       = RGB(40, 40, 40);
+static const COLORREF DARK_BORDER_FOCUS = RGB(0, 150, 255);
+static const COLORREF DARK_TEXT         = RGB(224, 224, 224);
+static const COLORREF DARK_TEXT_DIM     = RGB(150, 150, 150);
+static const COLORREF DARK_BTN_BG       = RGB(24, 24, 24);
+static const COLORREF DARK_GROUP_BORDER = RGB(36, 36, 36);
+
+// Light
+static const COLORREF LIGHT_BG           = RGB(255, 255, 255);
+static const COLORREF LIGHT_BG_CONTROL   = RGB(240, 240, 240);
+static const COLORREF LIGHT_BG_HOVER     = RGB(225, 225, 225);
+static const COLORREF LIGHT_BORDER       = RGB(200, 200, 200);
+static const COLORREF LIGHT_BORDER_FOCUS = RGB(0, 100, 200);
+static const COLORREF LIGHT_TEXT         = RGB(10, 10, 10);
+static const COLORREF LIGHT_TEXT_DIM     = RGB(80, 80, 80);
+static const COLORREF LIGHT_BTN_BG       = RGB(245, 245, 245);
+static const COLORREF LIGHT_GROUP_BORDER = RGB(220, 220, 220);
+
+static COLORREF CLR_BG, CLR_BG_CONTROL, CLR_BG_HOVER, CLR_BORDER, CLR_BORDER_FOCUS, CLR_GROUP_BORDER;
+static COLORREF CLR_TEXT, CLR_TEXT_DIM, CLR_BTN_BG;
+static const COLORREF CLR_ACCENT = RGB(0, 120, 215);
+static const COLORREF CLR_BTN_PRIMARY = RGB(0, 100, 200);
 
 // Brushes
 static HBRUSH s_hBrushBg      = nullptr;
@@ -40,7 +55,8 @@ static HBRUSH s_hBrushControl = nullptr;
 static HBRUSH s_hBrushBtnBg   = nullptr;
 
 static UniKeyConfig* s_pConfig = nullptr;
-static HFONT s_hDarkFont = nullptr;
+static HFONT s_hUIFont = nullptr;
+static int s_CurrentTab = 0; // 0 = Basic, 1 = Advanced
 // =============================================================================
 // Auto-start registry
 // =============================================================================
@@ -80,37 +96,66 @@ static void SetAutoStart(bool enable) {
 // Dark Mode Helpers
 // =============================================================================
 
-static void InitDarkBrushes() {
-    if (!s_hBrushBg) {
-        s_hBrushBg      = CreateSolidBrush(CLR_BG);
-        s_hBrushControl = CreateSolidBrush(CLR_BG_CONTROL);
-        s_hBrushBtnBg   = CreateSolidBrush(CLR_BTN_BG);
+static bool ShouldUseDarkMode() {
+    HKEY hKey;
+    bool isDark = true;
+    if (RegOpenKeyExW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
+        DWORD value = 0;
+        DWORD size = sizeof(value);
+        if (RegQueryValueExW(hKey, L"AppsUseLightTheme", nullptr, nullptr, (LPBYTE)&value, &size) == ERROR_SUCCESS) {
+            isDark = (value == 0);
+        }
+        RegCloseKey(hKey);
     }
+    return isDark;
+}
+
+static void UpdateColorsBasedOnTheme() {
+    bool dark = ShouldUseDarkMode();
+    CLR_BG           = dark ? DARK_BG           : LIGHT_BG;
+    CLR_BG_CONTROL   = dark ? DARK_BG_CONTROL   : LIGHT_BG_CONTROL;
+    CLR_BG_HOVER     = dark ? DARK_BG_HOVER     : LIGHT_BG_HOVER;
+    CLR_BORDER       = dark ? DARK_BORDER       : LIGHT_BORDER;
+    CLR_BORDER_FOCUS = dark ? DARK_BORDER_FOCUS : LIGHT_BORDER_FOCUS;
+    CLR_GROUP_BORDER = dark ? DARK_GROUP_BORDER : LIGHT_GROUP_BORDER;
+    CLR_TEXT         = dark ? DARK_TEXT         : LIGHT_TEXT;
+    CLR_TEXT_DIM     = dark ? DARK_TEXT_DIM     : LIGHT_TEXT_DIM;
+    CLR_BTN_BG       = dark ? DARK_BTN_BG       : LIGHT_BTN_BG;
+}
+
+static void InitThemeBrushes() {
+    UpdateColorsBasedOnTheme();
+    if (s_hBrushBg) DeleteObject(s_hBrushBg);
+    if (s_hBrushControl) DeleteObject(s_hBrushControl);
+    if (s_hBrushBtnBg) DeleteObject(s_hBrushBtnBg);
+
+    s_hBrushBg      = CreateSolidBrush(CLR_BG);
+    s_hBrushControl = CreateSolidBrush(CLR_BG_CONTROL);
+    s_hBrushBtnBg   = CreateSolidBrush(CLR_BTN_BG);
 }
 
 static void SetDarkTitleBar(HWND hWnd) {
-    BOOL useDarkMode = TRUE;
+    BOOL useDarkMode = ShouldUseDarkMode() ? TRUE : FALSE;
     HMODULE hDwm = LoadLibraryW(L"dwmapi.dll");
     if (hDwm) {
         typedef HRESULT(WINAPI* PFN_DwmSetWindowAttribute)(HWND, DWORD, LPCVOID, DWORD);
         auto pfn = (PFN_DwmSetWindowAttribute)GetProcAddress(hDwm, "DwmSetWindowAttribute");
         if (pfn) {
+            // Apply dark mode to title bar (DWMWA_USE_IMMERSIVE_DARK_MODE = 20)
             pfn(hWnd, 20, &useDarkMode, sizeof(useDarkMode));
+            
+            // Force Windows 11 rounded corners (DWMWA_WINDOW_CORNER_PREFERENCE = 33, DWMWCP_ROUND = 2)
+            DWORD cornerPreference = 2;
+            pfn(hWnd, 33, &cornerPreference, sizeof(cornerPreference));
         }
         FreeLibrary(hDwm);
     }
 }
 
-static HFONT CreateDarkFont() {
-    return CreateFontW(
-        -20, 0, 0, 0, FW_NORMAL,
-        FALSE, FALSE, FALSE,
-        DEFAULT_CHARSET,
-        OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
-        CLEARTYPE_QUALITY,
-        DEFAULT_PITCH | FF_SWISS,
-        L"Segoe UI"
-    );
+static HFONT CreateUIFont() {
+    LOGFONTW lf = {0};
+    SystemParametersInfoW(SPI_GETICONTITLELOGFONT, sizeof(LOGFONTW), &lf, 0);
+    return CreateFontIndirectW(&lf);
 }
 
 // =============================================================================
@@ -252,7 +297,7 @@ static void DrawDarkGroupBox(HWND hWnd, HDC hdc, HWND hGroup) {
     }
 
     RECT borderRc = { rc.left, rc.top + textHeight, rc.right, rc.bottom };
-    RoundRect(hdc, borderRc.left, borderRc.top, borderRc.right, borderRc.bottom, 6, 6);
+    RoundRect(hdc, borderRc.left, borderRc.top, borderRc.right, borderRc.bottom, 8, 8);
 
     if (szText[0] != L'\0') {
         SetTextColor(hdc, CLR_TEXT_DIM);
@@ -273,8 +318,16 @@ static void DrawDarkButton(DRAWITEMSTRUCT* pDIS) {
     bool isFocused = (pDIS->itemState & ODS_FOCUS) != 0;
     bool isDefault = (pDIS->itemState & ODS_DEFAULT) != 0;
 
+    bool isTab = (pDIS->CtlID == IDC_TAB_BASIC || pDIS->CtlID == IDC_TAB_ADVANCED);
+    bool isSelectedTab = false;
+    if (isTab) {
+        isSelectedTab = (pDIS->CtlID == IDC_TAB_BASIC && s_CurrentTab == 0) || 
+                        (pDIS->CtlID == IDC_TAB_ADVANCED && s_CurrentTab == 1);
+        if (isSelectedTab) isPressed = true;
+    }
+
     COLORREF bgColor;
-    if (isDefault || pDIS->CtlID == (UINT)IDOK)
+    if (isDefault || pDIS->CtlID == (UINT)IDOK || isSelectedTab)
         bgColor = isPressed ? CLR_ACCENT : CLR_BTN_PRIMARY;
     else
         bgColor = isPressed ? CLR_BG_HOVER : CLR_BTN_BG;
@@ -283,7 +336,7 @@ static void DrawDarkButton(DRAWITEMSTRUCT* pDIS) {
     HPEN hPen = CreatePen(PS_SOLID, 1, isFocused ? CLR_BORDER_FOCUS : CLR_BORDER);
     HPEN hOldPen = (HPEN)SelectObject(hdc, hPen);
     HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hBrush);
-    RoundRect(hdc, rc.left, rc.top, rc.right, rc.bottom, 6, 6);
+    RoundRect(hdc, rc.left, rc.top, rc.right, rc.bottom, 8, 8);
     SelectObject(hdc, hOldPen);
     SelectObject(hdc, hOldBrush);
     DeleteObject(hBrush);
@@ -326,6 +379,52 @@ static INT_PTR HandleCtlColor(HDC hdc, UINT msg) {
     }
 }
 
+static void UpdateTabContent(HWND hWnd) {
+    int sel = s_CurrentTab;
+
+    int basic[] = {
+        IDC_CHK_VIETNAMESE, IDC_GRP_BASIC, IDC_LBL_INPUT_METHOD, IDC_CBO_INPUT_METHOD,
+        IDC_LBL_CHARSET, IDC_CBO_CHARSET, IDC_GRP_TOGGLE_KEY, IDC_RAD_CTRL_SHIFT,
+        IDC_RAD_ALT_Z, IDC_GRP_TONE_TYPE, IDC_RAD_MODERN_TONE, IDC_RAD_CLASSIC_TONE,
+        IDC_GRP_OPTIONS, IDC_CHK_SPELL_CHECK, IDC_CHK_FREE_TONE, IDC_CHK_MACRO,
+        IDC_CHK_AUTO_START, IDC_LBL_MACRO_FILE, IDC_TXT_MACRO_FILE, IDC_BTN_MACRO_FILE
+    };
+    
+    int advanced[] = {
+        IDC_GRP_BLACKLIST, IDC_LST_BLACKLIST, IDC_TXT_BLACKLIST_ADD,
+        IDC_BTN_BLACKLIST_BROWSE, IDC_BTN_BLACKLIST_DEL, IDC_BTN_BLACKLIST_ADD
+    };
+
+    for (int id : basic) ShowWindow(GetDlgItem(hWnd, id), sel == 0 ? SW_SHOW : SW_HIDE);
+    for (int id : advanced) ShowWindow(GetDlgItem(hWnd, id), sel == 1 ? SW_SHOW : SW_HIDE);
+}
+
+static HWND s_hToolTip = nullptr;
+
+static void CreateToolTips(HWND hWndDlg) {
+    if (!s_hToolTip) {
+        s_hToolTip = CreateWindowExW(WS_EX_TOPMOST, TOOLTIPS_CLASSW, NULL,
+            WS_POPUP | TTS_ALWAYSTIP | TTS_NOPREFIX,
+            CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+            hWndDlg, NULL, GetModuleHandle(NULL), NULL);
+        
+        SetWindowTheme(s_hToolTip, L"Explorer", NULL);
+        
+        TOOLINFOW ti = { 0 };
+        ti.cbSize = sizeof(TOOLINFOW);
+        ti.uFlags = TTF_IDISHWND | TTF_SUBCLASS;
+        ti.hwnd = hWndDlg;
+        
+        ti.uId = (UINT_PTR)GetDlgItem(hWndDlg, IDC_CHK_FREE_TONE);
+        ti.lpszText = (LPWSTR)L"Bỏ dấu ở bất kỳ vị trí nào trong từ và di chuyển dấu tự động";
+        SendMessageW(s_hToolTip, TTM_ADDTOOLW, 0, (LPARAM)&ti);
+
+        ti.uId = (UINT_PTR)GetDlgItem(hWndDlg, IDC_CHK_SPELL_CHECK);
+        ti.lpszText = (LPWSTR)L"Chỉ cho phép gõ dấu khi các chữ cái tạo thành từ tiếng Việt hợp lệ";
+        SendMessageW(s_hToolTip, TTM_ADDTOOLW, 0, (LPARAM)&ti);
+    }
+}
+
 // =============================================================================
 // Dialog Procedure
 // =============================================================================
@@ -334,23 +433,39 @@ static INT_PTR CALLBACK SettingsDlgProc(HWND hWnd, UINT message, WPARAM wParam, 
     switch (message) {
     case WM_INITDIALOG: {
         s_pConfig = (UniKeyConfig*)lParam;
-        InitDarkBrushes();
+        InitThemeBrushes();
         SetDarkTitleBar(hWnd);
 
-        s_hDarkFont = CreateDarkFont();
+        s_hUIFont = CreateUIFont();
         EnumChildWindows(hWnd, [](HWND hChild, LPARAM lp) -> BOOL {
             SendMessageW(hChild, WM_SETFONT, (WPARAM)lp, TRUE);
             return TRUE;
-        }, (LPARAM)s_hDarkFont);
-        SendMessageW(hWnd, WM_SETFONT, (WPARAM)s_hDarkFont, TRUE);
+        }, (LPARAM)s_hUIFont);
+        SendMessageW(hWnd, WM_SETFONT, (WPARAM)s_hUIFont, TRUE);
+
+        CreateToolTips(hWnd);
+
+        // Initialize Tabs
+        s_CurrentTab = 0;
+        UpdateTabContent(hWnd);
 
         // --- Owner-draw buttons ---
+        HWND hTabBasic = GetDlgItem(hWnd, IDC_TAB_BASIC);
+        HWND hTabAdvanced = GetDlgItem(hWnd, IDC_TAB_ADVANCED);
         HWND hBtnClose = GetDlgItem(hWnd, IDOK);
         HWND hBtnMacro = GetDlgItem(hWnd, IDC_BTN_MACRO_FILE);
         HWND hBtnAdd = GetDlgItem(hWnd, IDC_BTN_BLACKLIST_ADD);
         HWND hBtnDel = GetDlgItem(hWnd, IDC_BTN_BLACKLIST_DEL);
         HWND hBtnBlacklistBrowse = GetDlgItem(hWnd, IDC_BTN_BLACKLIST_BROWSE);
         
+        if (hTabBasic) {
+            SetWindowLongW(hTabBasic, GWL_STYLE, GetWindowLongW(hTabBasic, GWL_STYLE) | BS_OWNERDRAW);
+            SetWindowTheme(hTabBasic, L"", L"");
+        }
+        if (hTabAdvanced) {
+            SetWindowLongW(hTabAdvanced, GWL_STYLE, GetWindowLongW(hTabAdvanced, GWL_STYLE) | BS_OWNERDRAW);
+            SetWindowTheme(hTabAdvanced, L"", L"");
+        }
         if (hBtnClose) {
             SetWindowLongW(hBtnClose, GWL_STYLE, GetWindowLongW(hBtnClose, GWL_STYLE) | BS_OWNERDRAW);
             SetWindowTheme(hBtnClose, L"", L"");
@@ -410,11 +525,17 @@ static INT_PTR CALLBACK SettingsDlgProc(HWND hWnd, UINT message, WPARAM wParam, 
         return (INT_PTR)TRUE;
     }
 
+    case WM_SETTINGCHANGE: {
+        InitThemeBrushes();
+        InvalidateRect(hWnd, nullptr, TRUE);
+        return (INT_PTR)TRUE;
+    }
+
     case WM_PAINT: {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
 
-        HFONT hOldFont = s_hDarkFont ? (HFONT)SelectObject(hdc, s_hDarkFont) : nullptr;
+        HFONT hOldFont = s_hUIFont ? (HFONT)SelectObject(hdc, s_hUIFont) : nullptr;
 
         HWND groupboxes[] = {
             GetDlgItem(hWnd, IDC_GRP_TOGGLE_KEY),
@@ -448,9 +569,17 @@ static INT_PTR CALLBACK SettingsDlgProc(HWND hWnd, UINT message, WPARAM wParam, 
         WORD wId = LOWORD(wParam);
         WORD wNotifyCmd = HIWORD(wParam);
 
+        if (wId == IDC_TAB_BASIC || wId == IDC_TAB_ADVANCED) {
+            s_CurrentTab = (wId == IDC_TAB_BASIC) ? 0 : 1;
+            UpdateTabContent(hWnd);
+            InvalidateRect(GetDlgItem(hWnd, IDC_TAB_BASIC), nullptr, TRUE);
+            InvalidateRect(GetDlgItem(hWnd, IDC_TAB_ADVANCED), nullptr, TRUE);
+            return (INT_PTR)TRUE;
+        }
+
         if (wId == IDOK || wId == IDCANCEL) {
             if (wId == IDOK) SaveUIToConfig(hWnd);
-            if (s_hDarkFont) { DeleteObject(s_hDarkFont); s_hDarkFont = nullptr; }
+            if (s_hUIFont) { DeleteObject(s_hUIFont); s_hUIFont = nullptr; }
             EndDialog(hWnd, wId);
             return (INT_PTR)TRUE;
         }
@@ -529,6 +658,7 @@ static INT_PTR CALLBACK SettingsDlgProc(HWND hWnd, UINT message, WPARAM wParam, 
         if (s_hBrushBg)      { DeleteObject(s_hBrushBg);      s_hBrushBg = nullptr; }
         if (s_hBrushControl) { DeleteObject(s_hBrushControl);  s_hBrushControl = nullptr; }
         if (s_hBrushBtnBg)   { DeleteObject(s_hBrushBtnBg);    s_hBrushBtnBg = nullptr; }
+        if (s_hToolTip)      { DestroyWindow(s_hToolTip);      s_hToolTip = nullptr; }
         break;
     }
     return (INT_PTR)FALSE;

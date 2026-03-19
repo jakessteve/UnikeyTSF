@@ -1,4 +1,6 @@
 # Research Task: [Track Name]
+> **Performance Rule:** Do not load the full AGENTS.md. Load only the relevant .agent/indexes/AGENTS-LITE-<role>.md and lazy-load specific skills as needed.
+
 
 ## Research Question
 > [Specific question this track must answer — one sentence]
@@ -11,7 +13,7 @@
 ## Context
 - **Project type:** [web app / native app / library / API / etc.]
 - **Tech stack:** [from docs/tech/ARCHITECTURE.md]
-- **This track is part of:** `/research-swarm` workflow with [N] parallel tracks
+- **This track is part of:** `/spawn-research` workflow with [N] parallel tracks
 
 ## Research Instructions
 1. Investigate the research question thoroughly.

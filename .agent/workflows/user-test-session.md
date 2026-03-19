@@ -31,10 +31,10 @@ For each **major page**, per persona:
 Pages to sweep:
 - Homepage / Landing
 - Calendar (Âm Lịch)
-- Dụng Sự (Activity Picker)
-- Tử Vi (Eastern Astrology)
-- Chiêm Tinh (Western Astrology)
-- Mai Hoa (Plum Blossom)
+- Feature A (primary user flow)
+- Feature B (detailed view)
+- Feature C (analysis view)
+- Feature D (input/output flow)
 - Settings
 - Auth (Login / Register)
 
@@ -44,11 +44,11 @@ Test these core flows as each persona. Use `user-experience-testing` skill §4 f
 
 | Flow | Description | Primary Persona |
 |------|-------------|----------------|
-| **Morning Routine** | Open app → check today's date → see lucky activities → close | Chị Lan |
-| **Fortune Reading** | Navigate to Tử Vi → enter birth data → read chart → understand | Bác Tư |
-| **Decision Making** | Go to Dụng Sự → pick activity → check if today is good → decide | Anh Minh |
-| **Deep Exploration** | Browse Chiêm Tinh → read natal chart → explore star map → learn | Linh |
-| **Quick Divination** | Open Mai Hoa → input question → read hexagram → understand answer | Chị Lan |
+| **Morning Routine** | Open app → check main screen → see key info → close | Primary User |
+| **Fortune Reading** | Navigate to detail view → enter data → read results → understand | Senior User |
+| **Decision Making** | Go to decision tool → pick option → check result → decide | Professional |
+| **Deep Exploration** | Browse analysis view → read output → explore details → learn | Young User |
+| **Quick Divination** | Open input tool → enter question → read result → understand answer | Primary User |
 
 For each flow, record:
 - Task success (yes/no/partial)
@@ -65,11 +65,11 @@ For each page, document:
 - **Positives:** What works well (celebrate wins!)
 - **Issues:** Problems found with severity ( Critical / Medium / Minor)
 - **Suggestions:** Improvement ideas, phrased in user language
-- **Empathy Assessment:** Use `accessibility-empathy` skill for Bác Tư and Chị Lan personas
+- **Empathy Assessment:** Use `accessibility-empathy` skill for Senior User and Primary User personas
 
 ## Step 5 — Mobile + Dark Mode Pass
 
-1. Set viewport to 375px (Chị Lan / Bác Tư perspective).
+1. Set viewport to 375px (Primary / Senior User perspective).
 2. Repeat Step 2–4 key checks on mobile.
 3. Toggle dark mode.
 4. Repeat key checks in dark mode.

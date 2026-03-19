@@ -127,7 +127,7 @@ Execute sequentially, respecting gate decisions:
 2. @pm updates the roadmap and creates follow-up stories if needed.
 3. Trigger `/retrospective` if this was a significant feature.
 
-**Output:** 
+**Output:**
 - Conclusion in `.hc/conclusions/YYYY-MM-DD-[topic].md`
 - Updated roadmap in `.hc/roadmap.md`
 - Follow-up stories in `.hc/stories/` (if applicable)
@@ -139,20 +139,20 @@ Execute sequentially, respecting gate decisions:
 ```
 Phase 1: Brainstorm ──→ Phase 2: Red Team ──→ Phase 3: Refine Design
  │ RETHINK │
- └───────────────────────┘ 
+ └───────────────────────┘
  Phase 4: Implement
  │
- 
+
  Phase 5: Battle Test ──────┘
  │ REDESIGN │
  └───────────────────────┘
  │ PASS
- 
+
  Phase 6: Debate Implementation
  │ RETHINK │
  └───────────────────────┘
  │ SHIP
- 
+
  Phase 7: Log & Close
 ```
 

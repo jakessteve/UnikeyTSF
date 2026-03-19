@@ -1,0 +1,24 @@
+============================================================
+ UniKey TSF Reborn — Build All Architectures
+============================================================
+
+[1/3] Configuring x64...
+-- Could NOT find Python3 (missing: Python3_EXECUTABLE Interpreter) 
+-- Configuring done (3.3s)
+-- Generating done (1.1s)
+-- Build files have been written to: C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64
+[2/3] Building x64 (Release)...
+MSBuild version 18.4.0+6e61e96ac for .NET Framework
+
+  gtest.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gtest.lib
+  gtest_main.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gtest_main.lib
+  ClipboardTests.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\ClipboardTests.exe
+  IPCTests.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\IPCTests.exe
+  settings_ui_test.cpp
+LINK : fatal error LNK1104: cannot open file 'C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\SettingsUITests.exe' [C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\SettingsUITests.vcxproj]
+  UniKeyTSF.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\UniKeyTSF.exe
+  UniKeyTests.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\UniKeyTests.exe
+  gmock.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gmock.lib
+  gmock_main.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gmock_main.lib
+  uktsf_core64.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\uktsf_core64.dll
+FAILED: x64 build

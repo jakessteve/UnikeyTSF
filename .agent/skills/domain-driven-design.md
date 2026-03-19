@@ -25,15 +25,14 @@ The team MUST use consistent domain terms everywhere — code, docs, conversatio
 1. List all domain terms used in the project.
 2. Define each term precisely (one definition, no synonyms in code).
 3. Document in a glossary (`GLOSSARY.md` or `docs/tech/ARCHITECTURE.md`).
-4. Enforce: if code uses `chart` but domain says `lá số`, rename in code.
+4. Enforce: if code uses one term but the domain uses another, rename in code.
 
-**Example for Lịch Việt:**
-| Term | Vietnamese | Meaning |
-|---|---|---|
-| Palace | Cung | One of 12 positions in a Tử Vi chart |
-| Star | Sao | Celestial influence placed in a palace |
-| Four Transformations | Tứ Hóa | Four modifications applied to stars (Lộc, Quyền, Khoa, Kỵ) |
-| Day Master | Nhật Chủ | The Heavenly Stem of the Day Pillar in Bát Tự |
+**Example:**
+| Term | Domain Meaning |
+|---|---|
+| _[Term 1]_ | _[Precise definition in this project's domain]_ |
+| _[Term 2]_ | _[Precise definition in this project's domain]_ |
+| _[Term 3]_ | _[Precise definition in this project's domain]_ |
 
 ### 2. Bounded Contexts
 A bounded context is a boundary within which a domain model is consistent.
@@ -46,17 +45,15 @@ A bounded context is a boundary within which a domain model is consistent.
 **Example:**
 ```
 ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│  Lunar Calendar  │  │   Tử Vi Engine  │  │  Numerology     │
-│  Context         │  │   Context       │  │  Context        │
-│                  │  │                 │  │                 │
-│ • Solar terms    │  │ • Palaces       │  │ • Life Path     │
-│ • Lunar dates    │  │ • Stars         │  │ • Expression    │
-│ • Auspicious     │  │ • Tứ Hóa        │  │ • Soul Urge     │
-│   activities     │  │ • Interpretation│  │ • Cycles        │
+│  Context A       │  │  Context B       │  │  Context C       │
+│                 │  │                 │  │                 │
+│ • [Concept 1]   │  │ • [Concept 4]   │  │ • [Concept 7]   │
+│ • [Concept 2]   │  │ • [Concept 5]   │  │ • [Concept 8]   │
+│ • [Concept 3]   │  │ • [Concept 6]   │  │ • [Concept 9]   │
 └─────────────────┘  └─────────────────┘  └─────────────────┘
         │                     │                     │
         └─────────────────────┴─────────────────────┘
-                    Shared Kernel: Date utilities, Can/Chi
+                    Shared Kernel: [shared utilities]
 ```
 
 ### 3. Context Mapping
@@ -64,10 +61,10 @@ Define how bounded contexts relate:
 
 | Relationship | Description | Example |
 |---|---|---|
-| **Shared Kernel** | Shared code both teams use | Date utilities, Can/Chi types |
-| **Customer/Supplier** | One context depends on another's output | Tử Vi uses Lunar Calendar dates |
-| **Anti-Corruption Layer** | Translate between context models | Convert iztro types to Vietnamese types |
-| **Published Language** | Shared format for communication | JSON schemas, TypeScript interfaces |
+| **Shared Kernel** | Shared code both teams use | Common data types, utility functions |
+| **Customer/Supplier** | One context depends on another's output | Service A consumes Service B's data |
+| **Anti-Corruption Layer** | Translate between context models | Convert external API types to internal types |
+| **Published Language** | Shared format for communication | JSON schemas, TypeScript interfaces, Protobuf |
 
 ### 4. Aggregates
 An aggregate is a cluster of domain objects treated as a single unit.
@@ -84,31 +81,31 @@ An aggregate is a cluster of domain objects treated as a single unit.
 
 ### Value Objects
 Immutable objects defined by their attributes, not identity:
-```typescript
-// Good: Value object
-class LunarDate {
-  constructor(readonly day: number, readonly month: number, readonly year: number, readonly leap: boolean) {}
-  equals(other: LunarDate) { return this.day === other.day && this.month === other.month && ...; }
+```
+// Good: Value object — immutable, compared by value
+class DateRange {
+  constructor(readonly start: Date, readonly end: Date) {}
+  equals(other: DateRange) { return this.start === other.start && this.end === other.end; }
 }
 ```
 
 ### Entities
 Objects with identity that persists across changes:
-```typescript
+```
 // Entity: identified by ID, mutable state
-class TuViChart {
-  constructor(readonly id: string, private palaces: Palace[]) {}
+class Order {
+  constructor(readonly id: string, private items: OrderItem[]) {}
 }
 ```
 
 ### Domain Events
 Record that something happened in the domain:
-```typescript
-interface ChartGenerated {
-  type: 'CHART_GENERATED';
-  chartId: string;
+```
+interface OrderPlaced {
+  type: 'ORDER_PLACED';
+  orderId: string;
   timestamp: Date;
-  birthData: BirthData;
+  customerData: CustomerData;
 }
 ```
 

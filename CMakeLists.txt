@@ -141,6 +141,21 @@ endif()
 include(GoogleTest)
 gtest_discover_tests(UniKeyTests)
 
+# IPC & Share Memory Tests
+add_executable(IPCTests
+    tests/ipc_test.cpp
+    src/config/ipc_manager.cpp
+)
+
+target_include_directories(IPCTests PRIVATE src)
+target_link_libraries(IPCTests PRIVATE GTest::gtest_main)
+
+if(MSVC)
+    target_compile_options(IPCTests PRIVATE /W4 /WX- /utf-8)
+endif()
+
+gtest_discover_tests(IPCTests)
+
 # Clipboard & Charset Conversion Tests
 # These include clipboard.cpp directly to test static/internal functions
 add_executable(ClipboardTests

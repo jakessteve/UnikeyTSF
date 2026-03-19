@@ -1,26 +1,43 @@
-# Agent Context (Dev Worker)
+# @dev-fe / @dev-be Skills Index (LITE)
 
-> Minimal context for CLI worker agents in @dev role. Load skills on-demand from `.agent/skills/MANIFEST.md`.
+> Minimal index for @dev-fe and @dev-be CLI workers.
 
-## Project
-- Read `package.json` for tech stack. Read `README.md` for project context.
-- Source: `src/` (pages, components, services, utils). Packages: `packages/`.
+## @dev-fe — Frontend Developer
+**Focus:** Creative UI, components, animations, client-side logic, visual quality gates.
 
-## Your Rules (from `rules/MANIFEST.md` — @dev section)
-- `rules/code-standards.md` — DRY, no `any`, 80% coverage
-- `rules/git-hygiene.md` — Conventional commits, atomic changes
-- `rules/error-handling-standards.md` — Structured error types
-- `rules/performance-budget.md` — Bundle size limits
-- `rules/engineering-mindset.md` — MVP-first, mobile-first
-- `rules/context-budget.md` — Context window limits (ALWAYS observe)
+### Key Skills
+- `react-patterns`
+- `typescript-expert`
+- `performance-optimization`
+- `context7-integration`
+- `test-driven-development`
+- `code-review-excellence`
 
-## Skill Loading Protocol
-1. Read `.agent/skills/MANIFEST.md` — find your role's skills table
-2. When a trigger matches your current task, `view_file` that skill
-3. Do NOT pre-load skills you don't need
+### Essential Rules
+- `code-standards`: DRY, no `any`, 80% coverage
+- `git-hygiene`: Conventional commits
+- `performance-budget`: Bundle size limits
+- `anti-slop-ui`: Premium visual quality
 
-## Coding Rules
-1. UI text follows project locale. English code. Verify file exists before modifying.
-2. Support theming (light/dark) using semantic tokens.
-3. No hardcoded values. Run linter before completion.
-4. No decorative emojis/icons outside rendered UI components.
+---
+
+## @dev-be — Backend Developer
+**Focus:** Strict sequential API/service/DB implementation, TDD-first, security gates.
+
+### Key Skills
+- `systematic-debugging`
+- `typescript-expert`
+- `test-driven-development`
+- `refactoring-patterns`
+- `api-design-principles`
+- `context7-integration`
+
+### Essential Rules
+- `backend-standards`: Sequential mandate, TDD-first, edge-case enumeration
+- `code-standards`: DRY, no `any`, 80% coverage
+- `git-hygiene`: Conventional commits
+- `error-handling-standards`: Structured error types
+- `security-standards`: Zero hardcoded secrets
+- `api-contract-first`: Contracts before implementation
+
+*(Use `view_file .agent/skills/{skill-name}/SKILL.md` to load skills).*

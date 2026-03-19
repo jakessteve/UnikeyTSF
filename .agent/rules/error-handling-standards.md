@@ -5,7 +5,7 @@ description: Error Handling Standards - structured error types, boundaries, and 
 # RULE: ERROR HANDLING STANDARDS
 
 **Mode:** Always On
-**Scope:** @dev
+**Scope:** @dev-fe, @dev-be
 
 ---
 

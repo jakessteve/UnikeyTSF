@@ -30,7 +30,7 @@ The lowest level — raw values with no semantic meaning:
   --hsl-blue-500: 220, 90%, 56%;
   --hsl-blue-700: 220, 90%, 36%;
   --hsl-amber-500: 38, 92%, 50%;
-  
+
   /* Size primitives */
   --size-1: 0.25rem;  /* 4px */
   --size-2: 0.5rem;   /* 8px */
@@ -51,7 +51,7 @@ Map primitives to purpose — **components reference this layer:**
   --color-bg-elevated: hsl(0, 0%, 97%);
   --color-text: hsl(0, 0%, 10%);
   --color-text-muted: hsl(0, 0%, 45%);
-  
+
   /* Semantic spacing */
   --space-xs: var(--size-1);
   --space-sm: var(--size-2);
@@ -77,13 +77,13 @@ Bind semantic tokens to specific component properties — enables per-component 
   --button-text: hsl(0, 0%, 100%);
   --button-radius: var(--radius-md);
   --button-shadow: var(--shadow-sm);
-  
+
   /* Card tokens */
   --card-bg: var(--color-bg-elevated);
   --card-border: var(--color-border);
   --card-radius: var(--radius-lg);
   --card-shadow: var(--shadow-md);
-  
+
   /* Input tokens */
   --input-bg: var(--color-bg);
   --input-border: var(--color-border);
@@ -175,20 +175,20 @@ Map token layers to Tailwind v4's `@theme` directive (CSS-first configuration):
   --color-bg-elevated: hsl(0, 0%, 97%);
   --color-text: hsl(0, 0%, 10%);
   --color-text-muted: hsl(0, 0%, 45%);
-  
+
   /* Spacing scale */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
-  
+
   /* Radius scale */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-full: 9999px;
-  
+
   /* Shadow scale */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);

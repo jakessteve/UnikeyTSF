@@ -205,7 +205,7 @@ SyllableParts Decompose(const std::wstring& word) {
     if (firstVowel == 1 && ToLower(word[0]) == L'q' && ToLower(normalizedBase[0]) == L'u' && normalizedBase.size() > 1) {
         parts.initial = L"qu";
         parts.vowels = normalizedBase.substr(1);
-    } else if (firstVowel == 2 && ToLower(word[0]) == L'g' && ToLower(word[1]) == L'i' && IsVowel(word[1]) && normalizedBase.size() > 1) {
+    } else if (firstVowel == 1 && ToLower(word[0]) == L'g' && ToLower(word[1]) == L'i' && IsVowel(word[1]) && normalizedBase.size() > 1) {
         // Handle 'gi' as initial followed by vowels
         parts.initial = L"gi";
         parts.vowels = normalizedBase.substr(1);

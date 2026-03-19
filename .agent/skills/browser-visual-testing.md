@@ -76,15 +76,16 @@ Toggle between light and dark mode and verify:
 - [ ] Form inputs have associated labels
 - [ ] No content hidden by `display:none` that should be accessible
 
-### Step 6: Key Areas for Lịch Việt Verification
+### Step 6: Project-Specific Verification Areas
+Define the critical UI areas for your project and verify each:
+
 | Area | What to Verify |
 |---|---|
-| Tử Vi chart | 12-palace grid, star placement, Tứ Hóa labels, center info panel |
-| Calendar | Day cells, selected/current day borders, month navigation, lunar dates |
-| Bát Tự | Pillars alignment, Hidden Stems display, element colors |
-| QMDJ grid | 9-palace layout, star/door/deity layers, direction labels |
-| Input forms | Date pickers, time selectors, dropdowns, validation states |
-| PDF export | Layout matches screen, fonts embedded, images render |
+| _[Core feature 1]_ | _[Key visual elements, layout, data display]_ |
+| _[Core feature 2]_ | _[Key visual elements, layout, data display]_ |
+| _[Input forms]_ | _[Form controls, validation states, error messages]_ |
+| _[Data display]_ | _[Tables, charts, lists — correct rendering at all breakpoints]_ |
+| _[Export / output]_ | _[Print layout, PDF, file output — matches screen]_ |
 
 ---
 

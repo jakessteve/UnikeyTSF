@@ -56,7 +56,7 @@ description: Animation Choreography - micro-interaction timing, easing curves, m
   --duration-normal: 250ms;
   --duration-slow: 400ms;
   --duration-glacial: 1000ms;
-  
+
   /* Easing curves */
   --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);      /* Entrances */
   --ease-in: cubic-bezier(0.4, 0.0, 1, 1);           /* Exits */

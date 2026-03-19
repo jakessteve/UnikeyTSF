@@ -5,7 +5,7 @@ description: Performance Budget - bundle size limits and Core Web Vitals thresho
 # RULE: PERFORMANCE BUDGET
 
 **Mode:** Always On
-**Scope:** @dev, @designer
+**Scope:** @dev-fe, @designer
 
 ---
 

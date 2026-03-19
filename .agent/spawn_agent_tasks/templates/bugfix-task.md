@@ -1,4 +1,6 @@
 # Bug Fix Task
+> **Performance Rule:** Do not load the full AGENTS.md. Load only the relevant .agent/indexes/AGENTS-LITE-<role>.md and lazy-load specific skills as needed.
+
 
 > For targeted bug fixes with known or suspected location.
 
@@ -9,8 +11,8 @@
 [What's broken, expected vs actual behavior]
 
 ## Architecture Context
-- **Project type**: Vite 7 + React 19 + TypeScript SPA (strict mode)
-- **Styling**: TailwindCSS v4 with `@theme` tokens. Dark mode mandatory.
+- **Project type**: Read `package.json`, `tsconfig.json`, and build config to detect stack
+- **Styling**: Read project config to determine CSS framework and conventions
 - **State**: Zustand
 - **Conventions**: UI text follows project locale. English code. No `any` types.
 

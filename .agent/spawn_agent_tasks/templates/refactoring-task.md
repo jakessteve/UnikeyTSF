@@ -1,4 +1,6 @@
 # Refactoring Task
+> **Performance Rule:** Do not load the full AGENTS.md. Load only the relevant .agent/indexes/AGENTS-LITE-<role>.md and lazy-load specific skills as needed.
+
 
 > For safe, scoped refactoring: extract, move, rename, restructure. No behavior changes.
 
@@ -12,8 +14,8 @@ Example: "Extract the scoring logic from `lunarUtils.ts` into a dedicated
 `activityScoring.ts` module to improve separation of concerns."
 
 ## Architecture Context
-- **Project type**: Vite 7 + React 19 + TypeScript SPA (strict mode)
-- **Styling**: TailwindCSS v4 with `@theme` tokens. Dark mode mandatory.
+- **Project type**: Read `package.json`, `tsconfig.json`, and build config to detect stack
+- **Styling**: Read project config to determine CSS framework and conventions
 - **State**: Zustand
 - **Conventions**: UI text follows project locale. English code. No `any` types. DRY principle.
 - **File structure**: `src/components/`, `src/services/`, `src/utils/`, `src/pages/`
@@ -44,12 +46,12 @@ src/
 
 ### Files to CREATE
 | File | Purpose |
-|------|---------| 
+|------|---------|
 | `src/path/to/new-module.ts` | [Extracted logic from source] |
 
 ### Files to READ (context only — DO NOT modify)
 | File | Why read |
-|------|---------| 
+|------|---------|
 | `src/path/to/consumer.ts` | Understand all import sites |
 
 ### Off-limits (MUST NOT touch)

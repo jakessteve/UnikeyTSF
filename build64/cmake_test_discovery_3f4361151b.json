@@ -1,0 +1,27 @@
+{
+  "tests": 3,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "IPCTest",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "InitSharedMemory_CreatesHandles",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\ipc_test.cpp",
+          "line": 21
+        },
+        {
+          "name": "LockConfig_TimeoutMitigation",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\ipc_test.cpp",
+          "line": 39
+        },
+        {
+          "name": "DataIntegrity_AcrossUpdates",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\ipc_test.cpp",
+          "line": 72
+        }
+      ]
+    }
+  ]
+}

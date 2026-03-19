@@ -22,18 +22,18 @@ description: React Patterns - hooks, render optimization, composition, state man
 ### 1. Custom Hooks (Extract Reusable Logic)
 ```typescript
 // Good custom hook: encapsulates logic, returns stable interface
-function useLunarDate(solarDate: Date) {
- const [lunarDate, setLunarDate] = useState<LunarDate | null>(null);
+function useFormattedData(rawInput: RawData) {
+ const [formatted, setformatted] = useState<formatted | null>(null);
  const [loading, setLoading] = useState(true);
 
  useEffect(() => {
  setLoading(true);
- const result = convertToLunar(solarDate);
- setLunarDate(result);
+ const result = processData(rawInput);
+ setformatted(result);
  setLoading(false);
- }, [solarDate]);
+ }, [rawInput]);
 
- return { lunarDate, loading };
+ return { formatted, loading };
 }
 ```
 
@@ -66,7 +66,7 @@ function Card({ header, children, footer }: CardProps) {
 
 // Usage: compose flexible layouts
 <Card header={<h2>Chart</h2>} footer={<ExportButton />}>
- <TuViChart data={chartData} />
+ <DataChart data={chartData} />
 </Card>
 ```
 
@@ -92,7 +92,7 @@ class ErrorBoundary extends React.Component<{ fallback: ReactNode }> {
 
 // Usage: wrap feature areas, not the entire app
 <ErrorBoundary fallback={<ChartError />}>
- <TuViChart />
+ <DataChart />
 </ErrorBoundary>
 ```
 

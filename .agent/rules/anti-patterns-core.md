@@ -40,8 +40,8 @@ If the same action/fix repeats **3 times** without progress → **STOP IMMEDIATE
 
 Context is finite — manage with discipline. These are **hard limits**, not suggestions.
 
-**File Reading:** Read only exact files needed. Max 500 lines per read. Use grep to find locations first. 
-**Progressive Loading:** Start minimal → expand on demand → never preload "just in case". 
+**File Reading:** Read only exact files needed. Max 500 lines per read. Use grep to find locations first.
+**Progressive Loading:** Start minimal → expand on demand → never preload "just in case".
 **Post-Task:** Summarize in 3 sentences → purge old context → keep only summary.
 
 **Tool Output Caps (HARD limits):**
@@ -150,4 +150,3 @@ If @pm enters EXECUTION mode and edits source files (`.ts`, `.tsx`, `.css`, `.rs
 - Status indicators using emojis (`✅ Done`, `❌ Failed`) instead of text (`PASS`, `FAIL`)
 
 **Why:** Each emoji consumes 2-4 tokens. A document with 50 decorative emojis wastes 100-200 tokens — enough for ~75 words of useful content. Over a session with multiple file reads, this compounds significantly.
-

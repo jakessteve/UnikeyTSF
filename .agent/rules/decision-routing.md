@@ -12,10 +12,10 @@ Unified rule for classifying tasks, scoring confidence, and routing decisions. A
 
 | Level | Files | Domains | Gate | Verification | Tool Budget | Delegation Mode |
 |---|---|---|---|---|---|---|
-| **Trivial** | <=1 | 1 | None | @dev self-verify | 10 | Persona-switch |
-| **Small** | <=3 | 1 | Fast-path | @dev + @qc spot-check | 20 | Persona-switch (default) |
-| **Standard** | 4-6 | 1 | Fast-path + validate | @dev + @qc novel parts | 30 | Lightweight delegation |
-| **Medium** | 7-10 | 1-2 | SPARC lite | Full @dev, @qc, @pm | 40 | CLI workers preferred |
+| **Trivial** | <=1 | 1 | None | @dev-fe/@dev-be self-verify | 10 | Persona-switch |
+| **Small** | <=3 | 1 | Fast-path | @dev-fe/@dev-be + @qc spot-check | 20 | Persona-switch (default) |
+| **Standard** | 4-6 | 1 | Fast-path + validate | @dev-fe/@dev-be + @qc novel parts | 30 | Lightweight delegation |
+| **Medium** | 7-10 | 1-2 | SPARC lite | Full @dev-fe/@dev-be, @qc, @pm | 40 | CLI workers preferred |
 | **Large** | >10 | 2+ | Full SPARC | Full + `/implementation-review` | 60 | CLI workers MANDATORY |
 | **Epic** | >20 | 3+ | SPARC + dialectical | Full + review + debate | 80 | CLI workers + multi-worker |
 

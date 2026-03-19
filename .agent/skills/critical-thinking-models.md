@@ -131,4 +131,3 @@ Quickly scan for 6 common biases that derail agent decisions:
 - Do NOT use this gate to justify inaction. The default is **PROCEED**.
 - If all seven models agree → there's no reason to delay.
 - The Bias Scan is a **check-yourself** mechanism, not a reason to halt. If a bias is detected, address it and move on.
-

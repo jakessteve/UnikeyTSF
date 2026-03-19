@@ -47,9 +47,9 @@ const flow = {
  steps: [
  { action: 'navigate', url: 'http://localhost:5173' },
  { action: 'wait', selector: '[data-testid="main-content"]' },
- { action: 'click', selector: '[data-testid="tab-tuvi"]' },
- { action: 'verify', selector: '.tuvi-grid', exists: true },
- { action: 'screenshot', name: 'tuvi-grid-loaded' },
+ { action: 'click', selector: '[data-testid="tab-feature"]' },
+ { action: 'verify', selector: '.feature-grid', exists: true },
+ { action: 'screenshot', name: 'feature-grid-loaded' },
  ]
 };
 ```

@@ -27,7 +27,9 @@
 HWND WaitForDialog(const wchar_t* title, int timeout_ms = 5000) {
     auto start = std::chrono::steady_clock::now();
     while (std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count() < timeout_ms) {
-        HWND hwnd = FindWindowW(NULL, title);
+        // "#32770" is the standard system dialog class. 
+        // This prevents matching the hidden message window from the running background process.
+        HWND hwnd = FindWindowExW(NULL, NULL, L"#32770", title);
         if (hwnd) return hwnd;
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
@@ -135,7 +137,9 @@ TEST_F(SettingsUITest, ChangeSettingsAndSave) {
     ToggleCheckbox(IDC_CHK_VIETNAMESE, false);
     SelectComboItem(IDC_CBO_INPUT_METHOD, IM_VNI);
     SelectComboItem(IDC_CBO_CHARSET, CS_TCVN3);
+    ToggleCheckbox(IDC_RAD_CTRL_SHIFT, false);
     ToggleCheckbox(IDC_RAD_ALT_Z, true);
+    ToggleCheckbox(IDC_RAD_MODERN_TONE, false);
     ToggleCheckbox(IDC_RAD_CLASSIC_TONE, true);
     ToggleCheckbox(IDC_CHK_SPELL_CHECK, true);
     ToggleCheckbox(IDC_CHK_MACRO, true);

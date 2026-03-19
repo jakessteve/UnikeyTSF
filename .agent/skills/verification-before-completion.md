@@ -1,5 +1,5 @@
 ---
-description: Per-task verification checklist — run before declaring any dev task complete. Includes test running, a11y audit, and performance checks.
+description: Per-task verification checklist — run before declaring any dev task complete. Includes test running, build checks, and quality gates.
 ---
 
 # SKILL: DEV VERIFICATION BEFORE COMPLETION
@@ -21,56 +21,53 @@ description: Per-task verification checklist — run before declaring any dev ta
 Run ALL of these before declaring completion:
 
 ### 1. Baseline Capture (Before Coding)
-```bash
-npm test
+Run the project's test suite to capture baseline state:
+```
+[project test command — see docs/tech/TEST_PLAN.md]
 ```
 - Capture the baseline test state. Note any pre-existing failures.
 - After coding, compare results with this baseline.
 
-### 2. TypeScript Compilation
-```bash
-npx tsc --noEmit
+### 2. Build / Compilation Check
+Run the project's build or type-check command:
+```
+[project build/type-check command — see docs/tech/ARCHITECTURE.md]
 ```
 - Must produce **zero errors**.
-- If errors: fix them. Don't report done with type errors.
+- If errors: fix them. Don't report done with build errors.
 
 ### 3. Test Suite
-```bash
-npm test
+Run the project's test suite:
+```
+[project test command — see docs/tech/TEST_PLAN.md]
 ```
 - All tests must **pass**.
 - If you wrote new code, there MUST be new or updated tests covering it.
 - If tests fail: fix the code (or the test if the test is wrong), then re-run.
-- If writing new logic in `src/utils/` or `src/services/`, check if corresponding tests exist in `test/`. If not, create them.
+- If writing new logic, check if corresponding tests exist. If not, create them.
 
 ### 4. Data Validation (if applicable)
-```bash
-npm run validate:data
-```
-- Run if any data files were modified or new data files added.
+- Run data validation if any data files were modified or new data files added.
+- Use the project's data validation command if one exists.
 
 ### 5. Lint Check (if configured)
-```bash
-npm run lint
-```
+- Run the project's linter if one is configured.
 - Fix any new lint errors introduced by your changes.
 
-### 6. Dev Server Smoke Test
-```bash
-npm run dev
-```
-- Verify the dev server starts without console errors.
-- If UI changes: use `browser_subagent` to visually verify the page loads correctly.
+### 6. Dev / Runtime Smoke Test
+- Start the application (dev server, executable, or equivalent).
+- Verify it starts without errors.
+- If UI changes: use `browser_subagent` or manual inspection to verify the output loads correctly.
 
 ### 7. Accessibility Quick Check (for UI changes)
 - If UI changed, verify basic a11y: color contrast, keyboard navigation, alt text on images.
-- Check for missing `aria-label` on interactive elements.
-- Run `axe-core` in browser devtools if available.
+- Check for missing accessibility labels on interactive elements.
+- Use platform-appropriate accessibility tools if available.
 
 ### 8. Performance Budget Check (for significant changes)
-- If adding new dependencies: check bundle size impact.
-- If adding new components: verify no unnecessary re-renders.
-- If modifying data processing: verify no O(n²) regressions.
+- If adding new dependencies: check binary/bundle size impact.
+- If adding new components: verify no unnecessary overhead.
+- If modifying data processing: verify no algorithmic complexity regressions (e.g., O(n²)).
 
 ### 9. Acceptance Criteria Cross-Check
 - Re-read the story's acceptance criteria from `.hc/stories/`.
@@ -78,7 +75,7 @@ npm run dev
 - If any criterion is not met: implement it before reporting done.
 
 ### 10. SOT Alignment
-- Verify your implementation matches `docs/tech/API_CONTRACTS.md` (if API changes).
+- Verify your implementation matches `docs/tech/API_CONTRACTS.md` (if API/contract changes).
 - Verify your file placement matches `docs/tech/ARCHITECTURE.md`.
 - If you deviated from SOT: update the SOT first (or flag to @sa).
 
@@ -88,12 +85,12 @@ npm run dev
 ```markdown
 **Verification:**
 - [ ] Baseline captured before coding
-- [ ] `tsc --noEmit` — 0 errors
-- [ ] `npm test` — X/Y passing (no regressions from baseline)
-- [ ] Lint — clean
-- [ ] Dev server — runs, no console errors
+- [ ] Build/compile — 0 errors
+- [ ] Tests — X/Y passing (no regressions from baseline)
+- [ ] Lint — clean (if configured)
+- [ ] Application runs — no startup errors
 - [ ] A11y — basic checks pass (if UI changed)
-- [ ] Performance — no bundle bloat, no O(n²) (if significant change)
+- [ ] Performance — no bloat, no complexity regressions (if significant change)
 - [ ] Acceptance criteria — all met
 - [ ] SOT alignment — matches
 ```

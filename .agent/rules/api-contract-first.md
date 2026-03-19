@@ -5,7 +5,7 @@ description: API Contract First - API contracts must be defined before implement
 # RULE: API CONTRACT FIRST
 
 **Mode:** Always On
-**Scope:** @sa, @dev
+**Scope:** @sa, @dev-be
 
 ---
 

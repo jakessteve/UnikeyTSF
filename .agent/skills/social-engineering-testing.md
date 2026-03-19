@@ -200,7 +200,7 @@ After completing the assessment, score each dimension:
 
 ### Advisory: Human-Led Testing Needed
 - [ ] Vishing (voice phishing) — test employee phone response
-- [ ] Physical tailgating — test office access controls 
+- [ ] Physical tailgating — test office access controls
 - [ ] In-person pretexting — test front-desk/reception protocols
 - [ ] USB baiting — test response to found media devices
 ```

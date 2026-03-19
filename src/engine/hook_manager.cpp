@@ -16,6 +16,7 @@ static VnEngine     g_engine;
 static MacroEngine  g_macroEngine;
 static bool         g_bInjecting   = false;
 static int          g_rawCharCount = 0;
+static std::wstring g_lastComposition = L"";
 static bool         g_bBlacklisted = false;
 static HWND         g_hLastForeground = nullptr;
 static bool         g_suppressedKeys[256] = { false };
@@ -33,20 +34,29 @@ static HWND g_hMainWnd = nullptr;
 // Atomic Text Replacement
 // =============================================================================
 
-static void ReplaceText(int charsToReplace, const std::wstring& newText)
+static void ReplaceText(const std::wstring& oldText, const std::wstring& newText)
 {
-    if (charsToReplace <= 0 && newText.empty()) return;
+    if (oldText.empty() && newText.empty()) return;
+
+    size_t commonLen = 0;
+    while (commonLen < oldText.length() && commonLen < newText.length() && 
+           oldText[commonLen] == newText[commonLen]) {
+        commonLen++;
+    }
+
+    size_t charsToReplace = oldText.length() - commonLen;
+    std::wstring toType = newText.substr(commonLen);
+
+    if (charsToReplace == 0 && toType.empty()) return;
 
     size_t backspaceEvents = charsToReplace * 2;
-    size_t unicodeEvents = newText.size() * 2;
+    size_t unicodeEvents = toType.size() * 2;
     size_t totalEvents = backspaceEvents + unicodeEvents;
-
-    if (totalEvents == 0) return;
 
     std::vector<INPUT> inputs(totalEvents);
     size_t idx = 0;
 
-    for (int i = 0; i < charsToReplace; i++) {
+    for (size_t i = 0; i < charsToReplace; i++) {
         inputs[idx] = {};
         inputs[idx].type = INPUT_KEYBOARD;
         inputs[idx].ki.wVk = VK_BACK;
@@ -59,15 +69,15 @@ static void ReplaceText(int charsToReplace, const std::wstring& newText)
         idx++;
     }
 
-    for (size_t i = 0; i < newText.size(); i++) {
+    for (size_t i = 0; i < toType.size(); i++) {
         inputs[idx] = {};
         inputs[idx].type = INPUT_KEYBOARD;
-        inputs[idx].ki.wScan = newText[i];
+        inputs[idx].ki.wScan = toType[i];
         inputs[idx].ki.dwFlags = KEYEVENTF_UNICODE;
         idx++;
         inputs[idx] = {};
         inputs[idx].type = INPUT_KEYBOARD;
-        inputs[idx].ki.wScan = newText[i];
+        inputs[idx].ki.wScan = toType[i];
         inputs[idx].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
         idx++;
     }
@@ -180,31 +190,24 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
             g_hLastForeground = hFgNow;
             g_engine.Clear();
             g_rawCharCount = 0;
-        }
-    }
-
-    if (!g_pConfig || !g_pConfig->inputEnabled)
-        return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
-
-    g_engine.SetToneType(static_cast<ToneType>(g_pConfig->toneType));
-    g_engine.SetFreeToneMarking(g_pConfig->freeToneMarking != 0);
-    g_engine.SetSpellCheck(g_pConfig->spellCheck != 0);
-
-    {
-        HWND hFg = GetForegroundWindow();
-        if (hFg) {
-            DWORD pid = 0;
-            GetWindowThreadProcessId(hFg, &pid);
-            if (pid) {
-                HANDLE hProc = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
-                if (hProc) {
-                    wchar_t exePath[MAX_PATH] = {};
-                    DWORD sz = MAX_PATH;
-                    if (QueryFullProcessImageNameW(hProc, 0, exePath, &sz)) {
-                        wchar_t* name = wcsrchr(exePath, L'\\');
-                        g_bBlacklisted = IsProcessBlacklisted(name ? name + 1 : exePath);
+            g_lastComposition.clear();
+            
+            // Query blacklist only when window changes
+            g_bBlacklisted = false; // Default to false if we can't determine
+            if (hFgNow) {
+                DWORD pid = 0;
+                GetWindowThreadProcessId(hFgNow, &pid);
+                if (pid) {
+                    HANDLE hProc = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
+                    if (hProc) {
+                        wchar_t exePath[MAX_PATH] = {};
+                        DWORD sz = MAX_PATH;
+                        if (QueryFullProcessImageNameW(hProc, 0, exePath, &sz)) {
+                            wchar_t* name = wcsrchr(exePath, L'\\');
+                            g_bBlacklisted = IsProcessBlacklisted(name ? name + 1 : exePath);
+                        }
+                        CloseHandle(hProc);
                     }
-                    CloseHandle(hProc);
                 }
             }
         }
@@ -215,6 +218,7 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
     if ((GetAsyncKeyState(VK_CONTROL) & 0x8000) || (GetAsyncKeyState(VK_MENU) & 0x8000)) {
         g_engine.Clear();
         g_rawCharCount = 0;
+        g_lastComposition.clear();
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
 
@@ -222,6 +226,7 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
         if (g_engine.IsInWord()) {
             g_engine.RemoveLastChar();
             if (g_rawCharCount > 0) g_rawCharCount--;
+            if (!g_lastComposition.empty()) g_lastComposition.pop_back();
         }
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
@@ -232,6 +237,7 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
         (vk >= VK_F1 && vk <= VK_F24)) {
         g_engine.Clear();
         g_rawCharCount = 0;
+        g_lastComposition.clear();
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
 
@@ -244,28 +250,32 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
     if (g_engine.ProcessKey(ch, (InputMethod)g_pConfig->inputMethod)) {
         std::wstring newComposition = g_engine.GetCompositionString();
         if (g_engine.DidTransform()) {
-            ReplaceText(oldRawCount, newComposition);
+            ReplaceText(g_lastComposition, newComposition);
             g_rawCharCount = (int)newComposition.length();
             g_suppressedKeys[vk] = true;
+            g_lastComposition = newComposition;
             return 1;
         } else {
             g_rawCharCount++;
+            g_lastComposition = newComposition;
             return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
         }
     } else {
         if (g_pConfig && g_pConfig->macroEnabled && oldRawCount > 0) {
-            std::wstring lastWord = g_engine.GetCompositionString();
+            std::wstring lastWord = g_lastComposition;
             if (!lastWord.empty()) {
                 std::wstring expanded = g_macroEngine.Expand(lastWord);
                 if (!expanded.empty()) {
-                    ReplaceText(oldRawCount, expanded);
+                    ReplaceText(g_lastComposition, expanded);
                     g_rawCharCount = 0;
                     g_engine.Clear();
+                    g_lastComposition.clear();
                     return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
                 }
             }
         }
         g_rawCharCount = 0;
+        g_lastComposition.clear();
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
 }
@@ -276,6 +286,7 @@ static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lPara
         if (wParam == WM_LBUTTONDOWN || wParam == WM_RBUTTONDOWN || wParam == WM_MBUTTONDOWN) {
             g_engine.Clear();
             g_rawCharCount = 0;
+            g_lastComposition.clear();
         }
     }
     return CallNextHookEx(g_hMouseHook, nCode, wParam, lParam);
@@ -290,7 +301,6 @@ bool InstallHooks(HINSTANCE hInstance, HWND hWnd)
     g_hMainWnd = hWnd;
     g_hKeyboardHook = SetWindowsHookExW(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
     g_hMouseHook = SetWindowsHookExW(WH_MOUSE_LL, LowLevelMouseProc, hInstance, 0);
-...
 
     // Load macros if enabled
     if (g_pConfig && g_pConfig->macroEnabled && g_pConfig->macroFilePath[0] != L'\0') {
@@ -327,4 +337,5 @@ void ResetEngine()
 {
     g_engine.Clear();
     g_rawCharCount = 0;
+    g_lastComposition.clear();
 }

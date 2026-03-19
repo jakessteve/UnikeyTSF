@@ -280,6 +280,64 @@ HRESULT CUniKeyTextService::OnKeyDown(
     GetKeyboardState(keyboardState);
     wchar_t ch;
     if (ToUnicodeEx((UINT)wParam, (UINT)(lParam >> 16) & 0xFF, keyboardState, &ch, 1, 4, GetKeyboardLayout(0)) > 0) {
+        
+        // Surrounding Text Assessment (Reconversion)
+        if (!_engine.IsInWord() && _engine.IsWordChar(ch, (InputMethod)_config.inputMethod)) {
+            ComPtr<CEditSession> pReadSession;
+            pReadSession.Attach(new CEditSession([this, pContext](TfEditCookie ec) -> HRESULT {
+                TF_SELECTION tfSelection;
+                ULONG fetched = 0;
+                if (FAILED(pContext->GetSelection(ec, TF_DEFAULT_SELECTION, 1, &tfSelection, &fetched)) || fetched != 1) return E_FAIL;
+                
+                BOOL isEmpty = FALSE;
+                if (FAILED(tfSelection.range->IsEmpty(ec, &isEmpty)) || !isEmpty) return S_OK;
+
+                ComPtr<ITfRange> pRange;
+                tfSelection.range->Clone(&pRange);
+                
+                LONG shifted = 0;
+                pRange->ShiftStart(ec, -64, &shifted, nullptr);
+                
+                wchar_t buf[65] = {0};
+                ULONG copied = 0;
+                if (SUCCEEDED(pRange->GetText(ec, 0, buf, 64, &copied)) && copied > 0) {
+                    std::wstring text(buf, copied);
+                    int startIdx = (int)text.length() - 1;
+                    while(startIdx >= 0) {
+                        if (!_engine.IsWordChar(text[startIdx], (InputMethod)_config.inputMethod)) {
+                            break;
+                        }
+                        startIdx--;
+                    }
+                    startIdx++;
+                    
+                    if (startIdx < (int)text.length()) {
+                        std::wstring prefix = text.substr(startIdx);
+                        _engine.Clear();
+                        for (wchar_t c : prefix) {
+                            _engine.ProcessKey(c, (InputMethod)_config.inputMethod);
+                        }
+                        
+                        LONG adjustStart = startIdx - (LONG)text.length();
+                        ComPtr<ITfRange> pWordRange;
+                        tfSelection.range->Clone(&pWordRange);
+                        pWordRange->ShiftStart(ec, adjustStart, &shifted, nullptr);
+                        pWordRange->SetText(ec, 0, L"", 0);
+                        
+                        pWordRange->Collapse(ec, TF_ANCHOR_END);
+                        TF_SELECTION sel = {};
+                        sel.range = pWordRange.Get();
+                        sel.style.ase = TF_AE_NONE;
+                        sel.style.fInterimChar = FALSE;
+                        pContext->SetSelection(ec, 1, &sel);
+                        pContext->SetSelection(ec, 1, &sel);
+                    }
+                }
+                return S_OK;
+            }));
+            pContext->RequestEditSession(_tfClientId, pReadSession.Get(), TF_ES_SYNC | TF_ES_READWRITE, nullptr);
+        }
+
         if (_engine.ProcessKey(ch, (InputMethod)_config.inputMethod)) {
             if (pfEaten) *pfEaten = TRUE;
 

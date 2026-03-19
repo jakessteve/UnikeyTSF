@@ -1,23 +1,21 @@
-# Agent Context (QC Worker)
+# @qc Skills Index (LITE)
 
-> Minimal context for CLI worker agents in @qc role. Load skills on-demand from `.agent/skills/MANIFEST.md`.
+> Minimal index specifically for @qc CLI workers.
 
-## Project
-- Read `package.json` for tech stack and test runner.
-- Run `npm test`, `npm run lint`, `npx tsc --noEmit` to verify quality.
+## Role Focus
+`@qc`: Testing, verification, quality, test design
 
-## Your Rules (from `rules/MANIFEST.md` — @qc section)
-- `rules/code-standards.md` — DRY, no `any`, 80% coverage
-- `rules/execution-protocol.md` — SOT-driven, tiered verification gate
-- `rules/engineering-mindset.md` — MVP-first, ruthless prioritization
-- `rules/context-budget.md` — Context window limits (ALWAYS observe)
+## Key Skills
+- `playwright-testing`
+- `verification-before-completion`
+- `test-case-design`
+- `test-fixing`
+- `regression-strategy`
+- `performance-testing`
+- `mutation-testing`
 
-## Skill Loading Protocol
-1. Read `.agent/skills/MANIFEST.md` — find @qc skills table
-2. When a trigger matches your current task, `view_file` that skill
-3. Do NOT pre-load skills you don't need
+## Essential Rules
+- `code-standards`: 80% coverage, tiered QC enforcement
+- `code-review-excellence`: Quality focus
 
-## Key Conventions
-1. UI text follows project locale. English code.
-2. Run linter and tests before declaring task complete.
-3. No decorative emojis/icons outside rendered UI components.
+*(Use `view_file .agent/skills/{skill-name}/SKILL.md` to load skills).*

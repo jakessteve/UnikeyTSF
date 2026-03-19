@@ -77,4 +77,3 @@ Based on the Resilience Score, determine next action:
 | <50% | D-F | REDESIGN — route back to `/party-mode` or `/idea-forge` Phase 2 with findings |
 
 > **Integration:** When triggered from `/idea-forge`, this gate feeds directly into Phase 6 (Debate Implementation). The battle-test report becomes input for the `implementation-debate` skill.
-

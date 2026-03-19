@@ -4,18 +4,18 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineSystem.cmake:212 (message)"
       - "CMakeLists.txt:2 (project)"
     message: |
       The system is: Windows - 10.0.26100 - AMD64
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:2 (project)"
     mode: "file"
     variable: "src_in"
@@ -31,8 +31,8 @@ events:
     names:
       - "CMakeCXXCompilerId.cpp.in"
     candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/"
-    found: "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/"
+    found: "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
         - "C:\\WINDOWS\\system32"
@@ -55,9 +55,9 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
@@ -67,10 +67,10 @@ events:
       
       The output was:
       0
-      MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-      Build started 18-Mar-26 3:07:23 PM.
+      MSBuild version 18.4.0+6e61e96ac for .NET Framework
+      Build started 19-Mar-26 2:45:22 PM.
       
-      Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.1.2-msvc8\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.2.3-msvc3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
         Creating directory "Debug\\".
         Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
@@ -83,7 +83,7 @@ events:
         CMakeCXXCompilerId.cpp
       Link:
         C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\\CMakeCXXCompilerId.obj
-        CompilerIdCXX.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.1.2-msvc8\\CompilerIdCXX\\CompilerIdCXX.exe
+        CompilerIdCXX.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.2.3-msvc3\\CompilerIdCXX\\CompilerIdCXX.exe
       PostBuildEvent:
         for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
         :VCEnd
@@ -91,13 +91,13 @@ events:
       FinalizeBuildStatus:
         Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
         Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
-      Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.1.2-msvc8\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.2.3-msvc3\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
       
       Build succeeded.
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.40
+      Time Elapsed 00:00:01.03
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -105,15 +105,15 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
       
       The CXX compiler identification is MSVC, found in:
-        C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/4.1.2-msvc8/CompilerIdCXX/CompilerIdCXX.exe
+        C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/4.2.3-msvc3/CompilerIdCXX/CompilerIdCXX.exe
       
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "_CMAKE_TOOL_WITH_PATH"
@@ -172,10 +172,10 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "_CMAKE_TOOL_WITH_PATH"
@@ -287,8 +287,8 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_LINKER"
@@ -347,8 +347,8 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_MT"
@@ -460,8 +460,8 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:243 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_AR"
@@ -520,11 +520,11 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:581 (enable_language)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:554 (__windows_compiler_msvc_enable_rc)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC-CXX.cmake:6 (__windows_compiler_msvc)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeCXXInformation.cmake:48 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC.cmake:584 (enable_language)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC.cmake:557 (__windows_compiler_msvc_enable_rc)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Platform/Windows-MSVC-CXX.cmake:6 (__windows_compiler_msvc)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeCXXInformation.cmake:48 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
     variable: "CMAKE_RC_COMPILER"
@@ -686,14 +686,14 @@ events:
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-hzny4l"
-      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-hzny4l"
+      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-b6dkqc"
+      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-b6dkqc"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -703,52 +703,51 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-hzny4l'
+        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-b6dkqc'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_85bda.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
-        MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 18-Mar-26 3:07:23 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_92c72.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
+        MSBuild version 18.4.0+6e61e96ac for .NET Framework
+        Build started 19-Mar-26 2:45:24 PM.
         
-        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-hzny4l\\cmTC_85bda.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-b6dkqc\\cmTC_92c72.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_85bda.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-hzny4l\\Debug\\".
-          Creating directory "cmTC_85bda.dir\\Debug\\cmTC_85bda.tlog\\".
+          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-b6dkqc\\Debug\\".
+          Creating directory "cmTC_92c72.dir\\Debug\\cmTC_92c72.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_85bda.dir\\Debug\\cmTC_85bda.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_85bda.dir\\Debug\\cmTC_85bda.tlog\\unsuccessfulbuild".
+          Creating "cmTC_92c72.dir\\Debug\\cmTC_92c72.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_92c72.dir\\Debug\\cmTC_92c72.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"cmTC_85bda.dir\\Debug\\\\" /Fd"cmTC_85bda.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TP /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35725 for x86
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_92c72.dir\\Debug\\\\" /Fd"cmTC_92c72.dir\\Debug\\vc145.pdb" /external:W1 /TP /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35727 for x86
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Fo"cmTC_85bda.dir\\Debug\\\\" /Fd"cmTC_85bda.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TP /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_92c72.dir\\Debug\\\\" /Fd"cmTC_92c72.dir\\Debug\\vc145.pdb" /external:W1 /TP /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-hzny4l\\Debug\\cmTC_85bda.exe" /INCREMENTAL /ILK:"cmTC_85bda.dir\\Debug\\cmTC_85bda.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-hzny4l/Debug/cmTC_85bda.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-hzny4l/Debug/cmTC_85bda.lib" /MACHINE:X86  /machine:X86 cmTC_85bda.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_85bda.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-hzny4l\\Debug\\cmTC_85bda.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-b6dkqc\\Debug\\cmTC_92c72.exe" /INCREMENTAL /ILK:"cmTC_92c72.dir\\Debug\\cmTC_92c72.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-b6dkqc/Debug/cmTC_92c72.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-b6dkqc/Debug/cmTC_92c72.lib" /MACHINE:X86  /machine:X86 cmTC_92c72.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_92c72.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-b6dkqc\\Debug\\cmTC_92c72.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_85bda.dir\\Debug\\cmTC_85bda.tlog\\unsuccessfulbuild".
-          Touching "cmTC_85bda.dir\\Debug\\cmTC_85bda.tlog\\cmTC_85bda.lastbuildstate".
-        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-hzny4l\\cmTC_85bda.vcxproj" (default targets).
+          Deleting file "cmTC_92c72.dir\\Debug\\cmTC_92c72.tlog\\unsuccessfulbuild".
+          Touching "cmTC_92c72.dir\\Debug\\cmTC_92c72.tlog\\cmTC_92c72.lastbuildstate".
+        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-b6dkqc\\cmTC_92c72.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.37
+        Time Elapsed 00:00:00.80
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
         linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/HostX64/x86/link.exe
         implicit libs: []
         implicit objs: []
@@ -759,24 +758,24 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Running the CXX compiler's linker: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/HostX64/x86/link.exe" "-v"
-      Microsoft (R) Incremental Linker Version 14.50.35725.0
+      Microsoft (R) Incremental Linker Version 14.50.35727.0
       Copyright (C) Microsoft Corporation.  All rights reserved.
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindGit.cmake:86 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FetchContent.cmake:1874 (find_package)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FetchContent.cmake:1609 (__FetchContent_populateSubbuild)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FetchContent.cmake:2145:EVAL:2 (__FetchContent_doPopulation)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FetchContent.cmake:2145 (cmake_language)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FetchContent.cmake:2384 (__FetchContent_Populate)"
-      - "CMakeLists.txt:118 (FetchContent_MakeAvailable)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindGit.cmake:111 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FetchContent.cmake:1884 (find_package)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FetchContent.cmake:1619 (__FetchContent_populateSubbuild)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FetchContent.cmake:2155:EVAL:2 (__FetchContent_doPopulation)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FetchContent.cmake:2155 (cmake_language)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FetchContent.cmake:2394 (__FetchContent_Populate)"
+      - "CMakeLists.txt:122 (FetchContent_MakeAvailable)"
     mode: "program"
     variable: "GIT_EXECUTABLE"
     description: "Git command line client"
@@ -967,11 +966,11 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
       - "build32/_deps/googletest-src/CMakeLists.txt:6 (project)"
     mode: "file"
     variable: "src_in"
@@ -987,8 +986,8 @@ events:
     names:
       - "CMakeCCompilerId.c.in"
     candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/"
-    found: "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeCCompilerId.c.in"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/"
+    found: "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
         - "C:\\WINDOWS\\system32"
@@ -1017,9 +1016,9 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
       - "build32/_deps/googletest-src/CMakeLists.txt:6 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
@@ -1029,10 +1028,10 @@ events:
       
       The output was:
       0
-      MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-      Build started 18-Mar-26 3:07:33 PM.
+      MSBuild version 18.4.0+6e61e96ac for .NET Framework
+      Build started 19-Mar-26 2:45:40 PM.
       
-      Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.1.2-msvc8\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.2.3-msvc3\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
         Creating directory "Debug\\".
         Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
@@ -1045,7 +1044,7 @@ events:
         CMakeCCompilerId.c
       Link:
         C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\\CMakeCCompilerId.obj
-        CompilerIdC.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.1.2-msvc8\\CompilerIdC\\CompilerIdC.exe
+        CompilerIdC.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.2.3-msvc3\\CompilerIdC\\CompilerIdC.exe
       PostBuildEvent:
         for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
         :VCEnd
@@ -1053,13 +1052,13 @@ events:
       FinalizeBuildStatus:
         Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
         Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
-      Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.1.2-msvc8\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\4.2.3-msvc3\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
       
       Build succeeded.
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.38
+      Time Elapsed 00:00:00.75
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -1067,15 +1066,15 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
       
       The C compiler identification is MSVC, found in:
-        C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/4.1.2-msvc8/CompilerIdC/CompilerIdC.exe
+        C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/4.2.3-msvc3/CompilerIdC/CompilerIdC.exe
       
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
       - "build32/_deps/googletest-src/CMakeLists.txt:6 (project)"
     mode: "program"
     variable: "_CMAKE_TOOL_WITH_PATH"
@@ -1241,14 +1240,14 @@ events:
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "build32/_deps/googletest-src/CMakeLists.txt:6 (project)"
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-o91j1b"
-      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-o91j1b"
+      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-6w9pd1"
+      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-6w9pd1"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1257,52 +1256,51 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-o91j1b'
+        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-6w9pd1'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ad49e.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
-        MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 18-Mar-26 3:07:34 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_5716c.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
+        MSBuild version 18.4.0+6e61e96ac for .NET Framework
+        Build started 19-Mar-26 2:45:42 PM.
         
-        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-o91j1b\\cmTC_ad49e.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-6w9pd1\\cmTC_5716c.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_ad49e.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-o91j1b\\Debug\\".
-          Creating directory "cmTC_ad49e.dir\\Debug\\cmTC_ad49e.tlog\\".
+          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-6w9pd1\\Debug\\".
+          Creating directory "cmTC_5716c.dir\\Debug\\cmTC_5716c.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_ad49e.dir\\Debug\\cmTC_ad49e.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_ad49e.dir\\Debug\\cmTC_ad49e.tlog\\unsuccessfulbuild".
+          Creating "cmTC_5716c.dir\\Debug\\cmTC_5716c.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_5716c.dir\\Debug\\cmTC_5716c.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_ad49e.dir\\Debug\\\\" /Fd"cmTC_ad49e.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.1\\Modules\\CMakeCCompilerABI.c"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35725 for x86
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5716c.dir\\Debug\\\\" /Fd"cmTC_5716c.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35727 for x86
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_ad49e.dir\\Debug\\\\" /Fd"cmTC_ad49e.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.1\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5716c.dir\\Debug\\\\" /Fd"cmTC_5716c.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-o91j1b\\Debug\\cmTC_ad49e.exe" /INCREMENTAL /ILK:"cmTC_ad49e.dir\\Debug\\cmTC_ad49e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-o91j1b/Debug/cmTC_ad49e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-o91j1b/Debug/cmTC_ad49e.lib" /MACHINE:X86  /machine:X86 cmTC_ad49e.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_ad49e.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-o91j1b\\Debug\\cmTC_ad49e.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-6w9pd1\\Debug\\cmTC_5716c.exe" /INCREMENTAL /ILK:"cmTC_5716c.dir\\Debug\\cmTC_5716c.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-6w9pd1/Debug/cmTC_5716c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-6w9pd1/Debug/cmTC_5716c.lib" /MACHINE:X86  /machine:X86 cmTC_5716c.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_5716c.vcxproj -> C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-6w9pd1\\Debug\\cmTC_5716c.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_ad49e.dir\\Debug\\cmTC_ad49e.tlog\\unsuccessfulbuild".
-          Touching "cmTC_ad49e.dir\\Debug\\cmTC_ad49e.tlog\\cmTC_ad49e.lastbuildstate".
-        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-o91j1b\\cmTC_ad49e.vcxproj" (default targets).
+          Deleting file "cmTC_5716c.dir\\Debug\\cmTC_5716c.tlog\\unsuccessfulbuild".
+          Touching "cmTC_5716c.dir\\Debug\\cmTC_5716c.tlog\\cmTC_5716c.lastbuildstate".
+        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-6w9pd1\\cmTC_5716c.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.36
+        Time Elapsed 00:00:00.75
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "build32/_deps/googletest-src/CMakeLists.txt:6 (project)"
     message: |
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
         linker tool for 'C': C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/HostX64/x86/link.exe
         implicit libs: []
         implicit objs: []
@@ -1313,19 +1311,19 @@ events:
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CMakeDetermineLinkerId.cmake:38 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "build32/_deps/googletest-src/CMakeLists.txt:6 (project)"
     message: |
       Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/HostX64/x86/link.exe" "-v"
-      Microsoft (R) Incremental Linker Version 14.50.35725.0
+      Microsoft (R) Incremental Linker Version 14.50.35727.0
       Copyright (C) Microsoft Corporation.  All rights reserved.
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython/Support.cmake:2173 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython3.cmake:656 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
       - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
       - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
     mode: "program"
@@ -1340,10 +1338,10 @@ events:
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "python3.14"
+      - "python3.15"
       - "python3"
       - "python"
-      - "ipy3.14"
+      - "ipy3.15"
       - "ipy3"
       - "ipy64"
       - "ipy32"
@@ -1352,23 +1350,23 @@ events:
     candidate_directories:
       - "/REGISTRY-NOTFOUND/bin/"
       - "/REGISTRY-NOTFOUND/Scripts/"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
       - "/REGISTRY-NOTFOUND/net45/"
       - "/REGISTRY-NOTFOUND/net40/"
       - "/REGISTRY-NOTFOUND/"
     searched_directories:
-      - "/REGISTRY-NOTFOUND/bin/python3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/python3.14"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
       - "/REGISTRY-NOTFOUND/bin/python3.com"
       - "/REGISTRY-NOTFOUND/bin/python3.exe"
       - "/REGISTRY-NOTFOUND/bin/python3"
       - "/REGISTRY-NOTFOUND/bin/python.com"
       - "/REGISTRY-NOTFOUND/bin/python.exe"
       - "/REGISTRY-NOTFOUND/bin/python"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
       - "/REGISTRY-NOTFOUND/bin/ipy3.com"
       - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
       - "/REGISTRY-NOTFOUND/bin/ipy3"
@@ -1383,18 +1381,18 @@ events:
       - "/REGISTRY-NOTFOUND/bin/ipy"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
       - "/REGISTRY-NOTFOUND/Scripts/python3.com"
       - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python3"
       - "/REGISTRY-NOTFOUND/Scripts/python.com"
       - "/REGISTRY-NOTFOUND/Scripts/python.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3"
@@ -1409,44 +1407,44 @@ events:
       - "/REGISTRY-NOTFOUND/Scripts/ipy"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
       - "/REGISTRY-NOTFOUND/net45/python3.com"
       - "/REGISTRY-NOTFOUND/net45/python3.exe"
       - "/REGISTRY-NOTFOUND/net45/python3"
       - "/REGISTRY-NOTFOUND/net45/python.com"
       - "/REGISTRY-NOTFOUND/net45/python.exe"
       - "/REGISTRY-NOTFOUND/net45/python"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
       - "/REGISTRY-NOTFOUND/net45/ipy3.com"
       - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net45/ipy3"
@@ -1461,18 +1459,18 @@ events:
       - "/REGISTRY-NOTFOUND/net45/ipy"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
       - "/REGISTRY-NOTFOUND/net40/python3.com"
       - "/REGISTRY-NOTFOUND/net40/python3.exe"
       - "/REGISTRY-NOTFOUND/net40/python3"
       - "/REGISTRY-NOTFOUND/net40/python.com"
       - "/REGISTRY-NOTFOUND/net40/python.exe"
       - "/REGISTRY-NOTFOUND/net40/python"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
       - "/REGISTRY-NOTFOUND/net40/ipy3.com"
       - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net40/ipy3"
@@ -1487,18 +1485,18 @@ events:
       - "/REGISTRY-NOTFOUND/net40/ipy"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe"
-      - "/REGISTRY-NOTFOUND/python3.14.com"
-      - "/REGISTRY-NOTFOUND/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/python3.14"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
       - "/REGISTRY-NOTFOUND/python3.com"
       - "/REGISTRY-NOTFOUND/python3.exe"
       - "/REGISTRY-NOTFOUND/python3"
       - "/REGISTRY-NOTFOUND/python.com"
       - "/REGISTRY-NOTFOUND/python.exe"
       - "/REGISTRY-NOTFOUND/python"
-      - "/REGISTRY-NOTFOUND/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/ipy3.14"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
       - "/REGISTRY-NOTFOUND/ipy3.com"
       - "/REGISTRY-NOTFOUND/ipy3.exe"
       - "/REGISTRY-NOTFOUND/ipy3"
@@ -1542,17 +1540,17 @@ events:
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CheckCSourceCompiles.cmake:103 (cmake_check_source_compiles)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindThreads.cmake:97 (check_c_source_compiles)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckCSourceCompiles.cmake:103 (cmake_check_source_compiles)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindThreads.cmake:160 (check_c_source_compiles)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindThreads.cmake:226 (_threads_check_libc)"
       - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:66 (find_package)"
       - "build32/_deps/googletest-src/googletest/CMakeLists.txt:83 (config_compiler_and_linker)"
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-cwlds4"
-      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-cwlds4"
+      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-xak1g5"
+      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-xak1g5"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1561,55 +1559,54 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-cwlds4'
+        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-xak1g5'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d3b8d.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
-        MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 18-Mar-26 3:07:35 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_5ea01.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
+        MSBuild version 18.4.0+6e61e96ac for .NET Framework
+        Build started 19-Mar-26 2:45:46 PM.
         
-        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\cmTC_d3b8d.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\cmTC_5ea01.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_d3b8d.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\Debug\\".
-          Creating directory "cmTC_d3b8d.dir\\Debug\\cmTC_d3b8d.tlog\\".
+          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\Debug\\".
+          Creating directory "cmTC_5ea01.dir\\Debug\\cmTC_5ea01.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_d3b8d.dir\\Debug\\cmTC_d3b8d.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_d3b8d.dir\\Debug\\cmTC_d3b8d.tlog\\unsuccessfulbuild".
+          Creating "cmTC_5ea01.dir\\Debug\\cmTC_5ea01.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_5ea01.dir\\Debug\\cmTC_5ea01.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_d3b8d.dir\\Debug\\\\" /Fd"cmTC_d3b8d.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\src.c"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35725 for x86
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5ea01.dir\\Debug\\\\" /Fd"cmTC_5ea01.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35727 for x86
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_d3b8d.dir\\Debug\\\\" /Fd"cmTC_d3b8d.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_5ea01.dir\\Debug\\\\" /Fd"cmTC_5ea01.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\src.c"
           src.c
-        C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\cmTC_d3b8d.vcxproj]
-        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\cmTC_d3b8d.vcxproj" (default targets) -- FAILED.
+        C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\cmTC_5ea01.vcxproj]
+        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\cmTC_5ea01.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\cmTC_d3b8d.vcxproj" (default target) (1) ->
+        "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\cmTC_5ea01.vcxproj" (default target) (1) ->
         (ClCompile target) -> 
-          C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-cwlds4\\cmTC_d3b8d.vcxproj]
+          C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-xak1g5\\cmTC_5ea01.vcxproj]
         
             0 Warning(s)
             1 Error(s)
         
-        Time Elapsed 00:00:00.22
+        Time Elapsed 00:00:00.58
         
       exitCode: 1
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CheckLibraryExists.cmake:154 (try_compile)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindThreads.cmake:112 (check_library_exists)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckLibraryExists.cmake:154 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindThreads.cmake:175 (check_library_exists)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindThreads.cmake:238 (_threads_check_lib)"
       - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:66 (find_package)"
       - "build32/_deps/googletest-src/googletest/CMakeLists.txt:83 (config_compiler_and_linker)"
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-8z7wci"
-      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-8z7wci"
+      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-m1kmzs"
+      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-m1kmzs"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1618,57 +1615,56 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-8z7wci'
+        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-m1kmzs'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_1a8cc.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
-        MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 18-Mar-26 3:07:36 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_cab74.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
+        MSBuild version 18.4.0+6e61e96ac for .NET Framework
+        Build started 19-Mar-26 2:45:47 PM.
         
-        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\cmTC_1a8cc.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\cmTC_cab74.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_1a8cc.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\Debug\\".
-          Creating directory "cmTC_1a8cc.dir\\Debug\\cmTC_1a8cc.tlog\\".
+          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\Debug\\".
+          Creating directory "cmTC_cab74.dir\\Debug\\cmTC_cab74.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_1a8cc.dir\\Debug\\cmTC_1a8cc.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_1a8cc.dir\\Debug\\cmTC_1a8cc.tlog\\unsuccessfulbuild".
+          Creating "cmTC_cab74.dir\\Debug\\cmTC_cab74.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_cab74.dir\\Debug\\cmTC_cab74.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_1a8cc.dir\\Debug\\\\" /Fd"cmTC_1a8cc.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\CheckFunctionExists.c"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35725 for x86
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_cab74.dir\\Debug\\\\" /Fd"cmTC_cab74.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35727 for x86
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_1a8cc.dir\\Debug\\\\" /Fd"cmTC_1a8cc.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\CheckFunctionExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_cab74.dir\\Debug\\\\" /Fd"cmTC_cab74.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\CheckFunctionExists.c"
           CheckFunctionExists.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\Debug\\cmTC_1a8cc.exe" /INCREMENTAL /ILK:"cmTC_1a8cc.dir\\Debug\\cmTC_1a8cc.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-8z7wci/Debug/cmTC_1a8cc.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-8z7wci/Debug/cmTC_1a8cc.lib" /MACHINE:X86  /machine:X86 cmTC_1a8cc.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\cmTC_1a8cc.vcxproj]
-        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\cmTC_1a8cc.vcxproj" (default targets) -- FAILED.
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\Debug\\cmTC_cab74.exe" /INCREMENTAL /ILK:"cmTC_cab74.dir\\Debug\\cmTC_cab74.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-m1kmzs/Debug/cmTC_cab74.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-m1kmzs/Debug/cmTC_cab74.lib" /MACHINE:X86  /machine:X86 cmTC_cab74.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\cmTC_cab74.vcxproj]
+        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\cmTC_cab74.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\cmTC_1a8cc.vcxproj" (default target) (1) ->
+        "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\cmTC_cab74.vcxproj" (default target) (1) ->
         (Link target) -> 
-          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-8z7wci\\cmTC_1a8cc.vcxproj]
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-m1kmzs\\cmTC_cab74.vcxproj]
         
             0 Warning(s)
             1 Error(s)
         
-        Time Elapsed 00:00:00.28
+        Time Elapsed 00:00:00.77
         
       exitCode: 1
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/CheckLibraryExists.cmake:154 (try_compile)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindThreads.cmake:112 (check_library_exists)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/CheckLibraryExists.cmake:154 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindThreads.cmake:175 (check_library_exists)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindThreads.cmake:239 (_threads_check_lib)"
       - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:66 (find_package)"
       - "build32/_deps/googletest-src/googletest/CMakeLists.txt:83 (config_compiler_and_linker)"
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-jo5ar2"
-      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-jo5ar2"
+      source: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-r5bohf"
+      binary: "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-r5bohf"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1677,42 +1673,41 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-jo5ar2'
+        Change Dir: 'C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-r5bohf'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f781a.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
-        MSBuild version 18.3.0-release-26070-10+3972042b7 for .NET Framework
-        Build started 18-Mar-26 3:07:37 PM.
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_57a7d.vcxproj /p:Configuration=Debug /p:Platform=Win32 /p:VisualStudioVersion=18.0 /v:n
+        MSBuild version 18.4.0+6e61e96ac for .NET Framework
+        Build started 19-Mar-26 2:45:48 PM.
         
-        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\cmTC_f781a.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\cmTC_57a7d.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_f781a.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\Debug\\".
-          Creating directory "cmTC_f781a.dir\\Debug\\cmTC_f781a.tlog\\".
+          Creating directory "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\Debug\\".
+          Creating directory "cmTC_57a7d.dir\\Debug\\cmTC_57a7d.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_f781a.dir\\Debug\\cmTC_f781a.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_f781a.dir\\Debug\\cmTC_f781a.tlog\\unsuccessfulbuild".
+          Creating "cmTC_57a7d.dir\\Debug\\cmTC_57a7d.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_57a7d.dir\\Debug\\cmTC_57a7d.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_f781a.dir\\Debug\\\\" /Fd"cmTC_f781a.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\CheckFunctionExists.c"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35725 for x86
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_57a7d.dir\\Debug\\\\" /Fd"cmTC_57a7d.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.50.35727 for x86
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_f781a.dir\\Debug\\\\" /Fd"cmTC_f781a.dir\\Debug\\vc145.pdb" /external:W1 /Gd /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\CheckFunctionExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /Oy- /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_57a7d.dir\\Debug\\\\" /Fd"cmTC_57a7d.dir\\Debug\\vc145.pdb" /external:W1 /TC /analyze- /errorReport:queue "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\CheckFunctionExists.c"
           CheckFunctionExists.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\Debug\\cmTC_f781a.exe" /INCREMENTAL /ILK:"cmTC_f781a.dir\\Debug\\cmTC_f781a.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-jo5ar2/Debug/cmTC_f781a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-jo5ar2/Debug/cmTC_f781a.lib" /MACHINE:X86  /machine:X86 cmTC_f781a.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\cmTC_f781a.vcxproj]
-        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\cmTC_f781a.vcxproj" (default targets) -- FAILED.
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.50.35717\\bin\\HostX64\\x86\\link.exe /OUT:"C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\Debug\\cmTC_57a7d.exe" /INCREMENTAL /ILK:"cmTC_57a7d.dir\\Debug\\cmTC_57a7d.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-r5bohf/Debug/cmTC_57a7d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/CMakeFiles/CMakeScratch/TryCompile-r5bohf/Debug/cmTC_57a7d.lib" /MACHINE:X86  /machine:X86 cmTC_57a7d.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\cmTC_57a7d.vcxproj]
+        Done Building Project "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\cmTC_57a7d.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\cmTC_f781a.vcxproj" (default target) (1) ->
+        "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\cmTC_57a7d.vcxproj" (default target) (1) ->
         (Link target) -> 
-          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-jo5ar2\\cmTC_f781a.vcxproj]
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\build32\\CMakeFiles\\CMakeScratch\\TryCompile-r5bohf\\cmTC_57a7d.vcxproj]
         
             0 Warning(s)
             1 Error(s)
         
-        Time Elapsed 00:00:00.27
+        Time Elapsed 00:00:00.66
         
       exitCode: 1
 ...
@@ -1722,8 +1717,8 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython/Support.cmake:2173 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython3.cmake:656 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
       - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
       - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
     mode: "program"
@@ -1738,10 +1733,10 @@ events:
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "python3.14"
+      - "python3.15"
       - "python3"
       - "python"
-      - "ipy3.14"
+      - "ipy3.15"
       - "ipy3"
       - "ipy64"
       - "ipy32"
@@ -1750,23 +1745,23 @@ events:
     candidate_directories:
       - "/REGISTRY-NOTFOUND/bin/"
       - "/REGISTRY-NOTFOUND/Scripts/"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
       - "/REGISTRY-NOTFOUND/net45/"
       - "/REGISTRY-NOTFOUND/net40/"
       - "/REGISTRY-NOTFOUND/"
     searched_directories:
-      - "/REGISTRY-NOTFOUND/bin/python3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/python3.14"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
       - "/REGISTRY-NOTFOUND/bin/python3.com"
       - "/REGISTRY-NOTFOUND/bin/python3.exe"
       - "/REGISTRY-NOTFOUND/bin/python3"
       - "/REGISTRY-NOTFOUND/bin/python.com"
       - "/REGISTRY-NOTFOUND/bin/python.exe"
       - "/REGISTRY-NOTFOUND/bin/python"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
       - "/REGISTRY-NOTFOUND/bin/ipy3.com"
       - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
       - "/REGISTRY-NOTFOUND/bin/ipy3"
@@ -1781,18 +1776,18 @@ events:
       - "/REGISTRY-NOTFOUND/bin/ipy"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
       - "/REGISTRY-NOTFOUND/Scripts/python3.com"
       - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python3"
       - "/REGISTRY-NOTFOUND/Scripts/python.com"
       - "/REGISTRY-NOTFOUND/Scripts/python.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3"
@@ -1807,44 +1802,44 @@ events:
       - "/REGISTRY-NOTFOUND/Scripts/ipy"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
       - "/REGISTRY-NOTFOUND/net45/python3.com"
       - "/REGISTRY-NOTFOUND/net45/python3.exe"
       - "/REGISTRY-NOTFOUND/net45/python3"
       - "/REGISTRY-NOTFOUND/net45/python.com"
       - "/REGISTRY-NOTFOUND/net45/python.exe"
       - "/REGISTRY-NOTFOUND/net45/python"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
       - "/REGISTRY-NOTFOUND/net45/ipy3.com"
       - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net45/ipy3"
@@ -1859,18 +1854,18 @@ events:
       - "/REGISTRY-NOTFOUND/net45/ipy"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
       - "/REGISTRY-NOTFOUND/net40/python3.com"
       - "/REGISTRY-NOTFOUND/net40/python3.exe"
       - "/REGISTRY-NOTFOUND/net40/python3"
       - "/REGISTRY-NOTFOUND/net40/python.com"
       - "/REGISTRY-NOTFOUND/net40/python.exe"
       - "/REGISTRY-NOTFOUND/net40/python"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
       - "/REGISTRY-NOTFOUND/net40/ipy3.com"
       - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net40/ipy3"
@@ -1885,18 +1880,18 @@ events:
       - "/REGISTRY-NOTFOUND/net40/ipy"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe"
-      - "/REGISTRY-NOTFOUND/python3.14.com"
-      - "/REGISTRY-NOTFOUND/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/python3.14"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
       - "/REGISTRY-NOTFOUND/python3.com"
       - "/REGISTRY-NOTFOUND/python3.exe"
       - "/REGISTRY-NOTFOUND/python3"
       - "/REGISTRY-NOTFOUND/python.com"
       - "/REGISTRY-NOTFOUND/python.exe"
       - "/REGISTRY-NOTFOUND/python"
-      - "/REGISTRY-NOTFOUND/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/ipy3.14"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
       - "/REGISTRY-NOTFOUND/ipy3.com"
       - "/REGISTRY-NOTFOUND/ipy3.exe"
       - "/REGISTRY-NOTFOUND/ipy3"
@@ -1944,8 +1939,8 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython/Support.cmake:2173 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython3.cmake:656 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
       - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
       - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
     mode: "program"
@@ -1960,10 +1955,10 @@ events:
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "python3.14"
+      - "python3.15"
       - "python3"
       - "python"
-      - "ipy3.14"
+      - "ipy3.15"
       - "ipy3"
       - "ipy64"
       - "ipy32"
@@ -1972,23 +1967,23 @@ events:
     candidate_directories:
       - "/REGISTRY-NOTFOUND/bin/"
       - "/REGISTRY-NOTFOUND/Scripts/"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
       - "/REGISTRY-NOTFOUND/net45/"
       - "/REGISTRY-NOTFOUND/net40/"
       - "/REGISTRY-NOTFOUND/"
     searched_directories:
-      - "/REGISTRY-NOTFOUND/bin/python3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/python3.14"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
       - "/REGISTRY-NOTFOUND/bin/python3.com"
       - "/REGISTRY-NOTFOUND/bin/python3.exe"
       - "/REGISTRY-NOTFOUND/bin/python3"
       - "/REGISTRY-NOTFOUND/bin/python.com"
       - "/REGISTRY-NOTFOUND/bin/python.exe"
       - "/REGISTRY-NOTFOUND/bin/python"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
       - "/REGISTRY-NOTFOUND/bin/ipy3.com"
       - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
       - "/REGISTRY-NOTFOUND/bin/ipy3"
@@ -2003,18 +1998,18 @@ events:
       - "/REGISTRY-NOTFOUND/bin/ipy"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
       - "/REGISTRY-NOTFOUND/Scripts/python3.com"
       - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python3"
       - "/REGISTRY-NOTFOUND/Scripts/python.com"
       - "/REGISTRY-NOTFOUND/Scripts/python.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3"
@@ -2029,44 +2024,44 @@ events:
       - "/REGISTRY-NOTFOUND/Scripts/ipy"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
       - "/REGISTRY-NOTFOUND/net45/python3.com"
       - "/REGISTRY-NOTFOUND/net45/python3.exe"
       - "/REGISTRY-NOTFOUND/net45/python3"
       - "/REGISTRY-NOTFOUND/net45/python.com"
       - "/REGISTRY-NOTFOUND/net45/python.exe"
       - "/REGISTRY-NOTFOUND/net45/python"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
       - "/REGISTRY-NOTFOUND/net45/ipy3.com"
       - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net45/ipy3"
@@ -2081,18 +2076,18 @@ events:
       - "/REGISTRY-NOTFOUND/net45/ipy"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
       - "/REGISTRY-NOTFOUND/net40/python3.com"
       - "/REGISTRY-NOTFOUND/net40/python3.exe"
       - "/REGISTRY-NOTFOUND/net40/python3"
       - "/REGISTRY-NOTFOUND/net40/python.com"
       - "/REGISTRY-NOTFOUND/net40/python.exe"
       - "/REGISTRY-NOTFOUND/net40/python"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
       - "/REGISTRY-NOTFOUND/net40/ipy3.com"
       - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net40/ipy3"
@@ -2107,18 +2102,18 @@ events:
       - "/REGISTRY-NOTFOUND/net40/ipy"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe"
-      - "/REGISTRY-NOTFOUND/python3.14.com"
-      - "/REGISTRY-NOTFOUND/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/python3.14"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
       - "/REGISTRY-NOTFOUND/python3.com"
       - "/REGISTRY-NOTFOUND/python3.exe"
       - "/REGISTRY-NOTFOUND/python3"
       - "/REGISTRY-NOTFOUND/python.com"
       - "/REGISTRY-NOTFOUND/python.exe"
       - "/REGISTRY-NOTFOUND/python"
-      - "/REGISTRY-NOTFOUND/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/ipy3.14"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
       - "/REGISTRY-NOTFOUND/ipy3.com"
       - "/REGISTRY-NOTFOUND/ipy3.exe"
       - "/REGISTRY-NOTFOUND/ipy3"
@@ -2166,8 +2161,8 @@ events:
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython/Support.cmake:2173 (find_program)"
-      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.1/Modules/FindPython3.cmake:656 (include)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
       - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
       - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
     mode: "program"
@@ -2182,10 +2177,10 @@ events:
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "python3.14"
+      - "python3.15"
       - "python3"
       - "python"
-      - "ipy3.14"
+      - "ipy3.15"
       - "ipy3"
       - "ipy64"
       - "ipy32"
@@ -2194,23 +2189,23 @@ events:
     candidate_directories:
       - "/REGISTRY-NOTFOUND/bin/"
       - "/REGISTRY-NOTFOUND/Scripts/"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
       - "/REGISTRY-NOTFOUND/net45/"
       - "/REGISTRY-NOTFOUND/net40/"
       - "/REGISTRY-NOTFOUND/"
     searched_directories:
-      - "/REGISTRY-NOTFOUND/bin/python3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/python3.14"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
       - "/REGISTRY-NOTFOUND/bin/python3.com"
       - "/REGISTRY-NOTFOUND/bin/python3.exe"
       - "/REGISTRY-NOTFOUND/bin/python3"
       - "/REGISTRY-NOTFOUND/bin/python.com"
       - "/REGISTRY-NOTFOUND/bin/python.exe"
       - "/REGISTRY-NOTFOUND/bin/python"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/bin/ipy3.14"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
       - "/REGISTRY-NOTFOUND/bin/ipy3.com"
       - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
       - "/REGISTRY-NOTFOUND/bin/ipy3"
@@ -2225,18 +2220,18 @@ events:
       - "/REGISTRY-NOTFOUND/bin/ipy"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/bin/ipy.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/python3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
       - "/REGISTRY-NOTFOUND/Scripts/python3.com"
       - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python3"
       - "/REGISTRY-NOTFOUND/Scripts/python.com"
       - "/REGISTRY-NOTFOUND/Scripts/python.exe"
       - "/REGISTRY-NOTFOUND/Scripts/python"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/Scripts/ipy3.14"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
       - "/REGISTRY-NOTFOUND/Scripts/ipy3"
@@ -2251,44 +2246,44 @@ events:
       - "/REGISTRY-NOTFOUND/Scripts/ipy"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/python"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.14"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy3"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy64"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy32"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe.com"
-      - "/REGISTRY-NOTFOUND/share/ironpython3.14/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/python3.14"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
       - "/REGISTRY-NOTFOUND/net45/python3.com"
       - "/REGISTRY-NOTFOUND/net45/python3.exe"
       - "/REGISTRY-NOTFOUND/net45/python3"
       - "/REGISTRY-NOTFOUND/net45/python.com"
       - "/REGISTRY-NOTFOUND/net45/python.exe"
       - "/REGISTRY-NOTFOUND/net45/python"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net45/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
       - "/REGISTRY-NOTFOUND/net45/ipy3.com"
       - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net45/ipy3"
@@ -2303,18 +2298,18 @@ events:
       - "/REGISTRY-NOTFOUND/net45/ipy"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net45/ipy.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/python3.14"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
       - "/REGISTRY-NOTFOUND/net40/python3.com"
       - "/REGISTRY-NOTFOUND/net40/python3.exe"
       - "/REGISTRY-NOTFOUND/net40/python3"
       - "/REGISTRY-NOTFOUND/net40/python.com"
       - "/REGISTRY-NOTFOUND/net40/python.exe"
       - "/REGISTRY-NOTFOUND/net40/python"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/net40/ipy3.14"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
       - "/REGISTRY-NOTFOUND/net40/ipy3.com"
       - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
       - "/REGISTRY-NOTFOUND/net40/ipy3"
@@ -2329,18 +2324,1128 @@ events:
       - "/REGISTRY-NOTFOUND/net40/ipy"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
       - "/REGISTRY-NOTFOUND/net40/ipy.exe"
-      - "/REGISTRY-NOTFOUND/python3.14.com"
-      - "/REGISTRY-NOTFOUND/python3.14.exe"
-      - "/REGISTRY-NOTFOUND/python3.14"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
       - "/REGISTRY-NOTFOUND/python3.com"
       - "/REGISTRY-NOTFOUND/python3.exe"
       - "/REGISTRY-NOTFOUND/python3"
       - "/REGISTRY-NOTFOUND/python.com"
       - "/REGISTRY-NOTFOUND/python.exe"
       - "/REGISTRY-NOTFOUND/python"
-      - "/REGISTRY-NOTFOUND/ipy3.14.com"
-      - "/REGISTRY-NOTFOUND/ipy3.14.exe"
-      - "/REGISTRY-NOTFOUND/ipy3.14"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
+      - "/REGISTRY-NOTFOUND/ipy3.com"
+      - "/REGISTRY-NOTFOUND/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/ipy3"
+      - "/REGISTRY-NOTFOUND/ipy64.com"
+      - "/REGISTRY-NOTFOUND/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/ipy64"
+      - "/REGISTRY-NOTFOUND/ipy32.com"
+      - "/REGISTRY-NOTFOUND/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/ipy32"
+      - "/REGISTRY-NOTFOUND/ipy.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+      - "/REGISTRY-NOTFOUND/ipy"
+      - "/REGISTRY-NOTFOUND/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Users\\HeoCop\\.cargo\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\UniGetUI\\Chocolatey\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\HeoCop\\AppData\\Roaming\\npm"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Google\\Cloud SDK\\google-cloud-sdk\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Antigravity\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/UniKeyTSF"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files (x86)/UniKeyTSF"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
+      - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
+      - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
+    mode: "program"
+    variable: "_Python3_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python3.15"
+      - "python3"
+      - "python"
+      - "ipy3.15"
+      - "ipy3"
+      - "ipy64"
+      - "ipy32"
+      - "ipy"
+      - "ipy.exe"
+    candidate_directories:
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "/REGISTRY-NOTFOUND/Scripts/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
+      - "/REGISTRY-NOTFOUND/net45/"
+      - "/REGISTRY-NOTFOUND/net40/"
+      - "/REGISTRY-NOTFOUND/"
+    searched_directories:
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
+      - "/REGISTRY-NOTFOUND/bin/python3.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3"
+      - "/REGISTRY-NOTFOUND/bin/python.com"
+      - "/REGISTRY-NOTFOUND/bin/python.exe"
+      - "/REGISTRY-NOTFOUND/bin/python"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy64"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy32"
+      - "/REGISTRY-NOTFOUND/bin/ipy.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3"
+      - "/REGISTRY-NOTFOUND/Scripts/python.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
+      - "/REGISTRY-NOTFOUND/net45/python3.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3"
+      - "/REGISTRY-NOTFOUND/net45/python.com"
+      - "/REGISTRY-NOTFOUND/net45/python.exe"
+      - "/REGISTRY-NOTFOUND/net45/python"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy64"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy32"
+      - "/REGISTRY-NOTFOUND/net45/ipy.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
+      - "/REGISTRY-NOTFOUND/net40/python3.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3"
+      - "/REGISTRY-NOTFOUND/net40/python.com"
+      - "/REGISTRY-NOTFOUND/net40/python.exe"
+      - "/REGISTRY-NOTFOUND/net40/python"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy64"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy32"
+      - "/REGISTRY-NOTFOUND/net40/ipy.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
+      - "/REGISTRY-NOTFOUND/python3.com"
+      - "/REGISTRY-NOTFOUND/python3.exe"
+      - "/REGISTRY-NOTFOUND/python3"
+      - "/REGISTRY-NOTFOUND/python.com"
+      - "/REGISTRY-NOTFOUND/python.exe"
+      - "/REGISTRY-NOTFOUND/python"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
+      - "/REGISTRY-NOTFOUND/ipy3.com"
+      - "/REGISTRY-NOTFOUND/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/ipy3"
+      - "/REGISTRY-NOTFOUND/ipy64.com"
+      - "/REGISTRY-NOTFOUND/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/ipy64"
+      - "/REGISTRY-NOTFOUND/ipy32.com"
+      - "/REGISTRY-NOTFOUND/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/ipy32"
+      - "/REGISTRY-NOTFOUND/ipy.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+      - "/REGISTRY-NOTFOUND/ipy"
+      - "/REGISTRY-NOTFOUND/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Users\\HeoCop\\.cargo\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\UniGetUI\\Chocolatey\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\HeoCop\\AppData\\Roaming\\npm"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Google\\Cloud SDK\\google-cloud-sdk\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Antigravity\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/UniKeyTSF"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files (x86)/UniKeyTSF"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
+      - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
+      - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
+    mode: "program"
+    variable: "_Python3_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python3.15"
+      - "python3"
+      - "python"
+      - "ipy3.15"
+      - "ipy3"
+      - "ipy64"
+      - "ipy32"
+      - "ipy"
+      - "ipy.exe"
+    candidate_directories:
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "/REGISTRY-NOTFOUND/Scripts/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
+      - "/REGISTRY-NOTFOUND/net45/"
+      - "/REGISTRY-NOTFOUND/net40/"
+      - "/REGISTRY-NOTFOUND/"
+    searched_directories:
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
+      - "/REGISTRY-NOTFOUND/bin/python3.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3"
+      - "/REGISTRY-NOTFOUND/bin/python.com"
+      - "/REGISTRY-NOTFOUND/bin/python.exe"
+      - "/REGISTRY-NOTFOUND/bin/python"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy64"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy32"
+      - "/REGISTRY-NOTFOUND/bin/ipy.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3"
+      - "/REGISTRY-NOTFOUND/Scripts/python.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
+      - "/REGISTRY-NOTFOUND/net45/python3.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3"
+      - "/REGISTRY-NOTFOUND/net45/python.com"
+      - "/REGISTRY-NOTFOUND/net45/python.exe"
+      - "/REGISTRY-NOTFOUND/net45/python"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy64"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy32"
+      - "/REGISTRY-NOTFOUND/net45/ipy.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
+      - "/REGISTRY-NOTFOUND/net40/python3.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3"
+      - "/REGISTRY-NOTFOUND/net40/python.com"
+      - "/REGISTRY-NOTFOUND/net40/python.exe"
+      - "/REGISTRY-NOTFOUND/net40/python"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy64"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy32"
+      - "/REGISTRY-NOTFOUND/net40/ipy.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
+      - "/REGISTRY-NOTFOUND/python3.com"
+      - "/REGISTRY-NOTFOUND/python3.exe"
+      - "/REGISTRY-NOTFOUND/python3"
+      - "/REGISTRY-NOTFOUND/python.com"
+      - "/REGISTRY-NOTFOUND/python.exe"
+      - "/REGISTRY-NOTFOUND/python"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
+      - "/REGISTRY-NOTFOUND/ipy3.com"
+      - "/REGISTRY-NOTFOUND/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/ipy3"
+      - "/REGISTRY-NOTFOUND/ipy64.com"
+      - "/REGISTRY-NOTFOUND/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/ipy64"
+      - "/REGISTRY-NOTFOUND/ipy32.com"
+      - "/REGISTRY-NOTFOUND/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/ipy32"
+      - "/REGISTRY-NOTFOUND/ipy.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+      - "/REGISTRY-NOTFOUND/ipy"
+      - "/REGISTRY-NOTFOUND/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Users\\HeoCop\\.cargo\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\UniGetUI\\Chocolatey\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\HeoCop\\AppData\\Roaming\\npm"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Google\\Cloud SDK\\google-cloud-sdk\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Antigravity\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/UniKeyTSF"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files (x86)/UniKeyTSF"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
+      - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
+      - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
+    mode: "program"
+    variable: "_Python3_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python3.15"
+      - "python3"
+      - "python"
+      - "ipy3.15"
+      - "ipy3"
+      - "ipy64"
+      - "ipy32"
+      - "ipy"
+      - "ipy.exe"
+    candidate_directories:
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "/REGISTRY-NOTFOUND/Scripts/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
+      - "/REGISTRY-NOTFOUND/net45/"
+      - "/REGISTRY-NOTFOUND/net40/"
+      - "/REGISTRY-NOTFOUND/"
+    searched_directories:
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
+      - "/REGISTRY-NOTFOUND/bin/python3.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3"
+      - "/REGISTRY-NOTFOUND/bin/python.com"
+      - "/REGISTRY-NOTFOUND/bin/python.exe"
+      - "/REGISTRY-NOTFOUND/bin/python"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy64"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy32"
+      - "/REGISTRY-NOTFOUND/bin/ipy.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3"
+      - "/REGISTRY-NOTFOUND/Scripts/python.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
+      - "/REGISTRY-NOTFOUND/net45/python3.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3"
+      - "/REGISTRY-NOTFOUND/net45/python.com"
+      - "/REGISTRY-NOTFOUND/net45/python.exe"
+      - "/REGISTRY-NOTFOUND/net45/python"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy64"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy32"
+      - "/REGISTRY-NOTFOUND/net45/ipy.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
+      - "/REGISTRY-NOTFOUND/net40/python3.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3"
+      - "/REGISTRY-NOTFOUND/net40/python.com"
+      - "/REGISTRY-NOTFOUND/net40/python.exe"
+      - "/REGISTRY-NOTFOUND/net40/python"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy64"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy32"
+      - "/REGISTRY-NOTFOUND/net40/ipy.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
+      - "/REGISTRY-NOTFOUND/python3.com"
+      - "/REGISTRY-NOTFOUND/python3.exe"
+      - "/REGISTRY-NOTFOUND/python3"
+      - "/REGISTRY-NOTFOUND/python.com"
+      - "/REGISTRY-NOTFOUND/python.exe"
+      - "/REGISTRY-NOTFOUND/python"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
+      - "/REGISTRY-NOTFOUND/ipy3.com"
+      - "/REGISTRY-NOTFOUND/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/ipy3"
+      - "/REGISTRY-NOTFOUND/ipy64.com"
+      - "/REGISTRY-NOTFOUND/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/ipy64"
+      - "/REGISTRY-NOTFOUND/ipy32.com"
+      - "/REGISTRY-NOTFOUND/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/ipy32"
+      - "/REGISTRY-NOTFOUND/ipy.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+      - "/REGISTRY-NOTFOUND/ipy"
+      - "/REGISTRY-NOTFOUND/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Users\\HeoCop\\.cargo\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\UniGetUI\\Chocolatey\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\HeoCop\\AppData\\Roaming\\npm"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Google\\Cloud SDK\\google-cloud-sdk\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Antigravity\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/UniKeyTSF"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files (x86)/UniKeyTSF"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
+      - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
+      - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
+    mode: "program"
+    variable: "_Python3_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python3.15"
+      - "python3"
+      - "python"
+      - "ipy3.15"
+      - "ipy3"
+      - "ipy64"
+      - "ipy32"
+      - "ipy"
+      - "ipy.exe"
+    candidate_directories:
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "/REGISTRY-NOTFOUND/Scripts/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
+      - "/REGISTRY-NOTFOUND/net45/"
+      - "/REGISTRY-NOTFOUND/net40/"
+      - "/REGISTRY-NOTFOUND/"
+    searched_directories:
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
+      - "/REGISTRY-NOTFOUND/bin/python3.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3"
+      - "/REGISTRY-NOTFOUND/bin/python.com"
+      - "/REGISTRY-NOTFOUND/bin/python.exe"
+      - "/REGISTRY-NOTFOUND/bin/python"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy64"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy32"
+      - "/REGISTRY-NOTFOUND/bin/ipy.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3"
+      - "/REGISTRY-NOTFOUND/Scripts/python.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
+      - "/REGISTRY-NOTFOUND/net45/python3.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3"
+      - "/REGISTRY-NOTFOUND/net45/python.com"
+      - "/REGISTRY-NOTFOUND/net45/python.exe"
+      - "/REGISTRY-NOTFOUND/net45/python"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy64"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy32"
+      - "/REGISTRY-NOTFOUND/net45/ipy.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
+      - "/REGISTRY-NOTFOUND/net40/python3.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3"
+      - "/REGISTRY-NOTFOUND/net40/python.com"
+      - "/REGISTRY-NOTFOUND/net40/python.exe"
+      - "/REGISTRY-NOTFOUND/net40/python"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy64"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy32"
+      - "/REGISTRY-NOTFOUND/net40/ipy.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
+      - "/REGISTRY-NOTFOUND/python3.com"
+      - "/REGISTRY-NOTFOUND/python3.exe"
+      - "/REGISTRY-NOTFOUND/python3"
+      - "/REGISTRY-NOTFOUND/python.com"
+      - "/REGISTRY-NOTFOUND/python.exe"
+      - "/REGISTRY-NOTFOUND/python"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
+      - "/REGISTRY-NOTFOUND/ipy3.com"
+      - "/REGISTRY-NOTFOUND/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/ipy3"
+      - "/REGISTRY-NOTFOUND/ipy64.com"
+      - "/REGISTRY-NOTFOUND/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/ipy64"
+      - "/REGISTRY-NOTFOUND/ipy32.com"
+      - "/REGISTRY-NOTFOUND/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/ipy32"
+      - "/REGISTRY-NOTFOUND/ipy.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+      - "/REGISTRY-NOTFOUND/ipy"
+      - "/REGISTRY-NOTFOUND/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/ipy.exe"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\Calibre2\\"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Users\\HeoCop\\.cargo\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\UniGetUI\\Chocolatey\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\HeoCop\\AppData\\Roaming\\npm"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Google\\Cloud SDK\\google-cloud-sdk\\bin"
+        - "C:\\Users\\HeoCop\\AppData\\Local\\Programs\\Antigravity\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/UniKeyTSF"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake"
+        - "C:/Program Files (x86)/UniKeyTSF"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython/Support.cmake:2180 (find_program)"
+      - "C:/Program Files/Microsoft Visual Studio/18/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-4.2/Modules/FindPython3.cmake:671 (include)"
+      - "build32/_deps/googletest-src/googletest/cmake/internal_utils.cmake:250 (find_package)"
+      - "build32/_deps/googletest-src/googletest/CMakeLists.txt:81 (include)"
+    mode: "program"
+    variable: "_Python3_EXECUTABLE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: false
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python3.15"
+      - "python3"
+      - "python"
+      - "ipy3.15"
+      - "ipy3"
+      - "ipy64"
+      - "ipy32"
+      - "ipy"
+      - "ipy.exe"
+    candidate_directories:
+      - "/REGISTRY-NOTFOUND/bin/"
+      - "/REGISTRY-NOTFOUND/Scripts/"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/"
+      - "/REGISTRY-NOTFOUND/net45/"
+      - "/REGISTRY-NOTFOUND/net40/"
+      - "/REGISTRY-NOTFOUND/"
+    searched_directories:
+      - "/REGISTRY-NOTFOUND/bin/python3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3.15"
+      - "/REGISTRY-NOTFOUND/bin/python3.com"
+      - "/REGISTRY-NOTFOUND/bin/python3.exe"
+      - "/REGISTRY-NOTFOUND/bin/python3"
+      - "/REGISTRY-NOTFOUND/bin/python.com"
+      - "/REGISTRY-NOTFOUND/bin/python.exe"
+      - "/REGISTRY-NOTFOUND/bin/python"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.15"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy3"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy64"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy32"
+      - "/REGISTRY-NOTFOUND/bin/ipy.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/bin/ipy"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/bin/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python3"
+      - "/REGISTRY-NOTFOUND/Scripts/python.com"
+      - "/REGISTRY-NOTFOUND/Scripts/python.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/python"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.15"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy3"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy64"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy32"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/Scripts/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/python"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.15"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy3"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy64"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy32"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/share/ironpython3.15/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3.15"
+      - "/REGISTRY-NOTFOUND/net45/python3.com"
+      - "/REGISTRY-NOTFOUND/net45/python3.exe"
+      - "/REGISTRY-NOTFOUND/net45/python3"
+      - "/REGISTRY-NOTFOUND/net45/python.com"
+      - "/REGISTRY-NOTFOUND/net45/python.exe"
+      - "/REGISTRY-NOTFOUND/net45/python"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy3"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy64"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy32"
+      - "/REGISTRY-NOTFOUND/net45/ipy.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net45/ipy"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net45/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3.15"
+      - "/REGISTRY-NOTFOUND/net40/python3.com"
+      - "/REGISTRY-NOTFOUND/net40/python3.exe"
+      - "/REGISTRY-NOTFOUND/net40/python3"
+      - "/REGISTRY-NOTFOUND/net40/python.com"
+      - "/REGISTRY-NOTFOUND/net40/python.exe"
+      - "/REGISTRY-NOTFOUND/net40/python"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.15"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy3.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy3"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy64.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy64"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy32.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy32"
+      - "/REGISTRY-NOTFOUND/net40/ipy.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/net40/ipy"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe.com"
+      - "/REGISTRY-NOTFOUND/net40/ipy.exe"
+      - "/REGISTRY-NOTFOUND/python3.15.com"
+      - "/REGISTRY-NOTFOUND/python3.15.exe"
+      - "/REGISTRY-NOTFOUND/python3.15"
+      - "/REGISTRY-NOTFOUND/python3.com"
+      - "/REGISTRY-NOTFOUND/python3.exe"
+      - "/REGISTRY-NOTFOUND/python3"
+      - "/REGISTRY-NOTFOUND/python.com"
+      - "/REGISTRY-NOTFOUND/python.exe"
+      - "/REGISTRY-NOTFOUND/python"
+      - "/REGISTRY-NOTFOUND/ipy3.15.com"
+      - "/REGISTRY-NOTFOUND/ipy3.15.exe"
+      - "/REGISTRY-NOTFOUND/ipy3.15"
       - "/REGISTRY-NOTFOUND/ipy3.com"
       - "/REGISTRY-NOTFOUND/ipy3.exe"
       - "/REGISTRY-NOTFOUND/ipy3"

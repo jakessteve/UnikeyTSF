@@ -41,6 +41,7 @@
 #define IDC_CBO_CHARSET         3003   // Bảng mã
 #define IDC_LBL_INPUT_METHOD    3004
 #define IDC_CBO_INPUT_METHOD    3005   // Kiểu gõ
+#define IDC_GRP_BASIC           3009   // Cơ bản groupbox
 
 // Toggle key section (Phím chuyển)
 #define IDC_GRP_TOGGLE_KEY      3010
@@ -77,7 +78,8 @@
 #define IDC_BTN_BLACKLIST_BROWSE 3065  // "..." button to browse exe
 
 // Tab-based layout (redesign v2)
-#define IDC_TAB_MAIN            3070   // Tab control
+#define IDC_TAB_BASIC           3071
+#define IDC_TAB_ADVANCED        3072   // Tab control
 #define IDC_TOGGLE_VIET         3071   // Custom toggle switch area
 #define IDC_STATUS_MODE         3072   // Status header region
 #define IDC_LBL_SHORTCUT1       3073   // Shortcut label 1

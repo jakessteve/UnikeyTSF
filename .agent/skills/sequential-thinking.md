@@ -4,7 +4,7 @@ description: Sequential Thinking - decompose complex logic into verifiable thoug
 
 # SKILL: Sequential Thinking
 
-**Trigger:** Before implementing complex calculations, debugging non-obvious logic, or designing multi-step algorithms — especially for astrology engines, palace placement, star mapping, or Nạp Âm derivation.
+**Trigger:** Before implementing complex calculations, debugging non-obvious logic, or designing multi-step algorithms — especially for computations involving multiple interacting variables, order-dependent operations, or domain-specific rule engines.
 
 ---
 
@@ -68,18 +68,18 @@ Before writing code:
 
 ---
 
-## Domain-Specific Triggers (Lịch Việt)
-These computations REQUIRE sequential thinking before implementation:
+## Domain-Specific Triggers
+These types of computations REQUIRE sequential thinking before implementation:
 
-| Domain | Example Computation | Why |
+| Category | Example Computation | Why |
 |---|---|---|
-| Tử Vi | Palace placement from Cục + Earthly Branch | 5-variable interaction |
-| Tử Vi | Star positioning (Chính Tinh, Phụ Tinh) | Order-dependent, 100+ stars |
-| Bát Tự | Hidden Stems (Tàng Can) derivation | Branch-to-stem mapping with exceptions |
-| Lunar Calendar | Leap month determination | Solar term alignment + JDN math |
-| QMDJ | Board construction (stems, stars, doors, deities) | 4 layered systems interacting |
-| Lục Nhâm | Tam Truyền derivation from Khóa Thức | Conditional rules with edge cases |
-| Nạp Âm | 60 Jiazi → element/sound mapping | Pattern-based with historical variants |
+| Multi-variable algorithms | Calculations with 3+ interacting variables | Complex state interactions |
+| Order-dependent operations | Pipelines where step order changes output | Subtle sequencing bugs |
+| Lookup-with-exceptions | Mapping tables with edge case overrides | Exception paths hide bugs |
+| Precision-critical math | Floating-point, calendar, or financial calculations | Rounding/boundary errors |
+| Layered system construction | Multi-layer data structures (e.g., grids, trees) | Inter-layer dependencies |
+| Conditional rule engines | Business rules with nested conditions and edge cases | Combinatorial explosion |
+| Pattern-based derivation | Input → derived output via historical or mathematical patterns | Pattern-based with variants |
 
 ## Integration with Confidence Routing
 After completing sequential thinking:

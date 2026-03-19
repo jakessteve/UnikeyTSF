@@ -1,5 +1,5 @@
 ---
-description: Backlog Grooming — scan, clean, re-prioritize, and flag stale tasks in the project backlog
+description: Backlog Grooming ï¿½ scan, clean, re-prioritize, and flag stale tasks in the project backlog
 ---
 
 # SKILL: BACKLOG GROOMING
@@ -9,9 +9,9 @@ description: Backlog Grooming — scan, clean, re-prioritize, and flag stale tasks
 ---
 
 ## When to Use
-- Before starting a new sprint — groom the backlog to decide what goes in.
-- When the backlog has > 15 items — clean up to focus.
-- After a pivot or re-prioritization — reassess all pending items.
+- Before starting a new sprint ï¿½ groom the backlog to decide what goes in.
+- When the backlog has > 15 items ï¿½ clean up to focus.
+- After a pivot or re-prioritization ï¿½ reassess all pending items.
 - When the User asks "what's pending?" or "what should we do next?"
 
 ---
@@ -20,10 +20,10 @@ description: Backlog Grooming — scan, clean, re-prioritize, and flag stale tasks
 
 ### Step 1: Inventory Scan
 Scan all pending work across:
-- `.hc/stories/` — user stories
-- `.hc/epics/` — epic definitions
-- `.hc/backlog.md` — icebox / deferred items
-- `.hc/roadmap.md` — planned but not started items
+- `.hc/stories/` ï¿½ user stories
+- `.hc/epics/` ï¿½ epic definitions
+- `.hc/backlog.md` ï¿½ icebox / deferred items
+- `.hc/roadmap.md` ï¿½ planned but not started items
 
 For each item, capture:
 | ID | Title | Priority | Size | Age (days) | Status |
@@ -52,7 +52,7 @@ Apply Rule `engineering-mindset.md`:
 Present a clean, prioritized backlog:
 
 ```markdown
-# Groomed Backlog — YYYY-MM-DD
+# Groomed Backlog ï¿½ YYYY-MM-DD
 **Groomed by:** @pm
 
 ## Ready for Sprint (Must-have)
@@ -84,7 +84,7 @@ Present a clean, prioritized backlog:
 ---
 
 ## Rules of Engagement
-1. **Never auto-close** — flag for closure, but the User makes the final call.
-2. **Groom regularly** — at every sprint boundary, not just when it gets messy.
-3. **Keep it lean** — a backlog with > 20 active items is too big. Push excess to Icebox.
-4. **Challenge every item** — "Is this still the most important thing we could work on?"
+1. **Never auto-close** ï¿½ flag for closure, but the User makes the final call.
+2. **Groom regularly** ï¿½ at every sprint boundary, not just when it gets messy.
+3. **Keep it lean** ï¿½ a backlog with > 20 active items is too big. Push excess to Icebox.
+4. **Challenge every item** ï¿½ "Is this still the most important thing we could work on?"

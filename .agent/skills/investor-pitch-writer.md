@@ -92,7 +92,7 @@ Before writing, scan and extract key data from:
 ### Common Mistakes to Avoid
 | Do | Don't |
 |----|-------|
-| "35M Vietnamese use lunar calendars daily" | "Huge market opportunity" |
+| "[X users] rely on [product category] daily" | "Huge market opportunity" |
 | "MVP live with 5 core features" | "Building a revolutionary platform" |
 | "Revenue from premium tier at ₫49k/mo" | "Multiple monetization strategies" |
 | "Solo founder, 10 years in software" | "World-class team" |

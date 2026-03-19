@@ -9,7 +9,7 @@ description: Research & Analysis - structured multi-step methodology for investi
 ---
 
 ## When to Use
-- Investigating a new feature domain (e.g., lunar calendar algorithms).
+- Investigating a new feature domain (e.g., domain-specific algorithms).
 - Evaluating technology choices (e.g., which charting library?).
 - Market research for pitch decks or PRDs.
 - Understanding a complex problem space before writing requirements.
@@ -99,15 +99,15 @@ Before handoff, self-check:
 ---
 
 ## Domain-Specific Research Triggers
-- Vietnamese astrology terms (Tử Vi, Tứ Hóa, Cục, Nạp Âm, Sao chủ)
-- Lunar calendar algorithms (solar term calculation, leap month rules)
-- Phong thủy (Feng Shui) concepts and directional rules
-- Mai Hoa Dịch Số (Plum Blossom Numerology) references
+- Project domain terminology (consult docs/tech/ARCHITECTURE.md)
+- Domain-specific algorithms and calculation rules
+- Industry-specific concepts and business rules
+- Specialized domain references and standards
 
 ## Preferred Sources
 - Official library documentation (React, Vite, TypeScript)
 - MDN Web Docs for web standards
-- Vietnamese astrology reference sites for domain knowledge
+- Domain-specific reference sites and authoritative sources
 - GitHub issues/discussions for library-specific bugs
 
 ---

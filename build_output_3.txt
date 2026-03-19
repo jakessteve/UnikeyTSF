@@ -1,0 +1,87 @@
+============================================================
+ UniKey TSF Reborn — Build All Architectures
+============================================================
+
+[1/3] Configuring x64...
+-- Could NOT find Python3 (missing: Python3_EXECUTABLE Interpreter) 
+-- Configuring done (4.3s)
+-- Generating done (1.1s)
+-- Build files have been written to: C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64
+[2/3] Building x64 (Release)...
+MSBuild version 18.4.0+6e61e96ac for .NET Framework
+
+  gtest.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gtest.lib
+  gtest_main.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gtest_main.lib
+  ClipboardTests.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\ClipboardTests.exe
+  IPCTests.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\IPCTests.exe
+  SettingsUITests.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\SettingsUITests.exe
+  UniKeyTSF.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\UniKeyTSF.exe
+  UniKeyTests.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\UniKeyTests.exe
+  gmock.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gmock.lib
+  gmock_main.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\lib\Release\gmock_main.lib
+  uktsf_core64.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\Release\uktsf_core64.dll
+[3/3] Configuring Win32...
+-- Could NOT find Python3 (missing: Python3_EXECUTABLE Interpreter) 
+-- Configuring done (4.0s)
+-- Generating done (1.1s)
+-- Build files have been written to: C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32
+      Building Win32 (Release)...
+MSBuild version 18.4.0+6e61e96ac for .NET Framework
+
+  uktsf_core32.vcxproj -> C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build32\Release\uktsf_core32.dll
+
+Copying to production/...
+
+============================================================
+ BUILD COMPLETE
+============================================================
+UniKeyTSF.exe
+uktsf_core32.dll
+uktsf_core64.dll
+
+Running unit tests...
+[Test 1] Core Engine
+Running main() from C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] 90 tests from 12 test suites ran. (0 ms total)
+[  PASSED  ] 90 tests.
+[Test 2] IPC Manager
+Running main() from C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] 3 tests from 1 test suite ran. (2013 ms total)
+[  PASSED  ] 3 tests.
+[Test 3] Clipboard Toolkit
+Running main() from C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] 48 tests from 4 test suites ran. (0 ms total)
+[  PASSED  ] 48 tests.
+[Test 4] Settings UI (E2E)
+Running main() from C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\build64\_deps\googletest-src\googletest\src\gtest_main.cc
+Found Window HWND: 0000000000850708, Class: UniKeyTSF_HiddenWnd
+GetDlgItem(3001) = 0000000000000000
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\tests\e2e\settings_ui_test.cpp(127): error: Value of: IsChecked(3001)
+  Actual: false
+Expected: true
+
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\tests\e2e\settings_ui_test.cpp(128): error: Expected equality of these values:
+  GetComboSelection(3005)
+    Which is: -1
+  IM_TELEX
+    Which is: \0
+
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\tests\e2e\settings_ui_test.cpp(129): error: Expected equality of these values:
+  GetComboSelection(3003)
+    Which is: -1
+  CS_UNICODE
+    Which is: \0
+
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\tests\e2e\settings_ui_test.cpp(130): error: Value of: IsChecked(3011)
+  Actual: false
+Expected: true
+
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\tests\e2e\settings_ui_test.cpp(132): error: Value of: IsChecked(3031)
+  Actual: false
+Expected: true
+
+C:\Users\HeoCop\Downloads\Projects\UnikeyTSF\tests\e2e\settings_ui_test.cpp(136): error: Value of: IsChecked(3022)
+  Actual: false
+Expected: true
+
+WARNING: Some tests failed

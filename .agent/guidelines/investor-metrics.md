@@ -74,7 +74,7 @@ Every `/sprint-review` MUST include:
 
 ### 4. Pitch-Ready Data
 Metrics must be formatted so @ba can directly extract them for investor materials:
-- Use concrete numbers, not percentages alone ("35M Vietnamese lunar calendar users" not "large market")
+- Use concrete numbers, not percentages alone ("2M active users in target segment" not "large market")
 - Track "traction" metrics: features live, data coverage, code maturity
 - Maintain before/after comparisons for performance improvements
 

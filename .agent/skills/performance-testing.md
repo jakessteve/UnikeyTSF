@@ -39,10 +39,10 @@ description: Performance Testing - load, stress, and benchmark patterns with str
 | First Input Delay (FID) | < 100ms | Lighthouse, Web Vitals | User responsiveness |
 | Cumulative Layout Shift (CLS) | < 0.1 | Lighthouse, Web Vitals | Visual stability |
 | API response time (p95) | < 500ms | Custom timing | Backend performance |
-| Engine calculation speed | < 50ms per chart | `console.time` / Vitest bench | Domain-specific |
-| Memory usage growth | < 10MB over 1hr | Chrome DevTools | Leak detection |
-| Bundle size (gzipped) | < 200KB | vite-bundle-analyzer | Load time impact |
-| Time to Interactive (TTI) | < 3.5s (3G) | Lighthouse | Mobile UX |
+| Engine calculation speed | < 50ms per operation | `console.time` / bench framework | Domain-specific |
+| Memory usage growth | < 10MB over 1hr | Profiler / DevTools | Leak detection |
+| Bundle / binary size | Project-specific target | Build analysis tools | Load time / install size |
+| Time to Interactive (TTI) | < 3.5s (3G) | Lighthouse (web) / manual (native) | User experience |
 
 ### Step 2: Choose Method and Tool
 
@@ -51,20 +51,20 @@ description: Performance Testing - load, stress, and benchmark patterns with str
 // Vitest benchmark (preferred for engines)
 import { bench, describe } from 'vitest';
 
-describe('Tử Vi Engine Benchmark', () => {
+describe('Core Engine Benchmark', () => {
  bench('generate chart', () => {
- generateTuViChart(sampleBirthData);
+ computeResult(sampleInput);
  }, { iterations: 1000, time: 5000 });
 });
 ```
 
 **Quick console benchmark:**
 ```typescript
-console.time('chartGeneration');
+console.time('engineComputation');
 for (let i = 0; i < 1000; i++) {
- generateTuViChart(testBirthData);
+ computeResult(testInput);
 }
-console.timeEnd('chartGeneration');
+console.timeEnd('engineComputation');
 // Expected: < 1000ms for 1000 iterations
 ```
 
@@ -114,4 +114,4 @@ npx lhci autorun --collect.url=http://localhost:5173
 - **Test on representative devices** — not just your fast laptop. Simulate 3G throttling.
 - **Median, not average** — outliers skew averages. Report p50 and p95.
 - **Document results** in `.hc/benchmarks/` with timestamps for trend tracking.
-- **Performance tests are not optional for engine changes** — Tử Vi, Bát Tự, QMDJ engines MUST be benchmarked.
+- **Performance tests are not optional for critical engine/logic changes** — core business logic MUST be benchmarked.

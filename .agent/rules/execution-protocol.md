@@ -23,10 +23,11 @@ Follow SPARC phases: Specification → Pseudocode → Architecture → Refinemen
 - Do NOT skip phases (use `/hc-sdlc`). Fast-path (≤3 files, single concern) may skip to Refinement.
 - For **Medium+ tasks**, use `amateur-proof-plans` skill during Specification.
 
-### Frontend Adaptation
-This is a **frontend-only SPA** — SPARC gates adapt:
-- S→P: wireframe/story sufficient for UI-only features
-- A→R: TypeScript interfaces serve as implicit contracts
+### Project-Type Adaptation
+Detect project type from config files (`package.json`, `tsconfig.json`, `CMakeLists.txt`, etc.) and adapt SPARC gates accordingly:
+- **Frontend SPA:** wireframe/story sufficient for S→P; TypeScript interfaces serve as implicit contracts for A→R
+- **Backend API:** API contracts required for A→R; security gate mandatory for auth/data flows
+- **Full-stack:** both frontend and backend gates apply
 - Security Gate: required only for user data, external APIs, or auth flows
 
 ### Upstream Gates (P1+ features only)
@@ -42,11 +43,11 @@ Match verification tier to task complexity (see `decision-routing.md`):
 
 | Tier | Scope | Steps | QC Switch? |
 |---|---|---|---|
-| **Trivial** (≤1 file, ≤10 lines) | Typo/config | @dev self-verify: tests + tsc | No |
-| **Small** (≤3 files) | Bug fixes | @dev + @qc spot-check | Minimal |
-| **Standard** (4-6 files) | Pattern features | @dev + @qc novel parts only | Minimal |
-| **Medium** (7-10 files) | Novel features | Full: @dev → @qc → @pm synthesis | Full |
-| **Large** (>10 files) | Epics | Full + `/implementation-review` | Full |
+| **Trivial** (≤1 file, ≤10 lines) | Typo/config | @dev-fe/@dev-be self-verify: tests + tsc (Bypass SOT update) | No |
+| **Small** (≤3 files) | Bug fixes | @dev-fe/@dev-be + @qc spot-check (Bypass SOT update unless arch changed) | Minimal |
+| **Standard** (4-6 files) | Pattern features | @dev-fe/@dev-be + @sa arch review (if needed) + @qc | Minimal |
+| **Medium** (7-10 files) | Novel features | Full: @dev-fe/@dev-be → @sa arch review → @qc → @pm synthesis | Full |
+| **Large** (>10 files) | Epics | Full + `@sa arch review` + `/implementation-review` | Full |
 
 ### Standard Steps (Medium+)
 1. Tests pass (`npm test`), lint passes (`npm run lint`), tsc clean (`npx tsc --noEmit`)
@@ -55,8 +56,8 @@ Match verification tier to task complexity (see `decision-routing.md`):
 
 ### Cross-Verification Gates
 - **Security (Large tasks):** @devops fixes → @whitehat-hacker independently re-tests.
-- **UX (ANY UI change):** @dev implements → @user-tester evaluates via `/user-test-session`.
-- **Bug Fix:** Bug record in `.hc/bugs/` required → @dev fixes → @qc re-verifies → bug record updated.
+- **UX (ANY UI change):** @dev-fe implements → @user-tester evaluates via `/user-test-session`.
+- **Bug Fix:** Bug record in `.hc/bugs/` required → @dev-fe/@dev-be fixes → @qc re-verifies → bug record updated.
 - **UAT Done-Gate:** Critical findings block Done. Medium/Minor queued as stories.
 
 ---
@@ -114,7 +115,7 @@ When an agent is stuck: **Detect** (3x expected time or anti-loop trigger) → *
 ### CLI Worker Rules (Gemini CLI via spawn-agent)
 - CLI workers count toward all limits above. Each process = one agent.
 - Workers MUST NOT spawn sub-agents. They are terminal nodes.
-- **Context injection:** Use role-scoped LITE files: `AGENTS-LITE-dev.md`, `AGENTS-LITE-qc.md`, `AGENTS-LITE-pm.md`, or generic `AGENTS-LITE.md`. **Never** full `AGENTS.md`.
+- **Context injection:** Use role-scoped LITE files: `AGENTS-LITE-dev.md`, `AGENTS-LITE-qc.md`, `AGENTS-LITE-pm.md`, `AGENTS-LITE-designer.md`, `AGENTS-LITE-sa.md`, `AGENTS-LITE-devops.md`, or generic `AGENTS-LITE.md`. **Never** full `AGENTS.md`.
 - **Skill lazy-loading mandatory:** Read MANIFEST → view_file only needed skills.
 - **Output review mandatory:** Read output logs AND run `git diff`. Never assume success.
 - **One task per spawn.** Review output between spawns.

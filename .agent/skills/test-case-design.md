@@ -36,18 +36,18 @@ Test at the edges of partitions — bugs cluster at boundaries.
 ```
 Example: Birth year (valid: 1900-2100)
 Boundary : 1899 | 1900 | 1901 | ... | 2099 | 2100 | 2101
-Expected : | | | | | | 
+Expected : | | | | | |
 ```
 
 **When to use:** After EP, for any numeric/date ranges. Critical for calendar calculations.
 
 **Domain example:**
 ```typescript
-// Lunar calendar month boundaries
-describe('solarTermBoundary', () => {
- it('assigns Jan 20 to previous month (before Đại Hàn)', () => { /* ... */ });
- it('assigns Jan 21 to current month (on Đại Hàn)', () => { /* ... */ });
- it('assigns Jan 22 to current month (after Đại Hàn)', () => { /* ... */ });
+// Date range boundary testing
+describe('dateRangeBoundary', () => {
+  it('handles last day of month correctly (Jan 31)', () => { /* ... */ });
+  it('handles first day of next month (Feb 1)', () => { /* ... */ });
+  it('handles leap year boundary (Feb 29)', () => { /* ... */ });
 });
 ```
 
@@ -55,12 +55,12 @@ describe('solarTermBoundary', () => {
 For logic with multiple interacting conditions.
 
 ```
-| Gender | Birth Hour Known | Lunar Calendar | → Action |
-|--------|-----------------|----------------|----------|
-| Male | Yes | Standard | Full Tử Vi chart |
-| Male | No | Standard | Chart without Time Palace |
-| Female | Yes | Leap month | Chart with leap adjustment |
-| Female | No | Leap month | Partial chart + warning |
+| Type | Detail Known | Calendar Mode | → Action |
+|--------|-------------|----------------|----------|
+| Type A | Yes | Standard | Full output |
+| Type A | No | Standard | Partial output without detail |
+| Type B | Yes | Adjusted | Output with adjustment applied |
+| Type B | No | Adjusted | Partial output + warning |
 ```
 
 **When to use:** Business rules with 2+ conditions. Derive test cases from each row.
@@ -93,9 +93,9 @@ Based on domain experience, test for common mistakes:
 | Empty values | `""`, `[]`, `{}`, `0` |
 | Negative numbers | `-1`, `-999` |
 | Very large | `Number.MAX_SAFE_INTEGER`, 10000-char strings |
-| Special characters | Unicode, emoji, Vietnamese diacritics |
+| Special characters | Unicode, emoji, accented characters, CJK |
 | **Date-specific** | Leap years (Feb 29), month boundaries, Dec 31 → Jan 1 |
-| **Calendar-specific** | Lunar leap months, solar term boundaries, timezone midnight |
+| **Calendar-specific** | Period boundaries, timezone midnight, DST transitions |
 | **Concurrent** | Same input computed twice simultaneously |
 
 ---
@@ -126,8 +126,8 @@ Based on domain experience, test for common mistakes:
 
 | Risk Level | Techniques to Apply | Example |
 |---|---|---|
-| Critical (data integrity, security) | EP + BVA + Decision Table + State + Error | Engine calculations, auth |
-| High (core features) | EP + BVA + Decision Table | Chart generation, date conversion |
+| Critical (data integrity, security) | EP + BVA + Decision Table + State + Error | Core engine calculations, auth |
+| High (core features) | EP + BVA + Decision Table | Data processing, transformations |
 | Medium (secondary features) | EP + Key boundaries | Settings, preferences |
 | Low (cosmetic) | Happy path only | UI text, formatting |
 

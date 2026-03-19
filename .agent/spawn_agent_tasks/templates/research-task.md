@@ -1,4 +1,6 @@
 # Research Task
+> **Performance Rule:** Do not load the full AGENTS.md. Load only the relevant .agent/indexes/AGENTS-LITE-<role>.md and lazy-load specific skills as needed.
+
 
 > For read-only codebase analysis. Worker MUST NOT modify any files.
 

@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/SettingsUITests[1]_tests.cmake")
+  include("C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build32/SettingsUITests[1]_tests.cmake")
+else()
+  add_test(SettingsUITests_NOT_BUILT SettingsUITests_NOT_BUILT)
+endif()

@@ -11,7 +11,7 @@ description: Always On — mandate standard user story format with acceptance cr
 
 ## Core Mandate
 
-Every feature, enhancement, or change MUST be expressed as a **user story** with **acceptance criteria** before any design or implementation begins. User stories are the contract between @ba and @dev.
+Every feature, enhancement, or change MUST be expressed as a **user story** with **acceptance criteria** before any design or implementation begins. User stories are the contract between @ba and @dev-fe/@dev-be.
 
 ---
 
@@ -28,7 +28,7 @@ so that [I get a benefit/value].
 
 **Examples:**
 - "As a Vietnamese user, I want to view the lunar date for any solar date, so that I can plan traditional events."
-- "As a Tử Vi enthusiast, I want to see my birth chart with all 12 palaces, so that I can understand my destiny."
+- "As a premium user, I want to see my dashboard with all key categories, so that I can understand the full analysis."
 - "Add lunar date conversion feature." (No user, no benefit)
 - "Build a chart component." (Technical task, not a user story)
 
@@ -57,7 +57,7 @@ Stories must be sized to be completable in a single phase:
 | **Medium (M)** | 4–8 files | Feature with UI + logic |
 | **Large (L)** | 9+ files | **MUST be split** into smaller stories |
 
-If a story is **Large**, @ba MUST break it down before @dev can start work.
+If a story is **Large**, @ba MUST break it down before @dev-fe/@dev-be can start work.
 
 ### 4. Story File Format
 Save stories in `.hc/stories/` with this structure:
@@ -77,7 +77,7 @@ As a [user], I want to [action], so that [benefit].
 - [ ] Edge: [Edge case criterion]
 
 ## Technical Notes (Optional)
-[Any technical context @dev needs — affected files, APIs, dependencies]
+[Any technical context @dev-fe/@dev-be needs — affected files, APIs, dependencies]
 
 ## Dependencies
 - [Blocked by: S-X] or [None]
@@ -86,7 +86,7 @@ As a [user], I want to [action], so that [benefit].
 ### 5. Definition of Done
 A story is "Done" only when:
 - [ ] All acceptance criteria checkboxes are checked
-- [ ] Code reviewed by @dev (self-review at minimum)
+- [ ] Code reviewed by @dev-fe/@dev-be (self-review at minimum)
 - [ ] Tests written and passing
 - [ ] No regressions in existing functionality
 - [ ] Design verified (if it has UI changes)
@@ -94,4 +94,4 @@ A story is "Done" only when:
 ---
 
 ## Enforcement
-Any feature request passed to @dev without a properly formatted user story should be flagged as ` STORY FORMAT VIOLATION` and returned to @ba for correction.
+Any feature request passed to @dev-fe/@dev-be without a properly formatted user story should be flagged as ` STORY FORMAT VIOLATION` and returned to @ba for correction.

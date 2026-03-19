@@ -66,7 +66,7 @@ If extended timeout also fails:
 **Level 3 -- Complete Manually**
 If sub-tasks also struggle:
 1. Use partial worker output as context
-2. Persona-switch to @dev, complete manually
+2. Persona-switch to @dev-fe/@dev-be, complete manually
 3. Log the failure in session audit trail
 
 **Level 4 -- Escalate to User**

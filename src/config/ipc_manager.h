@@ -32,5 +32,5 @@ std::wstring GetConfigFilePath();
 
 // --- Access Synchronization ---
 // Locks the shared mutex for thread-safe access to g_pConfig.
-void LockConfig();
+bool LockConfig();
 void UnlockConfig();

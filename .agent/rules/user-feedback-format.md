@@ -44,7 +44,7 @@ Every `user-feedback-*.md` report MUST follow this exact structure. Omitting sec
 ---
 
 ## Trend Comparison
-<!-- Include ONLY if previous report exists -->
+
 | Page | Dimension | Previous | Current | Δ | Trend |
 |------|-----------|----------|---------|---|-------|
 | [page] | [dim] | X | X | ±X | // |
@@ -85,10 +85,10 @@ Every `user-feedback-*.md` report MUST follow this exact structure. Omitting sec
 ---
 
 ## Empathy Assessments
-<!-- For Bác Tư, Chị Lan, and Cô Mai, using accessibility-empathy skill -->
+
 ### [Page Name] — [Persona]
 **Cognitive Load:** Intrinsic: // | Extraneous: // | Germane: //
-**Accessibility Modes (Bác Tư only):** Colorblind: / | Motor: / | Sunlight: /
+**Accessibility Modes (Senior User only):** Colorblind: / | Motor: / | Sunlight: /
 **Barriers:** [list]
 **Recommendations:** [list]
 
@@ -122,5 +122,5 @@ Every `user-feedback-*.md` report MUST follow this exact structure. Omitting sec
 Other agents MUST be able to parse this report:
 - **@pm:** Reads "Priority Recommendations" and "Executive Summary" for backlog
 - **@designer:** Reads "UI/UX" dimension scores and "Detailed Findings" for design fixes
-- **@dev:** Reads "Speed" scores and "Task Completion Tests" for performance work
+- **@dev-fe/@dev-be:** Reads "Speed" scores and "Task Completion Tests" for performance work
 - **@qc:** Reads "Task Completion Tests" to add user-centric test cases

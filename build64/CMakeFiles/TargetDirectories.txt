@@ -1,7 +1,9 @@
 C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/UniKeyTSF.dir
 C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/uktsf_core64.dir
 C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/UniKeyTests.dir
+C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/IPCTests.dir
 C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/ClipboardTests.dir
+C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/SettingsUITests.dir
 C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/RUN_TESTS.dir
 C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/INSTALL.dir
 C:/Users/HeoCop/Downloads/Projects/UnikeyTSF/build64/CMakeFiles/ALL_BUILD.dir

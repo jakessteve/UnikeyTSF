@@ -4,7 +4,7 @@ description: Accessibility Empathy - simulate low-tech user cognition, evaluate 
 
 # SKILL: Accessibility Empathy
 
-**Trigger:** When `@user-tester` evaluates a page from the perspective of non-tech-savvy users (Bác Tư, Chị Lan), or when any agent needs to assess cognitive load and inclusivity.
+**Trigger:** When `@user-tester` evaluates a page from the perspective of non-tech-savvy users (Senior User, Primary User), or when any agent needs to assess cognitive load and inclusivity.
 
 ## 1. Cognitive Load Assessment
 
@@ -14,7 +14,7 @@ Evaluate each page for the three types of cognitive load:
 | Rating | Indicators |
 |---|---|
 | Low | Simple, familiar concepts. Vietnamese language. Familiar cultural references |
-| Medium | Some specialized terms (astrology, feng shui) but explained inline |
+| Medium | Some specialized terms but explained inline |
 | High | Dense unexplained jargon, foreign concepts, English-heavy |
 
 ### Extraneous Load (Unnecessary complexity from poor design)
@@ -52,7 +52,7 @@ When simulating a non-tech-savvy user:
 
 ### Simulation Checklist
 For each interaction point, ask:
-- [ ] Would Bác Tư find this button/link?
+- [ ] Would a non-tech-savvy user find this button/link?
 - [ ] Is the text large enough (≥ 16px body, ≥ 14px secondary)?
 - [ ] Is the touch target large enough (≥ 44×44px)?
 - [ ] Does the label explain itself in Vietnamese?
@@ -93,7 +93,7 @@ For Vietnamese metaphysics content specifically:
 - [ ] Are astrological terms in Vietnamese, not Chinese characters or English?
 - [ ] Are dates shown in lunar format when contextually appropriate?
 - [ ] Do color choices respect cultural associations (red = lucky, white = mourning context)?
-- [ ] Is the tone academic and trustworthy, not sensationalist or pop-astrology?
+- [ ] Is the tone academic and trustworthy, not sensationalist or misleading?
 
 ## 5. Empathy Report Template
 
@@ -101,7 +101,7 @@ When this skill is invoked, produce:
 
 ```markdown
 ### Empathy Assessment — [Page/Feature]
-**Persona:** [Bác Tư / Chị Lan / etc.]
+**Persona:** [Senior User / Primary User / etc.]
 
 **Cognitive Load:** Intrinsic: // | Extraneous: // | Germane: //
 **Readability:** [assessment]

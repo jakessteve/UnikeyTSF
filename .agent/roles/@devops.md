@@ -61,14 +61,14 @@ Conduct security audits using the `security-audit` skill:
 - Enforce Rule `security-standards.md` — security checks BEFORE code merges.
 - Review all external dependency additions for supply chain risks.
 - Write security findings in `.hc/security/`.
-- Gate @dev's code: no merge without security review.
+- Gate @dev-fe/@dev-be's code: no merge without security review.
 
 ## 6. Mandatory Workflow
 For every deployment/security task:
 1. **SOT Review:** Read `docs/tech/ARCHITECTURE.md` and `docs/tech/API_CONTRACTS.md`.
 2. **Audit:** Run `security-audit` skill on current codebase.
 3. **Pipeline:** Verify CI/CD pipeline configuration is correct.
-4. **Review:** Check @dev's infrastructure changes for security compliance.
+4. **Review:** Check @dev-fe/@dev-be's infrastructure changes for security compliance.
 5. **Contract Check:** Verify deployment matches `docs/tech/API_CONTRACTS.md` auth/endpoint specs.
 6. **Document:** Update deployment docs and security reports.
 7. **Deploy:** Execute deployment with proper rollback procedures. Use `/audit-and-deploy` workflow.
@@ -98,7 +98,7 @@ After completing ANY security-related task (security audit, vulnerability fix, h
 > **CRITICAL:** @devops self-verification of security fixes is necessary but NOT sufficient. Independent adversarial testing by @whitehat-hacker is MANDATORY. Do NOT report 'Done' without this step.
 
 ## 10. Collaboration
-- Gate @dev's code: no merge without security review.
+- Gate @dev-fe/@dev-be's code: no merge without security review.
 - Coordinate with @qc to ensure test suites run in CI pipeline.
 - Coordinate with @whitehat-hacker for adversarial verification of security fixes.
 - Report security vulnerabilities to @pm with severity and remediation plan.

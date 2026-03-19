@@ -1,4 +1,6 @@
 # Implementation Task
+> **Performance Rule:** Do not load the full AGENTS.md. Load only the relevant .agent/indexes/AGENTS-LITE-<role>.md and lazy-load specific skills as needed.
+
 
 > Fill ALL sections before delegating. Workers start with ZERO context.
 
@@ -9,10 +11,10 @@
 [1-2 sentences — what exactly should be achieved]
 
 ## Architecture Context
-- **Project type**: Vite 7 + React 19 + TypeScript SPA (strict mode)
-- **Styling**: TailwindCSS v4 with custom `@theme` tokens in `src/index.css`. Dark mode mandatory.
+- **Project type**: Read `package.json`, `tsconfig.json`, and build config to detect stack
+- **Styling**: Read project config to determine CSS framework and conventions
 - **State**: Zustand for global state
-- **Key deps**: `iztro` (Tử Vi), `circular-natal-horoscope-js` (Western Astrology), `@dqcai/vn-lunar`
+- **Key deps**: `[project dependencies from package.json / CMakeLists.txt]
 - **Conventions**: Vietnamese UI text, English code/comments. No `any` types. DRY principle.
 - **File structure**: `src/components/`, `src/services/`, `src/utils/`, `src/pages/`
 

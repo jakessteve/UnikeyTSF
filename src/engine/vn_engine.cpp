@@ -291,6 +291,15 @@ static void ApplyToneToResult(std::wstring& result, int tone, ToneType toneType,
     int vowelCount = bestEnd - bestStart + 1;
     bool isClosed = (bestEnd < (int)result.size() - 1);
 
+    // Adjust for 'qu' and 'gi' which are initials but contain 'u' and 'i'.
+    if (bestStart > 0 && VnOrtho::ToLower(result[bestStart-1]) == L'q' && VnOrtho::ToLower(result[bestStart]) == L'u' && vowelCount > 1) {
+        bestStart++;
+        vowelCount--;
+    } else if (bestStart > 0 && VnOrtho::ToLower(result[bestStart-1]) == L'g' && VnOrtho::ToLower(result[bestStart]) == L'i' && vowelCount > 1) {
+        bestStart++;
+        vowelCount--;
+    }
+
     // Special handling for modern Vietnamese tone placement on specific diphthongs.
     if (vowelCount == 2 && !isClosed) {
         wchar_t v1 = VnOrtho::ToLower(result[bestStart]);

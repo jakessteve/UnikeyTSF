@@ -40,14 +40,14 @@ function handleResult(result: EngineResult) {
 ### 2. Type Guards (runtime narrowing)
 ```typescript
 // User-defined type guard
-function isLunarDate(date: unknown): date is LunarDate {
+function isValidDate(date: unknown): date is AppDate {
  return typeof date === 'object' && date !== null
- && 'lunarDay' in date && 'lunarMonth' in date;
+ && 'day' in date && 'month' in date;
 }
 
 // Use with discriminated unions
-function isTuViChart(chart: ChartData): chart is TuViChart {
- return chart.type === 'tuvi';
+function isDetailedResult(result: ResultData.: chart is DetailedResult {
+ return result.type === 'detailed';
 }
 ```
 
@@ -75,7 +75,7 @@ type ApiResponse<T> = T extends string ? TextResponse : JsonResponse<T>;
 | `Required<T>` | All props required | Validated input | `createUser(Required<UserInput>)` |
 | `Pick<T, K>` | Subset of props | API response shapes | `Pick<User, 'id' \| 'name'>` |
 | `Omit<T, K>` | Exclude props | Create without ID | `Omit<User, 'id'>` |
-| `Record<K, V>` | Map type | Lookup tables | `Record<PalaceId, Palace>` |
+| `Record<K, V>` | Map type | Lookup tables | `Record<EntityId, Entity>` |
 | `Readonly<T>` | Immutable | Config, constants | `Readonly<EngineConfig>` |
 | `Extract<T, U>` | Filter union members | Narrow type | `Extract<Event, { kind: 'click' }>` |
 | `Exclude<T, U>` | Remove union members | Remove type | `Exclude<Status, 'deleted'>` |
@@ -86,14 +86,14 @@ type ApiResponse<T> = T extends string ? TextResponse : JsonResponse<T>;
 Prevent accidentally swapping values of the same underlying type:
 ```typescript
 type UserId = string & { readonly __brand: 'UserId' };
-type PalaceId = string & { readonly __brand: 'PalaceId' };
+type OrderId = string & { readonly __brand: 'OrderId' };
 
 function createUserId(id: string): UserId { return id as UserId; }
-function createPalaceId(id: string): PalaceId { return id as PalaceId; }
+function createOrderId(id: string): OrderId { return id as OrderId; }
 
 // Now these are NOT interchangeable — TypeScript will error
 function getUser(id: UserId): User { /* ... */ }
-getUser(createPalaceId('palace-1')); // TS Error! 
+getUser(createOrderId('order-1')); // TS Error!
 ```
 
 ### 6. Exhaustive Checks

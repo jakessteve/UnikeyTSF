@@ -10,7 +10,7 @@ description: Mutation Testing - verify test suite effectiveness through systemat
 
 ## When to Use
 - After writing tests, to verify their quality (coverage ≠ effectiveness).
-- On critical calculation engines (Tử Vi, Bát Tự, Lunar Calendar, QMDJ).
+- On critical calculation engines (core business logic and critical calculation).
 - Before claiming "high test coverage" — mutation score reveals true effectiveness.
 - When suspicious that tests pass but don't actually verify correct behavior.
 - During `/battle-test` workflow to stress-test test suite quality.

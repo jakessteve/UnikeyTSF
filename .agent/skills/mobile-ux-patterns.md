@@ -71,7 +71,7 @@ Show less, reveal more on demand:
 | Swipe left/right | Navigate between items | Calendar month navigation |
 | Pull to refresh | Data refresh | Reload daily info |
 | Long press | Contextual menu | Show options for a date |
-| Pinch to zoom | Detailed view | Tử Vi chart zoom |
+| Pinch to zoom | Detailed view | Data chart zoom |
 | Swipe down | Dismiss | Close bottom sheet |
 
 ### 5. Form Design for Mobile

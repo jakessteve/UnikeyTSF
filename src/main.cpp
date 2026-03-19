@@ -85,25 +85,25 @@ static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
         switch (LOWORD(wParam)) {
         case IDM_TOGGLE_VE: ToggleInputState(); break;
         case IDM_INPUT_TELEX:
-            LockConfig(); g_pConfig->inputMethod = IM_TELEX; UnlockConfig();
+            if (LockConfig()) { g_pConfig->inputMethod = IM_TELEX; UnlockConfig(); }
             UpdateTrayIcon();
             break;
         case IDM_INPUT_VNI:
-            LockConfig(); g_pConfig->inputMethod = IM_VNI; UnlockConfig();
+            if (LockConfig()) { g_pConfig->inputMethod = IM_VNI; UnlockConfig(); }
             UpdateTrayIcon();
             break;
         case IDM_INPUT_VIQR:
-            LockConfig(); g_pConfig->inputMethod = IM_VIQR; UnlockConfig();
+            if (LockConfig()) { g_pConfig->inputMethod = IM_VIQR; UnlockConfig(); }
             UpdateTrayIcon();
             break;
         case IDM_CHARSET_UNICODE:
-            LockConfig(); g_pConfig->charset = CS_UNICODE; UnlockConfig();
+            if (LockConfig()) { g_pConfig->charset = CS_UNICODE; UnlockConfig(); }
             break;
         case IDM_CHARSET_TCVN3:
-            LockConfig(); g_pConfig->charset = CS_TCVN3; UnlockConfig();
+            if (LockConfig()) { g_pConfig->charset = CS_TCVN3; UnlockConfig(); }
             break;
         case IDM_CHARSET_VNI:
-            LockConfig(); g_pConfig->charset = CS_VNI_WIN; UnlockConfig();
+            if (LockConfig()) { g_pConfig->charset = CS_VNI_WIN; UnlockConfig(); }
             break;
         case IDM_SETTINGS:
             ShowSettingsDialog(hWnd, g_hInstance, g_pConfig);

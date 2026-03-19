@@ -112,7 +112,7 @@ Present the handoff artifact and tell the user:
 ```
  Plan complete. Handoff artifact saved to `.hc/handoffs/[filename]`.
 
-**Next step:** Start a new Antigravity conversation →
+**Next step:** Start a new conversation →
 Select **[Recommended Model]** → Type:
 "Read `.hc/handoffs/[filename]` and execute the handoff as @dev using /receive-handoff"
 ```

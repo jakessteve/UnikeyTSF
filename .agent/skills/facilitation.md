@@ -186,4 +186,3 @@ When comparing multiple ideas during synthesis, use the `idea-validation` skill 
 | 1 | [Idea A] | /20 | /20 | /20 | /60 | A |
 | 2 | [Idea B] | /20 | /20 | /20 | /60 | B |
 ```
-

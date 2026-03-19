@@ -1,0 +1,3 @@
+@echo off
+echo Starting HC Software Factory - @pm Orchestrator...
+gemini -s .agent/roles/@pm.md %*

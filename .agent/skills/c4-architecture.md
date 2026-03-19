@@ -76,15 +76,15 @@ Shows the internal structure of a single container.
 graph TD
  subgraph "CalcEngine"
  LunarCalc["LunarCalc\nSolar ↔ Lunar conversion"]
- TuViEngine["TuViEngine\nBirth chart generation"]
- GieoQue["GieoQue\nDivination engine"]
+ CoreEngine["CoreEngine\nBusiness logic"]
+ QueryEngine["QueryEngine\nQuery engine"]
  DateUtils["DateUtils\nJDN, Solar Terms"]
  end
 
  LunarCalc --> DateUtils
- TuViEngine --> DateUtils
- TuViEngine --> LunarCalc
- GieoQue --> LunarCalc
+ CoreEngine --> DateUtils
+ CoreEngine --> LunarCalc
+ QueryEngine --> LunarCalc
 ```
 
 **For each component, document:**

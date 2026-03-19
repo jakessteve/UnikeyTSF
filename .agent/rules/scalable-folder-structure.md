@@ -30,17 +30,17 @@ Group files by **feature/domain**, not by file type:
  CORRECT (Feature-based):
 src/
 ├── services/
-│ ├── tuvi/ # Tử Vi feature
-│ │ ├── tuviEngine.ts
-│ │ ├── tuviTypes.ts
-│ │ └── tuviPatterns.ts
+│ ├── feature-a/ # Feature A module
+│ │ ├── featureEngine.ts
+│ │ ├── featureTypes.ts
+│ │ └── featurePatterns.ts
 │ └── calendar/ # Calendar feature
 │ ├── lunarCalc.ts
 │ └── solarTerms.ts
 ├── components/
-│ ├── TuVi/
-│ │ ├── TuViGrid.tsx
-│ │ └── TuViModule.tsx
+│ ├── feature-a/
+│ │ ├── FeatureGrid.tsx
+│ │ └── FeatureModule.tsx
 │ └── Calendar/
 │ ├── MonthCalendar.tsx
 │ └── DayDetail.tsx
@@ -48,11 +48,11 @@ src/
  WRONG (Type-based flat dump):
 src/
 ├── engines/
-│ ├── tuviEngine.ts
+│ ├── featureEngine.ts
 │ ├── lunarCalc.ts
 │ └── gieoQueEngine.ts
 ├── types/
-│ ├── tuviTypes.ts
+│ ├── featureTypes.ts
 │ ├── calendarTypes.ts
 │ └── gieoQueTypes.ts
 ```
@@ -74,10 +74,10 @@ Each directory level has a clear responsibility:
 | `tests/` | Test files | Mirrors `src/` structure |
 
 ### 4. File Naming Convention
-- **Components:** PascalCase (`TuViGrid.tsx`, `MonthCalendar.tsx`)
-- **Services/Utils:** camelCase (`tuviEngine.ts`, `dateUtils.ts`)
-- **Types:** camelCase with `Types` suffix (`tuviTypes.ts`)
-- **Tests:** Same name + `.test` suffix (`tuviEngine.test.ts`)
+- **Components:** PascalCase (`FeatureGrid.tsx`, `MonthCalendar.tsx`)
+- **Services/Utils:** camelCase (`featureEngine.ts`, `dateUtils.ts`)
+- **Types:** camelCase with `Types` suffix (`featureTypes.ts`)
+- **Tests:** Same name + `.test` suffix (`featureEngine.test.ts`)
 - **Constants/Data:** camelCase (`actionWeight.json`)
 
 ### 5. Co-location Principle

@@ -54,9 +54,9 @@ Convert the enriched request into the `task-router` format:
 
 ```markdown
 **Original:** "Make the chart better"
-**Enriched:** "Improve the Tử Vi chart grid layout for readability"
+**Enriched:** "Improve the data grid layout for readability"
 **Sub-tasks:**
-1. Increase font size in palace cells from 11px → 13px (@designer)
+1. Increase font size in grid cells from 11px → 13px (@designer)
 2. Add more padding between star names (@designer)
 3. Improve center info panel contrast in dark mode (@designer)
 4. Verify changes at mobile breakpoints (@qc via browser-visual-testing)
@@ -76,4 +76,4 @@ Convert the enriched request into the `task-router` format:
 - **Enrichment is lightweight.** Don't turn a 30-second task into a 5-minute interview.
 - **Default to action.** If 80% confident in interpretation, proceed with a note. Don't block.
 - **Confidence threshold:** If score ≥ 70 on interpretation → auto-enrich. If < 70 → ask one question.
-- **Never enrich clear requests.** "Fix the bug in getLunarDay()" is already specific — just delegate.
+- **Never enrich clear requests.** "Fix the bug in calculateResult()" is already specific — just delegate.

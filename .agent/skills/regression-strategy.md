@@ -41,7 +41,7 @@ Select tests from highest to lowest priority:
 
 | Priority | Criteria | Run When | Examples |
 |---|---|---|---|
-| **P1 — Critical** | Core business logic, data integrity, engine calculations | Every change | Tử Vi engine, Lunar Calendar, date calculations |
+| **P1 — Critical** | Core business logic, data integrity, engine calculations | Every change | Core engines, critical calculations, data processing |
 | **P2 — High** | Key user flows, primary features, navigation | Every PR | Chart generation, PDF export, tab switching |
 | **P3 — Medium** | Edge cases, secondary features, error handling | Pre-release | Leap month handling, timezone edge cases |
 | **P4 — Low** | Cosmetic, preferences, settings | Major releases only | Theme switching, font size preferences |

@@ -32,6 +32,9 @@ public:
     // Check if we are currently in a word.
     bool IsInWord() const;
 
+    // Check if a character is valid for continuing a word in the given method
+    bool IsWordChar(wchar_t ch, InputMethod method) const;
+
     // Remove the last typed character and its mark.
     void RemoveLastChar();
 
@@ -45,9 +48,6 @@ private:
     std::wstring ApplyTelexRules(const std::wstring& raw);
     std::wstring ApplyVniRules(const std::wstring& raw);
     std::wstring ApplyViqrRules(const std::wstring& raw);
-
-    // Check if a character is valid for continuing a word in the given method
-    bool IsWordChar(wchar_t ch, InputMethod method) const;
 
     std::wstring _raw;         // The exact sequence of keys typed (e.g., "tieengs")
     std::wstring _composition; // The resulting Vietnamese string (e.g., "tiếng")

@@ -1,23 +1,23 @@
-# Agent Context (PM Worker)
+# @pm Skills Index (LITE)
 
-> Minimal context for CLI worker agents in @pm role. Load skills on-demand from `.agent/skills/MANIFEST.md`.
+> Minimal index specifically for @pm CLI workers.
 
-## Project
-- Read `package.json` for tech stack. Read `README.md` for project context.
+## Role Focus
+`@pm`: Planning, prioritization, delegation, orchestration, facilitation
 
-## Your Rules (from `rules/MANIFEST.md` — @pm section)
-- `rules/execution-protocol.md` — SOT-driven, SPARC phases, tiered verification, agent coordination
-- `rules/decision-routing.md` — Mandatory scores, 75+ auto-proceed
-- `rules/engineering-mindset.md` — MVP-first, ruthless prioritization
-- `rules/no-code-boundary.md` — PM writes docs, not code
-- `rules/context-budget.md` — Context window limits (ALWAYS observe)
+## Key Skills
+- `task-router`
+- `roadmap-architect`
+- `context-juggler`
+- `conflict-resolver`
+- `amateur-proof-plans`
+- `multi-worker-coordination`
+- `worker-output-parsing`
 
-## Skill Loading Protocol
-1. Read `.agent/skills/MANIFEST.md` — find @pm skills table
-2. When a trigger matches your current task, `view_file` that skill
-3. Do NOT pre-load skills you don't need
+## Essential Rules
+- `execution-protocol`: SPARC, tiered verification gate
+- `anti-patterns-swarm`: Swarm clash prevention
+- `model-routing`: Task→model matrix
+- `decision-routing`: Task classification
 
-## Key Conventions
-1. Planning roles write docs, not code.
-2. Max 5 parallel CLI worker agents per swarm wave.
-3. No decorative emojis/icons outside rendered UI components.
+*(Use `view_file .agent/skills/{skill-name}/SKILL.md` to load skills).*

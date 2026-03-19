@@ -1,0 +1,270 @@
+{
+  "tests": 48,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "VniMappingTest",
+      "tests": 10,
+      "testsuite": [
+        {
+          "name": "LowercaseTableHas68Entries",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 21
+        },
+        {
+          "name": "UppercaseTableSize",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 25
+        },
+        {
+          "name": "AllLowercaseEntriesHaveNonZeroMark",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 29
+        },
+        {
+          "name": "AllUppercaseEntriesHaveNonZeroMark",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 37
+        },
+        {
+          "name": "NoDuplicateUnicodeKeysInLowercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 45
+        },
+        {
+          "name": "NoDuplicateUnicodeKeysInUppercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 55
+        },
+        {
+          "name": "NoDuplicateVniPairsInLowercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 65
+        },
+        {
+          "name": "NoDuplicateVniPairsInUppercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 77
+        },
+        {
+          "name": "LowercaseBasesAreAllLowercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 89
+        },
+        {
+          "name": "UppercaseBasesAreAllUppercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "name": "VniConversionTest",
+      "tests": 25,
+      "testsuite": [
+        {
+          "name": "SingleCharForwardReverse_Lowercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 110
+        },
+        {
+          "name": "SingleCharForwardReverse_Uppercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 119
+        },
+        {
+          "name": "DStroke_Lowercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 128
+        },
+        {
+          "name": "DStroke_Uppercase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 137
+        },
+        {
+          "name": "WordRoundTrip_Nguyen",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 146
+        },
+        {
+          "name": "WordRoundTrip_VietNam",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 151
+        },
+        {
+          "name": "WordRoundTrip_XinChao",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 156
+        },
+        {
+          "name": "WordRoundTrip_AllTones",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 161
+        },
+        {
+          "name": "WordRoundTrip_HornChars",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 168
+        },
+        {
+          "name": "WordRoundTrip_BreveChars",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 173
+        },
+        {
+          "name": "WordRoundTrip_CircumflexChars",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 178
+        },
+        {
+          "name": "EmptyString",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 183
+        },
+        {
+          "name": "PureAscii_PassThrough",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 188
+        },
+        {
+          "name": "MixedContent",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 194
+        },
+        {
+          "name": "AllLowercaseRoundTrip",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 199
+        },
+        {
+          "name": "AllUppercaseRoundTrip",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 208
+        },
+        {
+          "name": "SpecCheck_Acute",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 218
+        },
+        {
+          "name": "SpecCheck_Grave",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 221
+        },
+        {
+          "name": "SpecCheck_Circumflex",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 224
+        },
+        {
+          "name": "SpecCheck_Tilde",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 227
+        },
+        {
+          "name": "SpecCheck_DotBelow",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 230
+        },
+        {
+          "name": "SpecCheck_Horn",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 233
+        },
+        {
+          "name": "SpecCheck_UpperHorn",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 237
+        },
+        {
+          "name": "SpecCheck_CircumflexAcute",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 241
+        },
+        {
+          "name": "SpecCheck_CircumflexDotBelow",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 244
+        }
+      ]
+    },
+    {
+      "name": "AccentStripTest",
+      "tests": 8,
+      "testsuite": [
+        {
+          "name": "BasicStrip",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 253
+        },
+        {
+          "name": "AllTones_a",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 256
+        },
+        {
+          "name": "AllModifiedVowels",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 259
+        },
+        {
+          "name": "DStroke",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 262
+        },
+        {
+          "name": "FullSentence",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 266
+        },
+        {
+          "name": "PureAscii",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 269
+        },
+        {
+          "name": "EmptyString",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 272
+        },
+        {
+          "name": "MixedCase",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 275
+        }
+      ]
+    },
+    {
+      "name": "IntegrationTest",
+      "tests": 5,
+      "testsuite": [
+        {
+          "name": "LongSentenceRoundTrip_VNI",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 284
+        },
+        {
+          "name": "LongSentenceStripAccents",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 289
+        },
+        {
+          "name": "NumbersAndPunctuation_Preserved",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 294
+        },
+        {
+          "name": "YWithTones_AllFive",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 299
+        },
+        {
+          "name": "UppercaseWord_HANOI",
+          "file": "C:\\Users\\HeoCop\\Downloads\\Projects\\UnikeyTSF\\tests\\clipboard_test.cpp",
+          "line": 306
+        }
+      ]
+    }
+  ]
+}

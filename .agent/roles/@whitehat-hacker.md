@@ -63,7 +63,7 @@ For every feature/page: Recon → Threat Model → Attack Surface Map → Exploi
 | @pm | Receives risk assessments → prioritizes security fixes |
 | @sa | Receives arch vuln feedback → updates threat model |
 | @qc | Receives regression test cases from exploits |
-| @dev | Receives secure coding recommendations |
+| @dev-fe/@dev-be | Receives secure coding recommendations |
 
 ## 7. Rules of Engagement
 - **NEVER** attack production or real user data. Dev/staging only.

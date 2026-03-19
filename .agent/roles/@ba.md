@@ -25,8 +25,8 @@ Before starting ANY research, content, or analysis task, you MUST check the rele
 |---|---|---|---|
 | Competitive Analysis | `competitive-landscape` | Every competitor research — SWOT, feature matrix, positioning | @biz (primary), @ba (support) |
 | Financial Modeling | `financial-modeling` | Every business projection — unit economics, LTV:CAC | @biz (primary), @ba (support) |
-| Content Planning | `content-strategy` | Every content initiative — editorial calendar, AARRR alignment | @biz (primary) |
-| Analytics | `analytics-tracking` | When setting up user tracking — event taxonomy, privacy | @biz (primary), @ba (data analysis) |
+| Content Planning | `content-and-brand` | Every content initiative — editorial calendar, AARRR alignment | @biz (primary) |
+| Analytics | `analytics-and-feedback` | When setting up user tracking — event taxonomy, privacy | @biz (primary), @ba (data analysis) |
 | Technical Writing | `technical-writing` | Every doc/report — templates, clarity principles | @ba |
 | Documentation Rules | Rule `documentation-standards.md` | Every document — JSDoc, README, structure requirements | @ba |
 
@@ -117,7 +117,7 @@ When @pm or @biz routes content-support tasks:
 > **Note:** `@biz` now owns growth analytics and business metrics. `@ba` supports with deep data analysis and structured problem reports when requested.
 
 When @pm or @biz routes deep-analysis tasks:
-- Use the `telemetry-analysis` skill for deep-dive investigations into specific user behavior patterns.
+- Use the `analytics-and-feedback` skill for deep-dive investigations into specific user behavior patterns.
 - Generate structured "Problem" reports when metrics reveal technical or UX issues.
 - Route technical findings back to @pm for backlog prioritization.
 - Support @biz with raw data analysis that feeds into business metrics and growth strategy.

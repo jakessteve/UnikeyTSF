@@ -1,43 +1,43 @@
-# Test Plan — UniKey TSF Reborn
+# Test Plan
 
 ## Overview
-Test strategy for a native C++17 Win32/COM application. Testing focuses on shared memory integrity, tray icon behavior, and (future) TSF keystroke processing.
+Test strategy and coverage targets for the project. Update this document per-project with the actual test framework, tools, and module breakdown.
 
-## Constraints
-- **No unit test framework in Phase 1.** Testing is manual + build verification.
-- Unit testing will be introduced with GoogleTest in Phase 2 (TSF DLL).
-- All tests are Windows-only (no cross-platform).
+## Test Tools
+- **Unit Test Framework:** _[e.g., Google Test, Catch2, Vitest, Jest, pytest]_
+- **Integration Test Framework:** _[e.g., same as unit, or separate tool]_
+- **E2E Test Tool:** _[e.g., Playwright, Selenium, AutoHotKey, manual scripts]_
+- **Coverage Tool:** _[e.g., gcov, lcov, Istanbul, c8]_
 
 ## Test Levels
 
-### Build Verification (Phase 1)
-- **Tool:** CMake + MSVC
-- **Pass criteria:** Zero compiler errors, zero warnings at `/W4`
-- **Command:** `cmake --build build --config Release`
+### Unit Tests
+- **Coverage target:** 80% line coverage (90% for critical modules)
+- **Location:** _[e.g., co-located `*.test.*` files, or `tests/unit/`]_
 
-### Manual Smoke Tests (Phase 1)
-| # | Test | Expected Result |
-|---|------|-----------------|
-| 1 | Run `UniKeyTSF.exe` | Tray icon "V" appears |
-| 2 | Left-click tray icon | Icon toggles V ↔ E |
-| 3 | Right-click tray icon | Context menu appears |
-| 4 | Press `Ctrl+Shift` | Icon toggles V ↔ E |
-| 5 | Click "Exit" in menu | Tray icon removed, process exits |
-| 6 | Run second instance | Detects existing instance, exits silently |
+### Integration Tests
+- **Scope:** Cross-module interactions, API contracts, data flow
+- **Location:** _[e.g., `tests/integration/`]_
 
-### Unit Tests (Phase 2+)
-- **Tool:** GoogleTest
-- **Location:** `tests/` directory
-- **Coverage targets:**
-  - Typing engine (tone placement, spell check): 90%+
-  - Shared memory read/write: 80%+
-  - COM lifecycle: 80%+
+### E2E Tests
+- **Scope:** Critical user flows, smoke tests
+- **Location:** _[e.g., `tests/e2e/`]_
 
-### Integration Tests (Phase 2+)
-- TSF DLL keystroke processing in a mock `ITfContext`
-- Shared memory producer-consumer between EXE and DLL
+## Test Categories by Module
 
-## Test Data
-- Vietnamese word lists for typing engine validation
-- Known-good tone placement reference data
-- `.ukm` macro files for macro expansion testing
+| Module | Unit | Integration | E2E | Notes |
+|--------|------|-------------|-----|-------|
+| _[Module 1]_ | Required | Required | Required | _[Priority / risk notes]_ |
+| _[Module 2]_ | Required | Required | — | _[Priority / risk notes]_ |
+| _[Module 3]_ | Required | — | — | _[Priority / risk notes]_ |
+
+## Acceptance Criteria
+- All tests pass before merge
+- No regression in existing coverage
+- Critical modules require 90%+ coverage
+- UI components require visual / screenshot tests (if applicable)
+
+## Test Data Management
+- Static test fixtures in _[fixtures location]_
+- Known-good reference data for calculation / logic engines
+- Mock / stub data for external service dependencies

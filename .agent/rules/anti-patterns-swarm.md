@@ -13,7 +13,7 @@ description: Swarm-Only — multi-agent coordination safety, cognitive bias dete
 These rules are MANDATORY during `/swarm-execute` and any parallel multi-agent execution.
 
 ### 7.1 File Ownership Protocol (Anti-Dual-Write)
-During parallel waves, each file MUST have a single owner. @pm MUST produce a File Ownership Map before Wave 2+.
+During parallel waves, each file MUST have a single owner. @pm MUST produce a File Ownership Map in Phase 1 (Decomposition) before any waves begin, to eliminate lock-sync waits.
 
 **Rules:**
 - Only the owner may WRITE to a file. Others may READ only.
@@ -48,7 +48,7 @@ A P2 task MUST NOT consume the last available parallel slot.
 
 ### 7.7 Anti-Swarm-Extravagance (Token Burn Guard)
 - **Max 4 CLI workers per wave.** Batch smallest/related tasks into single prompts.
-- All workers use `.agent/indexes/AGENTS-LITE.md` (not full `AGENTS.md`).
+- All workers use role-scoped `.agent/indexes/AGENTS-LITE-{role}.md` (not full `AGENTS.md`).
 - Mechanical workers: `-ApprovalMode Yolo -Timeout 60`.
 - If decomposition yields >6 tasks → HALT → re-batch → reduce to ≤4 workers.
 

@@ -27,6 +27,10 @@ End-to-end pipeline from a design mockup or text brief to production-ready coded
  - Style keywords (minimal, dark mode, glassmorphism, etc.)
  - Key components and features needed
  - Target devices (mobile, desktop, both)
+3. **Determine Aesthetic Configuration:** Set the tunable parameters:
+ - `DESIGN_VARIANCE` (1-10): Experimental vs standard layout.
+ - `MOTION_INTENSITY` (1-10): How much animation is present.
+ - `VISUAL_DENSITY` (1-10): How much content fits on the screen.
 
 ### Step 2 — Create Component Breakdown
 Write a structured plan in `WIREFRAMES.md`:
@@ -58,8 +62,9 @@ Write a structured plan in `WIREFRAMES.md`:
 4. Follow the `design-system-uiux` skill (Phase 1: AUDIT).
 
 ### Step 4 — Implement Components
-Code each component following the `design-system-uiux` skill:
-1. Use existing primitives and design tokens.
+Code each component following the `design-system-uiux`, `premium-taste-ui`, and `anti-lazy-output` skills:
+1. Use existing primitives and design tokens, while applying the aesthetic parameters.
+2. Produce production-ready code. Do not use placeholder comments. Use realistic mock data if needed.
 2. Follow CSS placement rules (`@theme`, `@layer base`, `@layer components`).
 3. Implement dark mode parity for every visual style.
 4. Add interaction states: hover, focus, active, disabled, loading.

@@ -75,7 +75,7 @@ After outputting the recommendation, check if a **model handoff** is warranted:
  **Model Switch Recommended**
 - The next phase (**[phase name]**) would benefit from **[Model Name]**.
 - **Current model:** [current] → **Recommended:** [new] — [1-line reason]
-- **Action:** I will generate a `/handoff` artifact. Then start a new conversation 
+- **Action:** I will generate a `/handoff` artifact. Then start a new conversation
  on **[Model Name]** and type: `/receive-handoff`
 - **Risk Level:** LOW / MEDIUM — [brief justification]
 ```
@@ -92,13 +92,13 @@ If the switch is NOT significant (same model category), output instead:
 **Task:** "Let's brainstorm ideas for the new calendar widget"
 → Recommended: Opus — Plan (`OPUS/Plan`) — deep thinking requires extended reasoning
 
-**Task:** "Implement the hexagram calculation engine with full test coverage"
+**Task:** "Implement the core calculation engine with full test coverage"
 → Recommended: Sonnet — Fast (`SONNET/Fast`) — coding + testing is Sonnet's strength
 
-**Task:** "Write all the Vietnamese interpretation texts for the 12 palaces"
-→ Recommended: Gemini High — Plan (`GEMINI-H/Plan`) — bulk multilingual research/content
+**Task:** "Write all the localized content for the 12 output categories"
+→ Recommended: Gemini High — Plan (`GEMINI-H/Plan`) — bulk content research/creation
 
-**Task:** "Design the architecture for the new astrology module, then implement it"
+**Task:** "Design the architecture for the new analytics module, then implement it"
 → Primary: Opus — Plan (`OPUS/Plan`) — architecture phase
 → Secondary: Sonnet — Fast (`SONNET/Fast`) — implementation phase
 → Model Switch Recommended: Opus → Sonnet after architecture is approved.
@@ -109,4 +109,3 @@ If the switch is NOT significant (same model category), output instead:
 **Task (PM completing plan, next phase is bulk coding):** "Plan complete. Next: implement 8 files."
 → Primary: Sonnet — Fast (`SONNET/Fast`) — large implementation, coding priority
 → Model Switch Recommended: Triggering `/handoff` workflow.
-

@@ -5,7 +5,7 @@ description: Git Hygiene - conventional commits, atomic changes, and branch nami
 # RULE: GIT HYGIENE
 
 **Mode:** Always On
-**Scope:** @dev, @devops
+**Scope:** @dev-fe, @dev-be, @devops
 
 ---
 
@@ -32,10 +32,10 @@ description: Git Hygiene - conventional commits, atomic changes, and branch nami
 
 ### Examples
 ```
-feat(tuvi): add Tứ Hóa star placement in palace grid
+feat(feature): add category placement in dashboard grid
 fix(calendar): correct leap month calculation for 2025
 refactor(engines): extract common star mapping logic
-perf(chart): memoize palace interpretation lookup
+perf(chart): memoize data interpretation lookup
 test(bazi): add BVA tests for solar term boundaries
 ```
 
@@ -48,7 +48,7 @@ test(bazi): add BVA tests for solar term boundaries
 ```
 <type>/<short-description>
 ```
-Examples: `feat/tuvi-temporal-overlay`, `fix/calendar-leap-month`, `refactor/engine-types`
+Examples: `feat/feature-temporal-overlay`, `fix/date-boundary-handling`, `refactor/engine-types`
 
 ## Rules
 - Never commit directly to `main`.

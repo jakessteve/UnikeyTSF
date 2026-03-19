@@ -41,7 +41,7 @@ Before writing **any** visual code, you MUST read the project's design token sou
  - Surfaces: `.card-surface`, `.card-subtle`, `.card-highlight`
  - Shadows: `.shadow-apple`, `.shadow-apple-hover`
  - Animations: `.animate-fade-in-up`, `.loading-shimmer`
-- If a new class IS needed, follow the existing naming convention (e.g., `card-*`, `tuvi-*`, `component-*`).
+- If a new class IS needed, follow the existing naming convention (e.g., `card-*, feature-*, component-*`).
 
 ### 5. Dark Mode Parity
 - Every light-mode visual style MUST have a corresponding `.dark` variant.

@@ -48,9 +48,9 @@ All agents writing code MUST follow these standards at all times.
 
 **Test Quality:** Descriptive names, behavior-focused, cover happy + error + edge paths. No `expect(true).toBe(true)`.
 
-**Completion Gate:** @dev MUST NOT report done if tests are missing/failing/below threshold.
+**Completion Gate:** @dev-fe/@dev-be MUST NOT report done if tests are missing/failing/below threshold.
 
-** QC Enforcement:** Follow the tiered verification model in `execution-protocol.md` §3. For Medium+ tasks, @qc MUST independently verify test coverage and quality. For Small tasks, @qc spot-checks. For Trivial tasks, @dev self-verification is sufficient.
+** QC Enforcement:** Follow the tiered verification model in `execution-protocol.md` §3. For Medium+ tasks, @qc MUST independently verify test coverage and quality. For Small tasks, @qc spot-checks. For Trivial tasks, @dev-fe/@dev-be self-verification is sufficient.
 
 ---
 

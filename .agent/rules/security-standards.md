@@ -12,7 +12,7 @@ All agents MUST enforce security-first practices at all times.
 
 Security is NOT a post-deployment afterthought. Integrate security checks at every phase:
 - **Design:** @sa reviews for OWASP Top 10 in architecture.
-- **Implementation:** @dev validates inputs, sanitizes outputs, uses parameterized queries.
+- **Implementation:** @dev-be validates inputs, sanitizes outputs, uses parameterized queries. @dev-fe validates user inputs client-side.
 - **Testing:** @qc includes security test cases (XSS, injection, auth bypass).
 - **Deployment:** @devops runs automated security scanning in CI/CD.
 

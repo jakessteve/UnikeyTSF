@@ -1,4 +1,4 @@
-﻿// =============================================================================
+// =============================================================================
 // UniKey TSF Reborn â€” DLL Main & COM Registration
 // =============================================================================
 // DLL entry points for the TSF COM server:
@@ -16,6 +16,7 @@
 #include <strsafe.h>
 #include <wrl/client.h>
 #include <new>
+#include <memory>
 
 #include <initguid.h>  // MUST come before guids.h to make DEFINE_GUID allocate storage
 #include "guids.h"
@@ -55,21 +56,28 @@ static BOOL SetAppContainerACL(HKEY hKey)
     // (A;OICI;KR;;;S-1-15-2-1) = Allow, Object Inherit + Container Inherit, Key Read, ALL APPLICATION PACKAGES
     const wchar_t* sddl = L"D:(A;OICI;KR;;;S-1-15-2-1)";
 
-    PSECURITY_DESCRIPTOR pSD = nullptr;
+    PSECURITY_DESCRIPTOR rawSD = nullptr;
     if (!ConvertStringSecurityDescriptorToSecurityDescriptorW(
-        sddl, SDDL_REVISION_1, &pSD, nullptr))
+        sddl, SDDL_REVISION_1, &rawSD, nullptr))
     {
         return FALSE;
     }
+
+    // RAII for SD
+    struct ScopedLocalFree {
+        HLOCAL ptr;
+        ScopedLocalFree(HLOCAL p) : ptr(p) {}
+        ~ScopedLocalFree() { if (ptr) LocalFree(ptr); }
+    };
+    ScopedLocalFree autoFreeSD(rawSD);
 
     BOOL bResult = TRUE;
     PACL pDacl = nullptr;
     BOOL bDaclPresent = FALSE;
     BOOL bDaclDefaulted = FALSE;
 
-    if (!GetSecurityDescriptorDacl(pSD, &bDaclPresent, &pDacl, &bDaclDefaulted) || !bDaclPresent)
+    if (!GetSecurityDescriptorDacl(rawSD, &bDaclPresent, &pDacl, &bDaclDefaulted) || !bDaclPresent)
     {
-        LocalFree(pSD);
         return FALSE;
     }
 
@@ -82,7 +90,6 @@ static BOOL SetAppContainerACL(HKEY hKey)
         bResult = FALSE;
     }
 
-    LocalFree(pSD);
     return bResult;
 }
 
