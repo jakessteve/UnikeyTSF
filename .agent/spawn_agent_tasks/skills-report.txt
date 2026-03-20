@@ -1,0 +1,11 @@
+﻿=== Spawn Agent: GEMINI ===
+Timestamp: 2026-03-19 21:47:39
+Mode: --approval-mode auto_edit
+Timeout: None (wait forever)
+Prompt preview: # Task: Performance Audit - Skills (@sa)
+## Goal: Perform a static performance and scale audit on all skill definitions in `.agent/skills/`.
+## Files: `.agent/skills/*/SKILL.md`
+## Expected output:
+An...
+================================
+

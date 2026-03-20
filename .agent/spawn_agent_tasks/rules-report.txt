@@ -1,0 +1,11 @@
+﻿=== Spawn Agent: GEMINI ===
+Timestamp: 2026-03-19 21:47:42
+Mode: --approval-mode auto_edit
+Timeout: None (wait forever)
+Prompt preview: # Task: Performance Audit - Rules (@qc)
+## Goal: Perform a static performance and scale audit on all rule definitions in `.agent/rules/`.
+## Files: `.agent/rules/*`
+## Expected output:
+Analyze rules f...
+================================
+
