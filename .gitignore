@@ -1,6 +1,14 @@
 # Build output
 build/
+build32/
+build64/
 out/
+production/
+release/
+
+# Frontend
+src/ui/frontend/node_modules/
+src/ui/frontend/dist/
 
 # IDE
 .vs/
@@ -20,6 +28,23 @@ CMakeSettings.json
 *.pdb
 *.ilk
 *.log
+
+# Temp files
+build_log*.txt
+build_output*.txt
+test_results*.txt
+test_out.txt
+_test.xml
+_test_output.txt
+track*.txt
+gemini_help*.txt
+
+# Agent spawn temp
+.agent/spawn_agent_tasks/output-*.log
+.agent/spawn_agent_tasks/temp_*
+.agent/spawn_agent_tasks/*-report.txt
+.agent/spawn_agent_tasks/debug_output_*.txt
+.agent/spawn_agent_tasks/huge_prompt.txt
 
 # OS
 Thumbs.db
