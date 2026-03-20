@@ -10,16 +10,26 @@ add_definitions(-DUNICODE -D_UNICODE)
 # =============================================================================
 # UniKeyTSF.exe -- Manager & Bootstrapper
 # =============================================================================
+include(FetchContent)
+FetchContent_Declare(
+    webview2
+    URL "https://www.nuget.org/api/v2/package/Microsoft.Web.WebView2/1.0.2151.40"
+)
+FetchContent_MakeAvailable(webview2)
+
 add_executable(UniKeyTSF WIN32
     src/main.cpp
     src/ui/tray_icon.cpp
     src/ui/settings_dialog.cpp
+    src/ui/settings_webview.cpp
     src/config/ipc_manager.cpp
     src/config/blacklist.cpp
     src/engine/hook_manager.cpp
     src/engine/tsf_registration.cpp
     src/engine/vn_engine.cpp
     src/engine/vn_ortho.cpp
+    src/engine/loanword_dict.cpp
+    src/engine/context_analyzer.cpp
     src/engine/macro.cpp
     src/toolkit/clipboard.cpp
     src/UniKeyTSF.rc
@@ -39,6 +49,13 @@ target_link_libraries(UniKeyTSF PRIVATE
     comctl32
 )
 
+target_include_directories(UniKeyTSF PRIVATE ${webview2_SOURCE_DIR}/build/native/include)
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    target_link_libraries(UniKeyTSF PRIVATE ${webview2_SOURCE_DIR}/build/native/x64/WebView2Loader.dll.lib)
+else()
+    target_link_libraries(UniKeyTSF PRIVATE ${webview2_SOURCE_DIR}/build/native/x86/WebView2Loader.dll.lib)
+endif()
+
 # =============================================================================
 # uktsf_core64.dll -- TSF COM Server
 # =============================================================================
@@ -50,6 +67,8 @@ add_library(uktsf_core64 SHARED
     src/tsf/key_event_sink.cpp
     src/engine/vn_engine.cpp
     src/engine/vn_ortho.cpp
+    src/engine/loanword_dict.cpp
+    src/engine/context_analyzer.cpp
     src/engine/macro.cpp
     src/config/blacklist.cpp
     src/tsf/uktsf_core.def
@@ -69,8 +88,6 @@ target_link_libraries(uktsf_core64 PRIVATE
 # =============================================================================
 # uktsf_core32.dll -- TSF COM Server (32-bit companion)
 # =============================================================================
-# Built only for Win32 architecture (pass -A Win32 to cmake)
-# Use build_all.bat to build both architectures automatically.
 if(CMAKE_SIZEOF_VOID_P EQUAL 4)
     add_library(uktsf_core32 SHARED
         src/tsf/dllmain.cpp
@@ -80,6 +97,8 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 4)
         src/tsf/key_event_sink.cpp
         src/engine/vn_engine.cpp
         src/engine/vn_ortho.cpp
+        src/engine/loanword_dict.cpp
+        src/engine/context_analyzer.cpp
         src/engine/macro.cpp
         src/config/blacklist.cpp
         src/tsf/uktsf_core32.def
@@ -126,8 +145,11 @@ enable_testing()
 add_executable(UniKeyTests
     tests/engine_test.cpp
     tests/spellcheck_test.cpp
+    tests/new_features_test.cpp
     src/engine/vn_engine.cpp
     src/engine/vn_ortho.cpp
+    src/engine/loanword_dict.cpp
+    src/engine/context_analyzer.cpp
     src/engine/macro.cpp
 )
 
@@ -157,7 +179,6 @@ endif()
 gtest_discover_tests(IPCTests)
 
 # Clipboard & Charset Conversion Tests
-# These include clipboard.cpp directly to test static/internal functions
 add_executable(ClipboardTests
     tests/clipboard_test.cpp
 )
@@ -175,6 +196,8 @@ gtest_discover_tests(ClipboardTests)
 add_executable(SettingsUITests
     tests/e2e/settings_ui_test.cpp
     src/ui/settings_dialog.cpp
+    src/ui/settings_webview.cpp
+    src/config/ipc_manager.cpp
     src/config/blacklist.cpp
     src/UniKeyTSF.rc
 )
@@ -193,9 +216,15 @@ target_link_libraries(SettingsUITests PRIVATE
     comdlg32
 )
 
+target_include_directories(SettingsUITests PRIVATE ${webview2_SOURCE_DIR}/build/native/include)
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    target_link_libraries(SettingsUITests PRIVATE ${webview2_SOURCE_DIR}/build/native/x64/WebView2Loader.dll.lib)
+else()
+    target_link_libraries(SettingsUITests PRIVATE ${webview2_SOURCE_DIR}/build/native/x86/WebView2Loader.dll.lib)
+endif()
+
 if(MSVC)
     target_compile_options(SettingsUITests PRIVATE /W4 /WX- /utf-8)
 endif()
 
 gtest_discover_tests(SettingsUITests)
-

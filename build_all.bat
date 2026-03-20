@@ -59,14 +59,25 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM --- Step 2.5: Build Frontend (React + Vite) ---
+echo.
+echo [Frontend] Building React UI...
+pushd src\ui\frontend
+call npm install
+call npm run build
+popd
+
 REM --- Step 3: Copy to production ---
 echo.
 echo Copying to production/...
 if not exist production mkdir production
+if not exist production\frontend mkdir production\frontend
 
 copy /Y build64\Release\UniKeyTSF.exe     production\ >nul
 copy /Y build64\Release\uktsf_core64.dll  production\ >nul
 copy /Y build32\Release\uktsf_core32.dll  production\ >nul
+copy /Y build64\_deps\webview2-src\build\native\x64\WebView2Loader.dll production\ >nul
+xcopy /E /I /Y src\ui\frontend\dist\*     production\frontend\ >nul
 
 echo.
 echo ============================================================
