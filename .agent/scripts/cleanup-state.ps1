@@ -6,7 +6,9 @@ param(
 $targetDirs = @(
     ".agent\spawn_agent_tasks",
     ".hc\debug",
-    ".hc\benchmarks"
+    ".hc\benchmarks",
+    ".hc\perf-audit",
+    ".hc\logs"
 )
 
 $cutoffDate = (Get-Date).AddDays(-$DaysOld)
@@ -15,7 +17,7 @@ $deletedSize = 0
 
 foreach ($dir in $targetDirs) {
     if (Test-Path -LiteralPath $dir) {
-        $files = Get-ChildItem -Path $dir -File | Where-Object { $_.LastWriteTime -lt $cutoffDate }
+        $files = Get-ChildItem -Path $dir -File -Recurse | Where-Object { $_.LastWriteTime -lt $cutoffDate }
         foreach ($file in $files) {
             $deletedSize += $file.Length
             if ($WhatIf) {

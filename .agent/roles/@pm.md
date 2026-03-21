@@ -57,6 +57,12 @@ Vision & Roadmap (`roadmap-architect`), Backlog & Prioritization (`backlog-groom
 > [!TIP]
 > Medium+ tasks: use `amateur-proof-plans` for phasing, `skill-bundles.md` for worker skills.
 
+#### Tiered Prompting Strategy (Token Optimization)
+When delegating to CLI workers, MUST use one of these context tiers to prevent context bloat:
+- **MINI Tier (Logic/Reasoning):** Pass ONLY `Core Identity + Task`. Use for Opus/deep-thinking tasks where tool-usage rules are a distraction.
+- **STANDARD Tier (Execution):** Pass `LITE-Rules` + `Task`. Default for Sonnet coding tasks.
+- **FULL Tier (Orchestration/Review):** Pass full `Tools + Rules`. Use strictly for complex architecture or multi-agent orchestration.
+
 ### 3.2 Auto-Delegation Decision Table
 
 > [!IMPORTANT]

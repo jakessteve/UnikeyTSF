@@ -264,6 +264,8 @@ try {
         $runnerScript += " *>> '$outFileEscaped'"
         $runnerScript += "`nRemove-Item -LiteralPath '$argsXmlEscaped' -Force -ErrorAction SilentlyContinue"
         $runnerScript += "`nRemove-Item -LiteralPath '$promptFileEscaped' -Force -ErrorAction SilentlyContinue"
+        $runnerScript += "`nRemove-Item -LiteralPath '$($tmpOut -replace "'", "''")' -Force -ErrorAction SilentlyContinue"
+        $runnerScript += "`nRemove-Item -LiteralPath '$($tmpErr -replace "'", "''")' -Force -ErrorAction SilentlyContinue"
         $runnerScript += "`nRemove-Item -LiteralPath '$($runnerPs1 -replace "'", "''")' -Force -ErrorAction SilentlyContinue"
     }
 

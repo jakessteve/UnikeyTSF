@@ -78,8 +78,10 @@ Team-mode (party/swarm): Use `🎯 **@pm:**` emoji-prefixed format. Max 3 discus
 
 ## 6. Parallel Resource Limits
 
-- Max **4 parallel agent threads** (hard limit).
-- Max **5 agents per swarm wave** (hard cap).
+- Max **4 parallel agent threads** (hard limit per wave).
+- **Sequential Wave Batching:** If a task requires >4 agents (e.g., `/spawn-research` with 6 tracks), SPLIT into 2-3 batches.
+  - Run Batch 1 -> Summarize Results -> Flush Context.
+  - Run Batch 2 with only the summary from Batch 1 as context.
 - Queue additional work if capacity reached.
 
 ---

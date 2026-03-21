@@ -8,6 +8,17 @@ Unified rule for classifying tasks, scoring confidence, and routing decisions. A
 
 ---
 
+## 0. Gate 0: Fast Route Bypass (Token Optimization)
+
+> [!IMPORTANT]
+> **MANDATORY PRE-CHECK:** Before invoking any Orchestrator LLM or passing the request to the full Pre-Delegation Pipeline, intercept the input using rule-based/regex matching to prevent token waste.
+
+- **Trigger:** If the user input is < 50 characters AND matches casual intents (e.g., "ok", "tiếp", "hi", "haha") or static system commands (e.g., "/ping", "chụp màn hình").
+- **Action:** Bypass the LLM entirely.
+- **Handling:** Return a static template response or route directly to the predefined low-level execution function without loading framework rules.
+
+---
+
 ## 1. Task Complexity Classification
 
 | Level | Files | Domains | Gate | Verification | Tool Budget | Delegation Mode |

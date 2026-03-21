@@ -1,8 +1,9 @@
-const fs = require('fs');
+const fs = require('fs/promises');
 const path = require('path');
 
 // Simple script to minify `.agent` markdown files to reduce token bloat for CLI workers
 // Use when packaging or before large swarm workflows.
+// UPGRADED: Uses async/await and Promise.all for parallel I/O performance.
 
 const args = process.argv.slice(2);
 const shouldWrite = args.includes('--write');
@@ -26,35 +27,52 @@ function minifyMarkdown(content) {
     return line.trimEnd() + (hasHardBreak ? '  ' : '');
   }).join('\n');
   
-  // 4. (Optional) Remove markdown blockquotes that are purely fluff.
-  // We skip this to avoid breaking functional info blockquotes like > Note needed for context.
-  
   return minified.trim() + '\n';
 }
 
-function traverseAndMinify(dir) {
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    if (file === 'spawn_agent_tasks' || file === 'benchmarks' || file === '.hc' || file === '.git' || file === 'node_modules') continue;
+async function traverseAndMinify(dir) {
+  const files = await fs.readdir(dir);
+  const tasks = files.map(async (file) => {
+    if (['spawn_agent_tasks', 'benchmarks', '.hc', '.git', 'node_modules'].includes(file)) return;
     
     const fullPath = path.join(dir, file);
-    if (fs.statSync(fullPath).isDirectory()) {
-      traverseAndMinify(fullPath);
-    } else if (file.endsWith('.md')) {
-      const original = fs.readFileSync(fullPath, 'utf8');
-      const minified = minifyMarkdown(original);
-      if (original !== minified) {
-        if (shouldWrite) {
-          fs.writeFileSync(fullPath, minified, 'utf8');
-          console.log(`Minified: ${path.relative(AGENT_DIR, fullPath)}`);
-        } else {
-          console.log(`[DRY RUN] Would minify: ${path.relative(AGENT_DIR, fullPath)}`);
+    try {
+      const stats = await fs.stat(fullPath);
+      
+      if (stats.isDirectory()) {
+        await traverseAndMinify(fullPath);
+      } else if (file.endsWith('.md')) {
+        const original = await fs.readFile(fullPath, 'utf8');
+        const minified = minifyMarkdown(original);
+        
+        if (original !== minified) {
+          if (shouldWrite) {
+            await fs.writeFile(fullPath, minified, 'utf8');
+            console.log(`Minified: ${path.relative(AGENT_DIR, fullPath)}`);
+          } else {
+            console.log(`[DRY RUN] Would minify: ${path.relative(AGENT_DIR, fullPath)}`);
+          }
         }
       }
+    } catch (err) {
+      console.error(`Error processing ${fullPath}:`, err.message);
     }
-  }
+  });
+
+  await Promise.all(tasks);
 }
 
-console.log('Starting minification of /.agent framework...');
-traverseAndMinify(AGENT_DIR);
-console.log('Done.');
+async function main() {
+  console.time('Minification Time');
+  console.log('Starting parallel minification of /.agent framework...');
+  try {
+    await traverseAndMinify(AGENT_DIR);
+    console.log('Done.');
+  } catch (err) {
+    console.error('Fatal minification error:', err);
+    process.exit(1);
+  }
+  console.timeEnd('Minification Time');
+}
+
+main();

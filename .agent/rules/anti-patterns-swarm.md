@@ -50,7 +50,9 @@ A P2 task MUST NOT consume the last available parallel slot.
 - **Max 4 CLI workers per wave.** Batch smallest/related tasks into single prompts.
 - All workers use `.agent/AGENTS-LITE.md` as their context rulebook (not full `AGENTS.md`).
 - Mechanical workers: `-ApprovalMode Yolo -Timeout 60`.
-- If decomposition yields >6 tasks → HALT → re-batch → reduce to ≤4 workers.
+- If decomposition yields >4 tasks → Apply **Sequential Wave Batching** (Chaining). 
+  - Split into 2-3 batches (e.g., P0/Blockers first, P1 later). 
+  - Between batches, perform **Context Flushing**: Summarize results into a tiny artifact (`batch_results.md`) and delete the long batch logs from active memory before launching the next batch.
 
 ---
 

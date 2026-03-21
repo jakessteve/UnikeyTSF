@@ -19,7 +19,7 @@ Prevent runaway token consumption by tracking estimated context size and enforci
 
 ---
 
-## 2. Lazy-Load Accounting
+## 2. Lazy-Load Accounting (Framework Level)
 
 Every `view_file` on a `.agent/` file adds to the running context total. Track estimated load:
 
@@ -34,6 +34,14 @@ Context = .agent/indexes/AGENTS-LITE (1-2 KB)
 1. Check if a currently-loaded skill is no longer needed and can be mentally deprioritized.
 2. If at the warning threshold, log: `[CONTEXT] Warning: ~{X} KB loaded, approaching {MAX} KB budget.`
 3. If at the hard cap, STOP loading new .agent/ files and work with what you have.
+
+---
+
+## 2.1 Lazy Memory Injection (User Intent Matrix)
+
+For user context (chat history, RAG databases, memory files):
+- **Casual Intent:** If the user sends a casual message ("ok", "hi"), inject ONLY a micro-profile (<50 tokens) to maintain persona. Do NOT retrieve or inject full RAG memory.
+- **Deep Query Intent:** Only inject Full RAG / Memory Context when the user asks a deep question requiring personal or project data retrieval.
 
 ---
 
@@ -58,6 +66,13 @@ These are **hard limits**, not suggestions:
 - `browser_subagent`: Summarize in ≤5 bullet points per page.
 - `npm test`/`tsc`: Summarize error categories if >30 errors.
 - **Proactive Context Check:** After every 15 tool calls, or if >8 files read, proactively compress and discard unneeded context.
+
+---
+
+## 4.1 History Compression & Context Caching
+
+- **History Filtering:** Protect the "Middle" zone of chat history from token bloat and hallucination by truncating long bot responses and strictly stripping out all `[ACTION:...]` or `<ctrl94>thought...<ctrl95>` tags from past turns. Retain only the Observation/Result.
+- **Context Caching (Gemini):** Push all static `.agent/` rule files and System Prompts into Gemini Context Caching. The orchestrator must prioritize fetching from the cache rather than passing static tokens on every request.
 
 ---
 
