@@ -1,0 +1,79 @@
+name: CI Build & Test
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x64]
+        config: [Release]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: src/ui/frontend/package-lock.json
+
+      - name: Build Frontend
+        working-directory: src/ui/frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch }}
+
+      - name: Configure CMake
+        run: cmake -B build64 -G "Visual Studio 17 2022" -A ${{ matrix.arch }}
+
+      - name: Build C++ (${{ matrix.config }})
+        run: cmake --build build64 --config ${{ matrix.config }}
+
+      - name: Run Unit Tests
+        working-directory: build64
+        run: |
+          $testExe = Get-ChildItem -Recurse -Filter "UniKeyTSFTests.exe" | Select-Object -First 1
+          if ($testExe) {
+            & $testExe.FullName --gtest_output=xml:test-results.xml
+          } else {
+            Write-Warning "Test executable not found, skipping tests"
+          }
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.arch }}
+          path: build64/**/test-results.xml
+          if-no-files-found: ignore
+
+      - name: Package Release Artifact
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        run: |
+          New-Item -ItemType Directory -Force -Path release/frontend
+          Copy-Item build64/${{ matrix.config }}/UniKeyTSF.exe -Destination release/ -ErrorAction SilentlyContinue
+          Copy-Item build64/${{ matrix.config }}/uktsf_core64.dll -Destination release/ -ErrorAction SilentlyContinue
+          Copy-Item build64/${{ matrix.config }}/uktsf_core32.dll -Destination release/ -ErrorAction SilentlyContinue
+          Copy-Item build64/${{ matrix.config }}/WebView2Loader.dll -Destination release/ -ErrorAction SilentlyContinue
+          Copy-Item src/ui/frontend/dist/* -Destination release/frontend/ -Recurse -ErrorAction SilentlyContinue
+
+      - name: Upload Release Artifact
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v4
+        with:
+          name: UniKeyTSF-${{ matrix.arch }}-${{ matrix.config }}
+          path: release/
+          if-no-files-found: warn

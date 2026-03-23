@@ -81,3 +81,26 @@ If manual completion also fails:
 **Retry Policy:**
 - **Mechanical tasks (-Timeout 60):** Do not retry. Fix prompt instead.
 - **Integration/Architecture tasks:** Retry once with 2x timeout if partial progress was made, otherwise split task.
+
+---
+
+## 3. Rate-Limit Prevention (429 Avoidance)
+
+**Scope:** All multi-agent spawn workflows using Gemini CLI.
+
+### Concurrency Limits
+- **Max simultaneous Gemini CLI workers:** 2
+- **Orchestrator counts as 1 active session** — total API sessions = orchestrator + workers = 3 max
+
+### Wave Protocol
+When spawning >2 workers total:
+1. **Wave 1:** Spawn workers 1-2 with `-Async` flag
+2. **Wait:** All Wave 1 workers must complete before proceeding
+3. **Cool-down:** Wait **30 seconds** after wave completion
+4. **Wave 2:** Spawn workers 3-4 (if needed)
+5. Repeat until all tracks are complete
+
+### If 429 Still Occurs
+1. Reduce to **1 worker at a time** (sequential spawning)
+2. Increase inter-spawn delay to 60 seconds
+3. If persistent, switch to persona-based execution (no CLI workers)

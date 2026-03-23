@@ -1,0 +1,5 @@
+graph TD
+    A[UniKeyTSF Manager and Tray] -->|Writes Config| B[Shared Memory IPC Zero-Overhead]
+    B -->|Reads Config| C[uktsf_core64 dll 64-bit]
+    B -->|Reads Config| D[uktsf_core32 dll 32-bit]
+    A --> E[Config Layer blacklist and macros]

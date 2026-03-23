@@ -1,0 +1,7 @@
+; UniKey TSF Reborn — DLL Export Definitions
+LIBRARY "uktsf_core64"
+EXPORTS
+    DllGetClassObject   PRIVATE
+    DllCanUnloadNow     PRIVATE
+    DllRegisterServer   PRIVATE
+    DllUnregisterServer PRIVATE

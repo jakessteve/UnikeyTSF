@@ -38,15 +38,17 @@ description: Shared 6-phase structure for all /spawn-* swarm workflows. Individu
 
 | Track Count | Strategy |
 |---|---|
-| 2-3 tracks | Persona-switching is acceptable (sequential, fast) |
-| 4-5 tracks | CLI workers recommended (parallel, context-clean) |
-| 5+ tracks | CLI workers MANDATORY, batch related tracks |
+| 2 tracks   | CLI workers OK (parallel, 2 max simultaneous) |
+| 3 tracks   | CLI 2-worker waves: spawn 2, wait for completion, 30s cool-down, spawn 1 |
+| 4-5 tracks | CLI 2-worker waves with 30s inter-wave cool-down |
+| 5+ tracks  | CLI 2-worker waves, batch related tracks, 30s cool-down |
 
 2. **Compose prompts** using appropriate template in `.agent/spawn_agent_tasks/templates/`.
 3. **Spawn workers** (or persona-switch) per the chosen strategy.
-   - CLI: Use `spawn-agent` skill. **You MUST pass the `-Async` flag** via `spawn-agent.ps1` if spawning ≥ 3 workers concurrently to prevent CLI I/O lockups. Pass `-Args "--max-tokens 8192"` (or relevant max token flag) to avoid silent output truncation. Do not run them sequentially.
+   - CLI: Use `spawn-agent` skill. **You MUST pass the `-Async` flag** via `spawn-agent.ps1` if spawning 2 workers concurrently to prevent CLI I/O lockups. Pass `-Args "--max-tokens 8192"` (or relevant max token flag) to avoid silent output truncation.
    - Persona-switch: Assume persona → investigate → output strictly in JSON → switch back.
-4. **Max parallel workers:** 4 (per `execution-protocol.md` §6).
+4. **Max parallel workers:** 2 (per `execution-protocol.md` §6). Use wave batching for >2 tracks.
+5. **Inter-wave cool-down:** Wait **30 seconds** after all workers in a wave complete before starting the next wave.
 
 **Safety checks (from `anti-patterns-swarm.md`):**
 - [ ] Each worker has a clearly scoped investigation question

@@ -1,0 +1,8 @@
+-xc++
+-std=c++17
+-Isrc
+-DWIN32
+-D_WINDOWS
+-DUNICODE
+-D_UNICODE
+--target=x86_64-pc-windows-msvc

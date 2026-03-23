@@ -286,7 +286,7 @@ try {
     $success = $false
 
     if ($Async) {
-        Start-Sleep -Milliseconds (Get-Random -Minimum 2000 -Maximum 10000)
+        Start-Sleep -Milliseconds (Get-Random -Minimum 10000 -Maximum 20000)
         Start-Process -FilePath $psExe -ArgumentList $procArgs -WindowStyle Hidden
         
         Write-Host ""
@@ -302,7 +302,7 @@ try {
             Write-Host "`n[WARN] Retry attempt $attempt/$maxAttempts triggered for $Agent..." -ForegroundColor Yellow
         }
 
-        Start-Sleep -Milliseconds (Get-Random -Minimum 2000 -Maximum 5000)
+        Start-Sleep -Milliseconds (Get-Random -Minimum 5000 -Maximum 15000)
         
         if (Test-Path $tmpOut) { Remove-Item $tmpOut -Force -ErrorAction SilentlyContinue }
         if (Test-Path $tmpErr) { Remove-Item $tmpErr -Force -ErrorAction SilentlyContinue }
@@ -344,7 +344,7 @@ try {
             Write-Host "`n[ERROR] Gemini API Capacity Exhausted detected! (Code 429)" -ForegroundColor Red
             $ExitCode = 1
             if ($attempt -lt $maxAttempts) {
-                $sleepSeconds = 15 * [math]::Pow(2, $attempt - 1)
+                $sleepSeconds = 30 * [math]::Pow(2, $attempt - 1)
                 Write-Host "Sleeping $sleepSeconds seconds before retry (Exponential Backoff)..." -ForegroundColor Yellow
                 Start-Sleep -Seconds $sleepSeconds
                 $attempt++

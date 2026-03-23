@@ -20,6 +20,8 @@ target/
 .next/
 .nuxt/
 .output/
+build_log.txt
+build_project.bat
 
 # Logs & Databases
 *.log
@@ -61,10 +63,15 @@ coverage/
 .yarn
 
 # Agent runtime artifacts (not framework)
-.agent/spawn_agent_tasks/output-*.log
-.agent/spawn_agent_tasks/temp_runner_*.ps1
-.agent/spawn_agent_tasks/huge_prompt.txt
+.agent/spawn_agent_tasks/
+.agent/scripts/tests/
 
 # HC runtime artifacts
 .hc/debug/
 .hc/perf-audit/
+.hc/pseudocode/
+.hc/research/
+.hc/ui-audit/
+
+# Frontend build deps
+src/ui/frontend/node_modules/
