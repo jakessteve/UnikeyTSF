@@ -282,7 +282,7 @@ HRESULT CUniKeyTextService::OnKeyDown(
     if (ToUnicodeEx((UINT)wParam, (UINT)(lParam >> 16) & 0xFF, keyboardState, &ch, 1, 4, GetKeyboardLayout(0)) > 0) {
         
         // Surrounding Text Assessment (Reconversion)
-        if (!_engine.IsInWord() && _engine.IsWordChar(ch, (InputMethod)_config.inputMethod)) {
+        if (!_engine.IsInWord() && (_engine.IsWordChar(ch, (InputMethod)_config.inputMethod) || _engine.IsPotentialModifier(ch, (InputMethod)_config.inputMethod))) {
             ComPtr<CEditSession> pReadSession;
             pReadSession.Attach(new CEditSession([this, pContext](TfEditCookie ec) -> HRESULT {
                 TF_SELECTION tfSelection;

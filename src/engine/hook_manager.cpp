@@ -17,6 +17,7 @@ static MacroEngine  g_macroEngine;
 static bool         g_bInjecting   = false;
 static int          g_rawCharCount = 0;
 static std::wstring g_lastComposition = L"";
+static std::wstring g_lastCommittedWord = L"";  // Reconversion cache: last word before space
 static bool         g_bBlacklisted = false;
 static HWND         g_hLastForeground = nullptr;
 static bool         g_suppressedKeys[256] = { false };
@@ -191,6 +192,7 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
             g_engine.Clear();
             g_rawCharCount = 0;
             g_lastComposition.clear();
+            g_lastCommittedWord.clear();  // Window changed, invalidate reconversion cache
             
             // Query blacklist only when window changes
             g_bBlacklisted = false; // Default to false if we can't determine
@@ -219,6 +221,7 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
         g_engine.Clear();
         g_rawCharCount = 0;
         g_lastComposition.clear();
+        g_lastCommittedWord.clear();  // Ctrl/Alt combo, invalidate reconversion cache
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
 
@@ -238,6 +241,10 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
         g_engine.Clear();
         g_rawCharCount = 0;
         g_lastComposition.clear();
+        // Don't clear g_lastCommittedWord on Left/Right — user may be moving back to edit
+        if (vk != VK_LEFT && vk != VK_RIGHT) {
+            g_lastCommittedWord.clear();
+        }
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
 
@@ -246,6 +253,18 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
 
     int oldRawCount = g_rawCharCount;
+
+    // Reconversion: if engine is empty and key is a potential modifier, re-feed the last committed word
+    if (!g_engine.IsInWord() && !g_lastCommittedWord.empty() &&
+        g_engine.IsPotentialModifier(ch, (InputMethod)g_pConfig->inputMethod)) {
+        std::wstring wordToRestore = g_lastCommittedWord;
+        g_engine.Clear();
+        for (wchar_t c : wordToRestore) {
+            g_engine.ProcessKey(c, (InputMethod)g_pConfig->inputMethod);
+        }
+        g_rawCharCount = (int)g_engine.GetCompositionString().length();
+        g_lastComposition = g_engine.GetCompositionString();
+    }
 
     if (g_engine.ProcessKey(ch, (InputMethod)g_pConfig->inputMethod)) {
         std::wstring newComposition = g_engine.GetCompositionString();
@@ -270,9 +289,14 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
                     g_rawCharCount = 0;
                     g_engine.Clear();
                     g_lastComposition.clear();
+                    g_lastCommittedWord.clear();
                     return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
                 }
             }
+        }
+        // Save the committed word for reconversion before clearing
+        if (!g_lastComposition.empty()) {
+            g_lastCommittedWord = g_engine.GetRawString();
         }
         g_rawCharCount = 0;
         g_lastComposition.clear();
@@ -287,6 +311,7 @@ static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lPara
             g_engine.Clear();
             g_rawCharCount = 0;
             g_lastComposition.clear();
+            g_lastCommittedWord.clear();  // Mouse click, invalidate reconversion cache
         }
     }
     return CallNextHookEx(g_hMouseHook, nCode, wParam, lParam);
@@ -338,4 +363,5 @@ void ResetEngine()
     g_engine.Clear();
     g_rawCharCount = 0;
     g_lastComposition.clear();
+    g_lastCommittedWord.clear();
 }

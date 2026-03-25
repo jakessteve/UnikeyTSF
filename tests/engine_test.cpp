@@ -506,3 +506,48 @@ TEST_F(VniTest, SpellCheck_On_Uppercase_VNI) {
     // Also test raw 'Đ' if pasted or native keyboard
     EXPECT_EQ(TypeWord(engine, L"Đuc71", IM_VNI), L"Đ\x1ee9" L"c"); // Đức
 }
+
+// =============================================================================
+// IsPotentialModifier Tests
+// =============================================================================
+TEST(PotentialModifierTest, VNI_Digits) {
+    VnEngine engine;
+    for (wchar_t d = L'0'; d <= L'9'; d++) {
+        EXPECT_TRUE(engine.IsPotentialModifier(d, IM_VNI))
+            << "VNI digit " << (char)d << " should be a potential modifier";
+    }
+}
+
+TEST(PotentialModifierTest, Telex_ToneKeys) {
+    VnEngine engine;
+    EXPECT_TRUE(engine.IsPotentialModifier(L's', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'f', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'r', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'x', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'j', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'z', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'w', IM_TELEX));
+}
+
+TEST(PotentialModifierTest, VIQR_Marks) {
+    VnEngine engine;
+    EXPECT_TRUE(engine.IsPotentialModifier(L'\'', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'`', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'?', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'~', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'.', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'^', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'(', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'+', IM_VIQR));
+}
+
+TEST(PotentialModifierTest, Alpha_ReturnsFalse) {
+    VnEngine engine;
+    // Regular alpha chars should NOT be potential modifiers in VNI
+    EXPECT_FALSE(engine.IsPotentialModifier(L'a', IM_VNI));
+    EXPECT_FALSE(engine.IsPotentialModifier(L'b', IM_VNI));
+    // Regular alpha non-modifier chars should NOT be potential modifiers in Telex
+    EXPECT_FALSE(engine.IsPotentialModifier(L'a', IM_TELEX));
+    EXPECT_FALSE(engine.IsPotentialModifier(L'b', IM_TELEX));
+    EXPECT_FALSE(engine.IsPotentialModifier(L'n', IM_TELEX));
+}

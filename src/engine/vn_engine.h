@@ -35,6 +35,10 @@ public:
     // Check if a character is valid for continuing a word in the given method
     bool IsWordChar(wchar_t ch, InputMethod method) const;
 
+    // Check if a character could be a Vietnamese modifier/tone key regardless of engine state.
+    // Used to trigger reconversion when the engine is empty but a modifier key is pressed.
+    bool IsPotentialModifier(wchar_t ch, InputMethod method) const;
+
     // Remove the last typed character and its mark.
     void RemoveLastChar();
 

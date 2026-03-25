@@ -32,6 +32,27 @@ bool VnEngine::IsWordChar(wchar_t ch, InputMethod method) const {
     return false;
 }
 
+bool VnEngine::IsPotentialModifier(wchar_t ch, InputMethod method) const {
+    if (method == IM_VNI) {
+        // VNI: digits 0-9 are tone/modifier keys
+        return (ch >= L'0' && ch <= L'9');
+    }
+    if (method == IM_TELEX) {
+        wchar_t lower = std::towlower(ch);
+        // Telex tone keys: s(sắc), f(huyền), r(hỏi), x(ngã), j(nặng), z(remove)
+        // Telex modifier key: w(horn/breve)
+        return (lower == L's' || lower == L'f' || lower == L'r' ||
+                lower == L'x' || lower == L'j' || lower == L'z' || lower == L'w');
+    }
+    if (method == IM_VIQR) {
+        // VIQR tone marks: ' ` ? ~ .
+        // VIQR modifiers: ^ ( +
+        return (ch == L'\'' || ch == L'`' || ch == L'?' || ch == L'~' ||
+                ch == L'.' || ch == L'^' || ch == L'(' || ch == L'+');
+    }
+    return false;
+}
+
 bool VnEngine::ProcessKey(wchar_t ch, InputMethod method) {
     // Whitespace always terminates the word
     if (ch == L' ' || ch == L'\t' || ch == L'\r' || ch == L'\n') {
