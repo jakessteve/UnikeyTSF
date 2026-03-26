@@ -124,6 +124,10 @@ bool InitSharedMemory()
                 g_pConfig->macroEnabled    = 0;
                 g_pConfig->freeToneMarking = 1;
                 g_pConfig->toggleKey       = TK_CTRL_SHIFT;
+                g_pConfig->restoreKeyEnabled = 1;
+                g_pConfig->useClipboardForUnicode = 0;
+                g_pConfig->showDialogOnStartup = 1;
+                g_pConfig->perAppInputState = 0;
                 g_pConfig->macroFilePath[0] = L'\0';
             }
         }

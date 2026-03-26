@@ -21,4 +21,7 @@ namespace Toolkit {
     // and pastes it back (Ctrl+V), replacing the selection.
     bool ConvertSelectedTextCharset(uint8_t srcCharset, uint8_t destCharset);
 
+    // Overwrites the clipboard with newText. Used for "use clipboard for Unicode" feature.
+    bool ModifyClipboardText(const std::wstring& newText);
+
 } // namespace Toolkit

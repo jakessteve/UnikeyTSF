@@ -1,6 +1,7 @@
 #include "hook_manager.h"
 #include <vector>
 #include <string>
+#include <map>
 #include "vn_engine.h"
 #include "macro.h"
 #include "../config/blacklist.h"
@@ -10,6 +11,7 @@
 #include "../resource.h"
 
 // --- Globals (Internal) ---
+static std::map<DWORD, bool> g_appInputStates;  // Per-app Vietnamese input on/off state
 static HHOOK        g_hKeyboardHook = nullptr;
 static HHOOK        g_hMouseHook    = nullptr;
 static VnEngine     g_engine;
@@ -50,42 +52,78 @@ static void ReplaceText(const std::wstring& oldText, const std::wstring& newText
 
     if (charsToReplace == 0 && toType.empty()) return;
 
-    size_t backspaceEvents = charsToReplace * 2;
-    size_t unicodeEvents = toType.size() * 2;
-    size_t totalEvents = backspaceEvents + unicodeEvents;
+    if (g_pConfig && g_pConfig->useClipboardForUnicode) {
+        size_t backspaceEvents = charsToReplace * 2;
+        std::vector<INPUT> inputs(backspaceEvents);
+        size_t idx = 0;
+        for (size_t i = 0; i < charsToReplace; i++) {
+            inputs[idx] = {};
+            inputs[idx].type = INPUT_KEYBOARD;
+            inputs[idx].ki.wVk = VK_BACK;
+            idx++;
+            inputs[idx] = {};
+            inputs[idx].type = INPUT_KEYBOARD;
+            inputs[idx].ki.wVk = VK_BACK;
+            inputs[idx].ki.dwFlags = KEYEVENTF_KEYUP;
+            idx++;
+        }
+        if (backspaceEvents > 0) {
+            g_bInjecting = true;
+            SendInput((UINT)inputs.size(), inputs.data(), sizeof(INPUT));
+            g_bInjecting = false;
+        }
 
-    std::vector<INPUT> inputs(totalEvents);
-    size_t idx = 0;
+        if (!toType.empty()) {
+            Toolkit::ModifyClipboardText(toType);
+            
+            INPUT vInputs[4] = {};
+            vInputs[0].type = INPUT_KEYBOARD; vInputs[0].ki.wVk = VK_CONTROL;
+            vInputs[1].type = INPUT_KEYBOARD; vInputs[1].ki.wVk = 'V';
+            vInputs[2].type = INPUT_KEYBOARD; vInputs[2].ki.wVk = 'V'; vInputs[2].ki.dwFlags = KEYEVENTF_KEYUP;
+            vInputs[3].type = INPUT_KEYBOARD; vInputs[3].ki.wVk = VK_CONTROL; vInputs[3].ki.dwFlags = KEYEVENTF_KEYUP;
+            
+            g_bInjecting = true;
+            SendInput(4, vInputs, sizeof(INPUT));
+            g_bInjecting = false;
+        }
+    } else {
+        size_t backspaceEvents = charsToReplace * 2;
+        size_t unicodeEvents = toType.size() * 2;
+        size_t totalEvents = backspaceEvents + unicodeEvents;
 
-    for (size_t i = 0; i < charsToReplace; i++) {
-        inputs[idx] = {};
-        inputs[idx].type = INPUT_KEYBOARD;
-        inputs[idx].ki.wVk = VK_BACK;
-        inputs[idx].ki.dwFlags = 0;
-        idx++;
-        inputs[idx] = {};
-        inputs[idx].type = INPUT_KEYBOARD;
-        inputs[idx].ki.wVk = VK_BACK;
-        inputs[idx].ki.dwFlags = KEYEVENTF_KEYUP;
-        idx++;
+        std::vector<INPUT> inputs(totalEvents);
+        size_t idx = 0;
+
+        for (size_t i = 0; i < charsToReplace; i++) {
+            inputs[idx] = {};
+            inputs[idx].type = INPUT_KEYBOARD;
+            inputs[idx].ki.wVk = VK_BACK;
+            inputs[idx].ki.dwFlags = 0;
+            idx++;
+            inputs[idx] = {};
+            inputs[idx].type = INPUT_KEYBOARD;
+            inputs[idx].ki.wVk = VK_BACK;
+            inputs[idx].ki.dwFlags = KEYEVENTF_KEYUP;
+            idx++;
+        }
+
+        for (size_t i = 0; i < toType.size(); i++) {
+            inputs[idx] = {};
+            inputs[idx].type = INPUT_KEYBOARD;
+            inputs[idx].ki.wScan = toType[i];
+            inputs[idx].ki.dwFlags = KEYEVENTF_UNICODE;
+            idx++;
+            inputs[idx] = {};
+            inputs[idx].type = INPUT_KEYBOARD;
+            inputs[idx].ki.wScan = toType[i];
+            inputs[idx].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+            idx++;
+        }
+
+        g_bInjecting = true;
+        SendInput((UINT)inputs.size(), inputs.data(), sizeof(INPUT));
+        g_bInjecting = false;
     }
-
-    for (size_t i = 0; i < toType.size(); i++) {
-        inputs[idx] = {};
-        inputs[idx].type = INPUT_KEYBOARD;
-        inputs[idx].ki.wScan = toType[i];
-        inputs[idx].ki.dwFlags = KEYEVENTF_UNICODE;
-        idx++;
-        inputs[idx] = {};
-        inputs[idx].type = INPUT_KEYBOARD;
-        inputs[idx].ki.wScan = toType[i];
-        inputs[idx].ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
-        idx++;
-    }
-
-    g_bInjecting = true;
-    SendInput((UINT)inputs.size(), inputs.data(), sizeof(INPUT));
-    g_bInjecting = false;
 }
 
 static wchar_t VkToChar(UINT vk)
@@ -188,6 +226,12 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
     {
         HWND hFgNow = GetForegroundWindow();
         if (hFgNow != g_hLastForeground) {
+            if (g_pConfig && g_pConfig->perAppInputState && g_hLastForeground) {
+                DWORD oldPid = 0;
+                GetWindowThreadProcessId(g_hLastForeground, &oldPid);
+                if (oldPid) g_appInputStates[oldPid] = (g_pConfig->inputEnabled == 1);
+            }
+
             g_hLastForeground = hFgNow;
             g_engine.Clear();
             g_rawCharCount = 0;
@@ -200,6 +244,17 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
                 DWORD pid = 0;
                 GetWindowThreadProcessId(hFgNow, &pid);
                 if (pid) {
+                    if (g_pConfig && g_pConfig->perAppInputState) {
+                        auto it = g_appInputStates.find(pid);
+                        if (it != g_appInputStates.end()) {
+                            if (g_pConfig->inputEnabled != (it->second ? 1 : 0)) {
+                                g_pConfig->inputEnabled = it->second ? 1 : 0;
+                                // Need to update tray icon to reflect new input mode
+                                if (g_hMainWnd) PostMessage(g_hMainWnd, WM_TIMER, 5001, 0); // 5001 is theoretically IDT_TRAY_WATCHDOG
+                            }
+                        }
+                    }
+
                     HANDLE hProc = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
                     if (hProc) {
                         wchar_t exePath[MAX_PATH] = {};
@@ -256,6 +311,7 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
 
     // Reconversion: if engine is empty and key is a potential modifier, re-feed the last committed word
     if (!g_engine.IsInWord() && !g_lastCommittedWord.empty() &&
+        (!g_pConfig || g_pConfig->restoreKeyEnabled) &&
         g_engine.IsPotentialModifier(ch, (InputMethod)g_pConfig->inputMethod)) {
         std::wstring wordToRestore = g_lastCommittedWord;
         g_engine.Clear();

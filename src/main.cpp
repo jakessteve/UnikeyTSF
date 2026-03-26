@@ -196,7 +196,9 @@ int WINAPI wWinMain(
     SettingsWebView::PreInitEnvironment();  // Pre-cache WebView2 env for fast settings open
     InstallHooks(hInstance, g_hWnd);
 
-    PostMessage(g_hWnd, WM_COMMAND, IDM_SETTINGS, 0);
+    if (g_pConfig && g_pConfig->showDialogOnStartup) {
+        PostMessage(g_hWnd, WM_COMMAND, IDM_SETTINGS, 0);
+    }
 
     MSG msg;
     while (GetMessageW(&msg, nullptr, 0, 0)) {

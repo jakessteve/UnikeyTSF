@@ -49,10 +49,14 @@ struct UniKeyConfig {
     uint8_t  macroEnabled;     // 1 = enabled
     uint8_t  freeToneMarking;  // 1 = enabled
     uint8_t  toggleKey;        // ToggleKey enum (0=Ctrl+Shift, 1=Alt+Z)
+    uint8_t  restoreKeyEnabled;      // 1 = enabled
+    uint8_t  useClipboardForUnicode; // 1 = enabled
+    uint8_t  showDialogOnStartup;    // 1 = enabled
+    uint8_t  perAppInputState;       // 1 = enabled
     wchar_t  macroFilePath[260]; // Path to .ukm file
 };
 #pragma pack(pop)
 
-static_assert(sizeof(UniKeyConfig) == 12 + 520, "UniKeyConfig must be exactly 532 bytes");
+static_assert(sizeof(UniKeyConfig) == 16 + 520, "UniKeyConfig must be exactly 536 bytes");
 
-constexpr uint32_t UNIKEY_CONFIG_VERSION = 2;
+constexpr uint32_t UNIKEY_CONFIG_VERSION = 3;

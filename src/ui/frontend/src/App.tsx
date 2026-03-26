@@ -6,7 +6,7 @@ import { AboutTab } from './components/tabs/AboutTab';
 import { UniKeyConfig, InputMethod, Charset, ToneType, ToggleKey } from './types/unikey';
 
 const DEFAULT_CONFIG: UniKeyConfig = {
-  version: 2,
+  version: 3,
   inputEnabled: true,
   inputMethod: InputMethod.TELEX,
   charset: Charset.UNICODE,
@@ -15,6 +15,10 @@ const DEFAULT_CONFIG: UniKeyConfig = {
   macroEnabled: false,
   freeToneMarking: true,
   toggleKey: ToggleKey.CTRL_SHIFT,
+  restoreKeyEnabled: true,
+  useClipboardForUnicode: false,
+  showDialogOnStartup: true,
+  perAppInputState: false,
   macroFilePath: '',
 };
 
@@ -114,7 +118,12 @@ const App: React.FC = () => {
         />
       )}
       {activeTab === 'advanced' && (
-        <AdvancedTab blacklist={blacklist} onBlacklistChange={handleBlacklistChange} />
+        <AdvancedTab 
+          config={config}
+          onChange={handleConfigChange}
+          blacklist={blacklist} 
+          onBlacklistChange={handleBlacklistChange} 
+        />
       )}
       {activeTab === 'about' && (
         <AboutTab />

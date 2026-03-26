@@ -258,7 +258,7 @@ static std::wstring VniToUnicode(const std::wstring& text) {
     return result;
 }
 
-static bool ModifyClipboardText(const std::wstring& newText) {
+bool ModifyClipboardText(const std::wstring& newText) {
     if (!OpenClipboard(nullptr)) return false;
     EmptyClipboard();
 

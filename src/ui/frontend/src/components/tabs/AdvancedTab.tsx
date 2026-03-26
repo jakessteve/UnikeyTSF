@@ -9,6 +9,7 @@ import {
   tokens,
   Text,
   Tooltip,
+  Switch,
 } from '@fluentui/react-components';
 import {
   ShieldCheckmarkRegular,
@@ -16,7 +17,9 @@ import {
   DeleteRegular,
   AppGenericRegular,
   SearchRegular,
+  SettingsRegular,
 } from '@fluentui/react-icons';
+import type { UniKeyConfig } from '../../types/unikey';
 
 const useStyles = makeStyles({
   container: {
@@ -102,11 +105,15 @@ const useStyles = makeStyles({
 });
 
 interface AdvancedTabProps {
+  config: UniKeyConfig;
+  onChange: (updates: Partial<UniKeyConfig>) => void;
   blacklist: string[];
   onBlacklistChange: (list: string[]) => void;
 }
 
 export const AdvancedTab: React.FC<AdvancedTabProps> = ({
+  config,
+  onChange,
   blacklist,
   onBlacklistChange,
 }) => {
@@ -138,6 +145,35 @@ export const AdvancedTab: React.FC<AdvancedTabProps> = ({
 
   return (
     <div className={styles.container}>
+      <Card className={styles.card}>
+        <CardHeader
+          image={<SettingsRegular className={styles.sectionIcon} fontSize={20} />}
+          header={<Text weight="semibold">Tùy chọn khác</Text>}
+        />
+        <div className={styles.cardBody} style={{ gap: '4px', paddingBottom: '20px' }}>
+          <Switch 
+            checked={config.restoreKeyEnabled} 
+            onChange={(_, data) => onChange({ restoreKeyEnabled: data.checked })}
+            label="Cho phép khôi phục phím với từ sai" 
+          />
+          <Switch 
+            checked={config.useClipboardForUnicode} 
+            onChange={(_, data) => onChange({ useClipboardForUnicode: data.checked })}
+            label="Luôn sử dụng clipboard cho unicode" 
+          />
+          <Switch 
+            checked={config.showDialogOnStartup} 
+            onChange={(_, data) => onChange({ showDialogOnStartup: data.checked })}
+            label="Bật hộp thoại này khi khởi động" 
+          />
+          <Switch 
+            checked={config.perAppInputState} 
+            onChange={(_, data) => onChange({ perAppInputState: data.checked })}
+            label="Ghi nhớ trạng thái E/V theo từng ứng dụng" 
+          />
+        </div>
+      </Card>
+
       <Card className={styles.card}>
         <CardHeader
           image={

@@ -30,6 +30,10 @@ export interface UniKeyConfig {
   macroEnabled: boolean;
   freeToneMarking: boolean;
   toggleKey: ToggleKey;
+  restoreKeyEnabled: boolean;
+  useClipboardForUnicode: boolean;
+  showDialogOnStartup: boolean;
+  perAppInputState: boolean;
   macroFilePath: string;
 }
 

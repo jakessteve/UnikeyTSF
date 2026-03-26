@@ -148,8 +148,11 @@ static void SetAutoStart(bool enable) {
     if (enable) {
         wchar_t exePath[MAX_PATH];
         GetModuleFileNameW(nullptr, exePath, MAX_PATH);
+        std::wstring quotedPath = L"\"";
+        quotedPath += exePath;
+        quotedPath += L"\"";
         RegSetValueExW(hKey, AUTOSTART_VALUE_NAME, 0, REG_SZ,
-            (const BYTE*)exePath, (DWORD)((wcslen(exePath) + 1) * sizeof(wchar_t)));
+            (const BYTE*)quotedPath.c_str(), (DWORD)((quotedPath.length() + 1) * sizeof(wchar_t)));
     } else {
         RegDeleteValueW(hKey, AUTOSTART_VALUE_NAME);
     }
@@ -237,6 +240,10 @@ HRESULT SettingsWebView::OnWebMessageReceived(
                 g_pConfig->macroEnabled   = jsonExtractBool(message, L"macroEnabled") ? 1 : 0;
                 g_pConfig->freeToneMarking= jsonExtractBool(message, L"freeToneMarking") ? 1 : 0;
                 g_pConfig->toggleKey      = (uint8_t)jsonExtractInt(message, L"toggleKey");
+                g_pConfig->restoreKeyEnabled = jsonExtractBool(message, L"restoreKeyEnabled") ? 1 : 0;
+                g_pConfig->useClipboardForUnicode = jsonExtractBool(message, L"useClipboardForUnicode") ? 1 : 0;
+                g_pConfig->showDialogOnStartup = jsonExtractBool(message, L"showDialogOnStartup") ? 1 : 0;
+                g_pConfig->perAppInputState = jsonExtractBool(message, L"perAppInputState") ? 1 : 0;
 
                 std::wstring macroPath = jsonExtractString(message, L"macroFilePath");
                 wcsncpy_s(g_pConfig->macroFilePath, macroPath.c_str(), 259);
@@ -318,6 +325,10 @@ std::wstring SettingsWebView::SerializeConfigToJson(const UniKeyConfig& config) 
        << L"\"macroEnabled\":" << (config.macroEnabled ? L"true" : L"false") << L","
        << L"\"freeToneMarking\":" << (config.freeToneMarking ? L"true" : L"false") << L","
        << L"\"toggleKey\":" << (int)config.toggleKey << L","
+       << L"\"restoreKeyEnabled\":" << (config.restoreKeyEnabled ? L"true" : L"false") << L","
+       << L"\"useClipboardForUnicode\":" << (config.useClipboardForUnicode ? L"true" : L"false") << L","
+       << L"\"showDialogOnStartup\":" << (config.showDialogOnStartup ? L"true" : L"false") << L","
+       << L"\"perAppInputState\":" << (config.perAppInputState ? L"true" : L"false") << L","
        << L"\"macroFilePath\":\"";
 
     // Basic escaping for the path (only backslashes for now)
