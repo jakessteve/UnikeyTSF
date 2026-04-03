@@ -24,10 +24,14 @@ add_executable(UniKeyTSF WIN32
     src/main.cpp
     src/ui/tray_icon.cpp
     src/ui/settings_dialog.cpp
+    src/ui/settings_message_contract.cpp
     src/ui/settings_webview.cpp
     src/config/ipc_manager.cpp
     src/config/blacklist.cpp
     src/engine/hook_manager.cpp
+    src/engine/key_translate.cpp
+    src/engine/input_routing.cpp
+    src/engine/typing_settings.cpp
     src/engine/tsf_registration.cpp
     src/engine/vn_engine.cpp
     src/engine/vn_ortho.cpp
@@ -66,6 +70,9 @@ add_library(uktsf_core64 SHARED
     src/tsf/text_service.cpp
     src/tsf/composition.cpp
     src/tsf/key_event_sink.cpp
+    src/engine/reconversion_word.cpp
+    src/engine/input_routing.cpp
+    src/engine/typing_settings.cpp
     src/engine/vn_engine.cpp
     src/engine/vn_ortho.cpp
     src/engine/macro.cpp
@@ -94,6 +101,9 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 4)
         src/tsf/text_service.cpp
         src/tsf/composition.cpp
         src/tsf/key_event_sink.cpp
+        src/engine/reconversion_word.cpp
+        src/engine/input_routing.cpp
+        src/engine/typing_settings.cpp
         src/engine/vn_engine.cpp
         src/engine/vn_ortho.cpp
         src/engine/macro.cpp
@@ -142,13 +152,15 @@ enable_testing()
 add_executable(UniKeyTests
     tests/engine_test.cpp
     tests/spellcheck_test.cpp
+    src/engine/key_translate.cpp
+    src/engine/reconversion_word.cpp
     src/engine/vn_engine.cpp
     src/engine/vn_ortho.cpp
     src/engine/macro.cpp
 )
 
 target_include_directories(UniKeyTests PRIVATE src)
-target_link_libraries(UniKeyTests PRIVATE GTest::gtest_main)
+target_link_libraries(UniKeyTests PRIVATE GTest::gtest_main user32)
 
 if(MSVC)
     target_compile_options(UniKeyTests PRIVATE /W4 /WX- /utf-8)
@@ -190,6 +202,7 @@ gtest_discover_tests(ClipboardTests)
 add_executable(SettingsUITests
     tests/e2e/settings_ui_test.cpp
     src/ui/settings_dialog.cpp
+    src/ui/settings_message_contract.cpp
     src/ui/settings_webview.cpp
     src/config/ipc_manager.cpp
     src/config/blacklist.cpp
@@ -222,3 +235,74 @@ if(MSVC)
 endif()
 
 gtest_discover_tests(SettingsUITests)
+
+# Settings WebView/native contract tests
+add_executable(SettingsMessageContractTests
+    tests/settings_message_contract_test.cpp
+    src/ui/settings_message_contract.cpp
+)
+
+target_include_directories(SettingsMessageContractTests PRIVATE src)
+target_link_libraries(SettingsMessageContractTests PRIVATE GTest::gtest_main)
+
+if(MSVC)
+    target_compile_options(SettingsMessageContractTests PRIVATE /W4 /WX- /utf-8)
+endif()
+
+gtest_discover_tests(SettingsMessageContractTests)
+
+# Characterization-first frozen behavior contract tests
+add_executable(CharacterizationTests
+    tests/characterization_test.cpp
+    tests/characterization_harness.cpp
+    src/engine/typing_settings.cpp
+    src/engine/reconversion_word.cpp
+    src/engine/vn_engine.cpp
+    src/engine/vn_ortho.cpp
+    src/engine/macro.cpp
+)
+
+target_include_directories(CharacterizationTests PRIVATE src tests)
+target_link_libraries(CharacterizationTests PRIVATE GTest::gtest_main)
+
+if(MSVC)
+    target_compile_options(CharacterizationTests PRIVATE /W4 /WX- /utf-8)
+endif()
+
+gtest_discover_tests(CharacterizationTests)
+
+# Routing ownership seam arbitration tests
+add_executable(RoutingTests
+    tests/routing_test.cpp
+    src/engine/input_routing.cpp
+)
+
+target_include_directories(RoutingTests PRIVATE src)
+target_link_libraries(RoutingTests PRIVATE GTest::gtest_main)
+
+if(MSVC)
+    target_compile_options(RoutingTests PRIVATE /W4 /WX- /utf-8)
+endif()
+
+gtest_discover_tests(RoutingTests)
+
+# TSF activation/onboarding diagnostics contract tests
+add_executable(TsfDiagnosticsTests
+    tests/tsf_diagnostics_test.cpp
+    src/engine/tsf_registration.cpp
+)
+
+target_include_directories(TsfDiagnosticsTests PRIVATE src)
+target_link_libraries(TsfDiagnosticsTests PRIVATE
+    GTest::gtest_main
+    advapi32
+    ole32
+    oleaut32
+    uuid
+)
+
+if(MSVC)
+    target_compile_options(TsfDiagnosticsTests PRIVATE /W4 /WX- /utf-8)
+endif()
+
+gtest_discover_tests(TsfDiagnosticsTests)

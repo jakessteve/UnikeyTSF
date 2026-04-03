@@ -16,6 +16,7 @@
 #endif
 
 #include <windows.h>
+#include <string>
 #include "resource.h"
 #include "config/ipc_manager.h"
 #include "config/blacklist.h"
@@ -23,6 +24,8 @@
 #include "ui/settings_dialog.h"
 #include "ui/settings_webview.h"
 #include "engine/hook_manager.h"
+#include "engine/input_routing.h"
+#include "engine/per_app_input_state.h"
 #include "engine/tsf_registration.h"
 
 // --- Globals ---
@@ -32,15 +35,131 @@ static HWND      g_hWnd      = nullptr;
 // --- Mutex for single instance ---
 static HANDLE       g_hMutex       = nullptr;
 static const wchar_t* MUTEX_NAME   = L"Local\\UniKeyTSF_SingleInstance";
+static bool         g_routingInitialized = false;
+
+namespace {
+
+bool EqualsCommandLineToken(const wchar_t* start, size_t length, const wchar_t* expected)
+{
+    return wcslen(expected) == length && _wcsnicmp(start, expected, length) == 0;
+}
+
+bool TryReadNextCommandLineToken(const wchar_t** cursor, const wchar_t** tokenStart, size_t* tokenLength)
+{
+    if (!cursor || !*cursor || !tokenStart || !tokenLength) {
+        return false;
+    }
+
+    const wchar_t* current = *cursor;
+    while (*current == L' ' || *current == L'\t') {
+        ++current;
+    }
+    if (*current == L'\0') {
+        *cursor = current;
+        return false;
+    }
+
+    *tokenStart = current;
+    while (*current != L'\0' && *current != L' ' && *current != L'\t') {
+        ++current;
+    }
+
+    *tokenLength = static_cast<size_t>(current - *tokenStart);
+    *cursor = current;
+    return true;
+}
+
+InputRoutingMode ResolveStartupRoutingMode(LPWSTR lpCmdLine)
+{
+    if (lpCmdLine) {
+        const wchar_t* cursor = lpCmdLine;
+        const wchar_t* tokenStart = nullptr;
+        size_t tokenLength = 0;
+        bool foundRoutingOverride = false;
+        InputRoutingMode cliMode = ROUTING_HOOK_PRIMARY;
+
+        while (TryReadNextCommandLineToken(&cursor, &tokenStart, &tokenLength)) {
+            if (EqualsCommandLineToken(tokenStart, tokenLength, L"/routing-tsf-primary")) {
+                cliMode = ROUTING_TSF_PRIMARY;
+                foundRoutingOverride = true;
+            } else if (EqualsCommandLineToken(tokenStart, tokenLength, L"/routing-fallback-scoped")) {
+                cliMode = ROUTING_FALLBACK_SCOPED;
+                foundRoutingOverride = true;
+            } else if (EqualsCommandLineToken(tokenStart, tokenLength, L"/routing-hook-primary")) {
+                cliMode = ROUTING_HOOK_PRIMARY;
+                foundRoutingOverride = true;
+            }
+        }
+
+        if (foundRoutingOverride) {
+            return cliMode;
+        }
+    }
+
+    wchar_t envValue[64] = {};
+    const DWORD envLength = GetEnvironmentVariableW(L"UNIKEY_ROUTING_MODE", envValue, ARRAYSIZE(envValue));
+    InputRoutingMode parsedMode = ROUTING_HOOK_PRIMARY;
+    if (envLength > 0 && envLength < ARRAYSIZE(envValue) && TryParseInputRoutingModeString(envValue, &parsedMode)) {
+        return parsedMode;
+    }
+
+    return ROUTING_HOOK_PRIMARY;
+}
+
+} // namespace
 
 // --- Taskbar restart resilience ---
 static UINT         WM_TASKBAR_CREATED = 0;
 #define IDT_TRAY_WATCHDOG  5001
-#define TRAY_WATCHDOG_MS   30000
+#define TRAY_WATCHDOG_MS   5000
 
 // --- Window Class ---
 static const wchar_t* WND_CLASS    = L"UniKeyTSF_HiddenWnd";
 static const wchar_t* WND_TITLE    = L"UniKey TSF Reborn";
+
+static void SetCurrentDirectoryToExeDir()
+{
+    wchar_t exePath[MAX_PATH] = {};
+    DWORD length = GetModuleFileNameW(nullptr, exePath, ARRAYSIZE(exePath));
+    if (length == 0 || length >= ARRAYSIZE(exePath)) {
+        return;
+    }
+
+    wchar_t* lastSlash = wcsrchr(exePath, L'\\');
+    if (!lastSlash) {
+        return;
+    }
+
+    *lastSlash = L'\0';
+    SetCurrentDirectoryW(exePath);
+}
+
+static void WriteDiagnosticsToShell(const std::wstring& output)
+{
+    HANDLE stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (stdoutHandle == nullptr || stdoutHandle == INVALID_HANDLE_VALUE) {
+        if (!AttachConsole(ATTACH_PARENT_PROCESS)) {
+            return;
+        }
+        stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+        if (stdoutHandle == nullptr || stdoutHandle == INVALID_HANDLE_VALUE) {
+            return;
+        }
+    }
+
+    const int utf8Size = WideCharToMultiByte(CP_UTF8, 0, output.c_str(), -1, nullptr, 0, nullptr, nullptr);
+    if (utf8Size <= 1) {
+        return;
+    }
+
+    std::string utf8(static_cast<size_t>(utf8Size), '\0');
+    if (WideCharToMultiByte(CP_UTF8, 0, output.c_str(), -1, utf8.data(), utf8Size, nullptr, nullptr) <= 1) {
+        return;
+    }
+
+    DWORD written = 0;
+    WriteFile(stdoutHandle, utf8.data(), static_cast<DWORD>(utf8.size() - 1), &written, nullptr);
+}
 
 // =============================================================================
 // Window Procedure
@@ -148,7 +267,7 @@ int WINAPI wWinMain(
     _In_ int /*nCmdShow*/)
 {
     g_hInstance = hInstance;
-    SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
+    SetCurrentDirectoryToExeDir();
 
     if (lpCmdLine && wcsstr(lpCmdLine, L"/unregister")) {
         UnregisterTsfDll();
@@ -158,6 +277,13 @@ int WINAPI wWinMain(
         RegisterTsfDll();
         return 0;
     }
+    if (lpCmdLine && wcsstr(lpCmdLine, L"/tsf-diagnostics")) {
+        const TsfDiagnosticsReport report = GetTsfDiagnosticsReport();
+        WriteDiagnosticsToShell(FormatTsfDiagnosticsKeyValue(report));
+        return report.status == TsfDiagnosticsStatus::kReady ? 0 : 2;
+    }
+
+    SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
     g_hMutex = CreateMutexW(nullptr, TRUE, MUTEX_NAME);
     if (GetLastError() == ERROR_ALREADY_EXISTS) {
@@ -165,7 +291,16 @@ int WINAPI wWinMain(
         return 0;
     }
 
+    EnsureTsfDllRegistered();
+
     if (!InitSharedMemory()) return 1;
+    EnsurePerAppInputStateStore();
+
+    g_routingInitialized = InitializeInputRoutingCoordinator();
+    if (g_routingInitialized) {
+        const InputRoutingMode startupRoutingMode = ResolveStartupRoutingMode(lpCmdLine);
+        SetInputRoutingMode(startupRoutingMode, InputRoutingConfiguredReason(startupRoutingMode));
+    }
 
     WNDCLASSEXW wc = {};
     wc.cbSize        = sizeof(WNDCLASSEXW);
@@ -174,6 +309,10 @@ int WINAPI wWinMain(
     wc.lpszClassName  = WND_CLASS;
 
     if (!RegisterClassExW(&wc)) {
+        if (g_routingInitialized) {
+            ShutdownInputRoutingCoordinator();
+            g_routingInitialized = false;
+        }
         CleanupSharedMemory();
         return 1;
     }
@@ -182,15 +321,15 @@ int WINAPI wWinMain(
                              HWND_MESSAGE, nullptr, hInstance, nullptr);
 
     if (!g_hWnd) {
+        if (g_routingInitialized) {
+            ShutdownInputRoutingCoordinator();
+            g_routingInitialized = false;
+        }
         CleanupSharedMemory();
         return 1;
     }
 
-    if (!InitTrayIcon(g_hWnd)) {
-        DestroyWindow(g_hWnd);
-        CleanupSharedMemory();
-        return 1;
-    }
+    InitTrayIcon(g_hWnd);
 
     InitBlacklist();
     SettingsWebView::PreInitEnvironment();  // Pre-cache WebView2 env for fast settings open
@@ -207,6 +346,11 @@ int WINAPI wWinMain(
     }
 
     CleanupTrayResources();
+    if (g_routingInitialized) {
+        ShutdownInputRoutingCoordinator();
+        g_routingInitialized = false;
+    }
+    ShutdownPerAppInputStateStore();
     CleanupSharedMemory();
 
     if (g_hMutex) {

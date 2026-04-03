@@ -124,7 +124,7 @@ export const AboutTab: React.FC = () => {
           <Divider style={{ opacity: 0.3 }} />
           <div className={styles.infoRow}>
             <Text className={styles.infoLabel}>Kiến trúc</Text>
-            <Text className={styles.infoValue}>Pure TSF (x86 + x64)</Text>
+            <Text className={styles.infoValue}>Hybrid runtime (hook-primary + TSF)</Text>
           </div>
           <Divider style={{ opacity: 0.3 }} />
           <div className={styles.infoRow}>

@@ -106,6 +106,10 @@ echo [Test 4] Settings UI (E2E)
 build64\Release\SettingsUITests.exe --gtest_brief=1
 if errorlevel 1 set "TESTS_FAILED=1"
 
+echo [Test 5] Characterization Contract
+build64\Release\CharacterizationTests.exe --gtest_brief=1
+if errorlevel 1 set "TESTS_FAILED=1"
+
 if "!TESTS_FAILED!"=="1" (
     echo WARNING: Some tests failed!
 ) else (

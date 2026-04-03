@@ -47,6 +47,4 @@ private:
     // Event registration tokens
     EventRegistrationToken _webMessageToken;
 
-    // Serializes UniKeyConfig to a JSON string
-    std::wstring SerializeConfigToJson(const UniKeyConfig& config);
 };

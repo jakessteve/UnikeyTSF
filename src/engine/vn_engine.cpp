@@ -1,4 +1,5 @@
 #include "vn_engine.h"
+#include "delimiter_policy.h"
 #include "vn_ortho.h"
 #include <cwctype>
 
@@ -7,8 +8,18 @@ static bool IsVowel(wchar_t ch) {
     return VnOrtho::IsVowel(ch);
 }
 
+static bool ContainsVowel(const std::wstring& text) {
+    for (wchar_t ch : text) {
+        if (IsVowel(ch)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 VnEngine::VnEngine() : _isUppercase(false), _didTransform(false),
-    _toneType(TONE_MODERN), _freeToneMarking(false), _spellCheck(false) {}
+    _toneType(TONE_MODERN), _freeToneMarking(false), _spellCheck(false),
+    _currentMethod(IM_TELEX) {}
 
 bool VnEngine::IsWordChar(wchar_t ch, InputMethod method) const {
     // Alphabetic characters are always valid word characters
@@ -40,22 +51,31 @@ bool VnEngine::IsPotentialModifier(wchar_t ch, InputMethod method) const {
     if (method == IM_TELEX) {
         wchar_t lower = std::towlower(ch);
         // Telex tone keys: s(sắc), f(huyền), r(hỏi), x(ngã), j(nặng), z(remove)
-        // Telex modifier key: w(horn/breve)
+        // Telex modifier keys: w(horn/breve), d(stroke)
         return (lower == L's' || lower == L'f' || lower == L'r' ||
-                lower == L'x' || lower == L'j' || lower == L'z' || lower == L'w');
+                lower == L'x' || lower == L'j' || lower == L'z' ||
+                lower == L'w' || lower == L'd');
     }
     if (method == IM_VIQR) {
         // VIQR tone marks: ' ` ? ~ .
-        // VIQR modifiers: ^ ( +
+        // VIQR modifiers: ^ ( + d
         return (ch == L'\'' || ch == L'`' || ch == L'?' || ch == L'~' ||
-                ch == L'.' || ch == L'^' || ch == L'(' || ch == L'+');
+                ch == L'.' || ch == L'^' || ch == L'(' || ch == L'+' ||
+                ch == L'd' || ch == L'D');
     }
     return false;
 }
 
 bool VnEngine::ProcessKey(wchar_t ch, InputMethod method) {
-    // Whitespace always terminates the word
-    if (ch == L' ' || ch == L'\t' || ch == L'\r' || ch == L'\n') {
+    // Whitespace remains the only delimiter eligible for replay/reconversion.
+    if (InputDelimiters::IsReplayEligibleDelimiter(ch)) {
+        Clear();
+        return false; // Let the app handle the word terminator
+    }
+
+    // Hyphen is an explicit hard boundary: keep it visible, but never extend
+    // composition or replay across it.
+    if (InputDelimiters::IsExplicitHyphenDelimiter(ch)) {
         Clear();
         return false; // Let the app handle the word terminator
     }
@@ -121,6 +141,23 @@ void VnEngine::Clear() {
     _composition.clear();
     _isUppercase = false;
     _didTransform = false;
+}
+
+void VnEngine::ResetContext() {
+    Clear();
+}
+
+void VnEngine::FeedContext(const std::wstring& seed, InputMethod method) {
+    ResetContext();
+    _currentMethod = method;
+    for (wchar_t ch : seed) {
+        ProcessKey(ch, method);
+    }
+}
+
+bool VnEngine::ReplayContextKey(const std::wstring& seed, wchar_t ch, InputMethod method) {
+    FeedContext(seed, method);
+    return ProcessKey(ch, method);
 }
 
 bool VnEngine::IsInWord() const {
@@ -236,7 +273,16 @@ static bool IsModifiedVowel(wchar_t ch) {
 // - Tone always goes on the first vowel of the vowel cluster.
 // =============================================================================
 static void ApplyToneToResult(std::wstring& result, int tone, ToneType toneType, bool freeToneMarking) {
+    (void)freeToneMarking;
     if (tone < 0 || result.empty()) return;
+
+    // Replaying a modifier against committed display text must replace the
+    // existing tone, not stack a new one on top of already-accented vowels.
+    for (wchar_t& ch : result) {
+        if (IsVowel(ch)) {
+            ch = ApplyTone(ch, 0);
+        }
+    }
 
     // Find the vowel cluster: first and last vowel indices
     int firstVowel = -1, lastVowel = -1;
@@ -396,6 +442,10 @@ std::wstring VnEngine::ApplyTelexRules(const std::wstring& raw) {
         int tone_idx = TelexToneIndex(lower);
         // Smart Typo Restoration: tone key can be anywhere except at the start of initial cluster
         if (tone_idx >= 0 && !IsPartOfInitial(raw, idx)) {
+            if (!_freeToneMarking && !ContainsVowel(result)) {
+                result += ch;
+                continue;
+            }
             // Double-key escape
             if (active_tone == tone_idx && !tone_escaped) {
                 active_tone = -1;
@@ -464,6 +514,10 @@ std::wstring VnEngine::ApplyVniRules(const std::wstring& raw) {
         if ((ch >= L'1' && ch <= L'5') || ch == L'0') {
             // Smart Restoration: allow tone digits anywhere except at the start
             if (idx > 0) {
+                if (!_freeToneMarking && !ContainsVowel(result)) {
+                    result += ch;
+                    continue;
+                }
                 int tone_idx = ch - L'0'; 
                 if (active_tone == tone_idx && !tone_escaped) {
                     active_tone = -1;
@@ -565,6 +619,10 @@ std::wstring VnEngine::ApplyViqrRules(const std::wstring& raw) {
             else if (ch == L'.') toneIdx = 5;   // nặng
             
             if (toneIdx >= 0) {
+                if (!_freeToneMarking && !ContainsVowel(result)) {
+                    result += ch;
+                    continue;
+                }
                 if (active_tone == toneIdx && !tone_escaped) {
                     active_tone = -1;
                     tone_escaped = true;

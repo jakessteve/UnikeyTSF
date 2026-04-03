@@ -17,6 +17,7 @@
 static SettingsWebView* s_pWebView = nullptr;
 static HWND s_hSettingsWnd = nullptr;       // Persistent window handle
 static bool s_classRegistered = false;
+static bool s_comInitialized = false;
 static HINSTANCE s_hInstance = nullptr;
 static const wchar_t* SETTINGS_WND_CLASS = L"UniKeyTSF_SettingsWnd";
 
@@ -134,6 +135,10 @@ static LRESULT CALLBACK SettingsWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPAR
             delete s_pWebView;
             s_pWebView = nullptr;
         }
+        if (s_comInitialized) {
+            CoUninitialize();
+            s_comInitialized = false;
+        }
         s_hSettingsWnd = nullptr;
         s_webviewReady = false;
         return 0;
@@ -164,7 +169,10 @@ void ShowSettingsDialog(HWND hWndParent, HINSTANCE hInstance, UniKeyConfig* pCon
     }
 
     // First time only: create the window + WebView2
-    CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+    HRESULT hrCoInit = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+    if (SUCCEEDED(hrCoInit) || hrCoInit == S_FALSE) {
+        s_comInitialized = true;
+    }
 
     if (!s_classRegistered) {
         WNDCLASSEXW wc = {};
@@ -207,6 +215,10 @@ void ShowSettingsDialog(HWND hWndParent, HINSTANCE hInstance, UniKeyConfig* pCon
         nullptr);
 
     if (!s_hSettingsWnd) {
+        if (s_comInitialized) {
+            CoUninitialize();
+            s_comInitialized = false;
+        }
         return;
     }
 

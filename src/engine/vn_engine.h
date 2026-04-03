@@ -29,6 +29,15 @@ public:
     // Clear the current word buffer.
     void Clear();
 
+    // Reset transient state before rebuilding composition from surrounding context.
+    void ResetContext();
+
+    // Feed committed text back into the engine to rebuild editable context.
+    void FeedContext(const std::wstring& seed, InputMethod method);
+
+    // Replay a key against a committed context in one step.
+    bool ReplayContextKey(const std::wstring& seed, wchar_t ch, InputMethod method);
+
     // Check if we are currently in a word.
     bool IsInWord() const;
 

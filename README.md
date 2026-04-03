@@ -1,22 +1,28 @@
 # UniKey TSF Reborn
 
-**UniKey TSF Reborn** is a modern, memory-safe Vietnamese keyboard (Input Method Editor) built purely on the Windows Text Services Framework (TSF). 
+**UniKey TSF Reborn** is a modern Vietnamese keyboard (Input Method Editor) for Windows that currently uses a **hybrid architecture**: a manager EXE, a shared-memory config layer, a hook-based primary typing path, and a TSF text service that is present but not yet the sole routing authority.
 
-It is designed to be a 100% feature-complete clone of classic UniKey, but built from the ground up to completely eliminate the legacy `SetWindowsHookEx` architecture. This resolves long-standing issues such as input lag, typing bugs in Chrome and Windows Terminal, and UAC elevation limitations.
+The long-term direction is to modernize the project toward **TSF-primary** behavior with explicit routing and bounded fallback, but that is not the current runtime truth today.
 
 ---
 
-## 🚀 Key Features
+## 🚀 Current Project State
 
-- **Pure TSF Architecture:** Zero hooks, zero input lag, and proper modern application support.
-- **100% UniKey Feature Parity:** Supports all major typing methods (Telex, VNI, VIQR), macros (`.ukm`), and the classic clipboard toolkit.
-- **Ultra-lightweight:** Built with Pure C++17 utilizing the Win32 API and Windows COM, resulting in a total footprint of less than 2MB.
-- **AppContainer / UWP Native:** Works flawlessly in UWP and Windows Store apps via properly configured ACLs (`S-1-15-2-1`).
-- **Memory Safety Guaranteed:** Uses `wrl/client.h` (`ComPtr<T>`) for strict COM object lifecycles—no manual memory management.
+- **Hybrid runtime today:** `UniKeyTSF.exe` still installs global hooks and owns startup, tray, settings, and shared config.
+- **TSF service present:** the repo includes a substantial TSF COM text service and registration flow, but TSF is not yet documented as the sole active input path.
+- **Classic Vietnamese typing support:** the engine and tests cover Telex, VNI, VIQR, charset conversion, macros, and related composition behavior.
+- **Windows-native implementation:** C++17, Win32, COM, shared memory IPC, and GoogleTest-based regression binaries.
 
 ## 🏗️ Architecture & Components
 
-The application uses an O(1) shared memory IPC model (`Local\UniKeyTSF_SharedConfig`) to communicate instantly between the Manager GUI and the injected TSF DLLs without JSON parsing or named pipe overhead.
+The application uses a shared memory IPC model (`Local\UniKeyTSF_SharedConfig`) to communicate configuration between the manager process and TSF components.
+
+Current runtime shape:
+
+- **Manager EXE:** bootstraps registration, creates the hidden window, owns tray/settings UI, and installs hooks.
+- **Hook path:** the effective primary typing path in current builds.
+- **TSF path:** implemented and registered, but not yet the only authoritative path.
+- **Shared config:** `UniKeyConfig` in `src/shared_config.h`, persisted under `%APPDATA%\UniKeyTSF\config.dat`.
 
 ![Architecture Diagram](./docs/tech/architecture.png)
 
@@ -51,8 +57,12 @@ cmake --build build --config Release
 
 ### Deployment
 1. Copy the resulting `UniKeyTSF.exe` to a permanent location (e.g., `C:\Program Files\UniKeyTSF\`).
-2. Run `UniKeyTSF.exe`. It will automatically register the necessary COM DLLs and spawn the system tray icon.
-3. To uninstall, exit the application from the tray menu, run `UniKeyTSF.exe /unregister`, and delete the folder.
+2. Run `UniKeyTSF.exe /register` once as the normal user that will use the IME.
+3. Run `UniKeyTSF.exe /tsf-diagnostics` from a shell to check activation status (`key=value` output: `status`, `dll_registered`, `profile_present`, `profile_active`, `dll_hr`, `profile_hr`, `next_step`).
+4. If diagnostics reports `profile_missing`, rerun `UniKeyTSF.exe /register`, then reopen Windows input settings so the profile list refreshes.
+5. If diagnostics reports `profile_inactive`, enable **UniKey TSF Reborn** in Windows input settings for Vietnamese.
+6. Run `UniKeyTSF.exe` normally to start tray/settings/hook runtime.
+7. To uninstall, exit the application from the tray menu, run `UniKeyTSF.exe /unregister`, and delete the folder.
 
 ## 📚 Documentation
 
@@ -66,6 +76,19 @@ Detailed documentation is available in the `docs/` folder:
   - [API Contracts / IPC](./docs/tech/API_CONTRACTS.md)
   - [Deployment Guide](./docs/tech/DEPLOYMENT.md)
   - [Test Plan](./docs/tech/TEST_PLAN.md)
+
+## 🧪 Blocking Validation Matrix
+
+The active modernization plan uses this app matrix as the default blocking validation set:
+
+- Notepad
+- Edge textarea
+- VS Code editor
+- Windows Terminal
+- elevated Notepad
+- WordPad or another RichEdit-style editor
+
+The project should not claim TSF-primary readiness until behavior is verified against that matrix.
 
 ## ⚖️ License
 

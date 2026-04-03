@@ -34,7 +34,8 @@ HRESULT CCompositionManager::StartComposition(TfEditCookie ec, ITfContext* pCont
 HRESULT CCompositionManager::UpdateComposition(TfEditCookie ec, ITfContext* pContext, const std::wstring& text)
 {
     if (!IsComposing()) {
-        StartComposition(ec, pContext, 0);
+        HRESULT hr = StartComposition(ec, pContext, 0);
+        if (FAILED(hr)) return hr;
     }
     
     if (!IsComposing()) return E_FAIL;

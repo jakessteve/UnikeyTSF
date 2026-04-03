@@ -11,7 +11,11 @@
 // =============================================================================
 
 #include <gtest/gtest.h>
+#include <array>
 #include "engine/vn_engine.h"
+#include "engine/delimiter_policy.h"
+#include "engine/key_translate.h"
+#include "engine/reconversion_word.h"
 #include "engine/macro.h"
 #include "shared_config.h"
 
@@ -147,6 +151,14 @@ TEST_F(TelexTest, Word_Hoas) {
 
 TEST_F(TelexTest, Word_Xueer) {
     EXPECT_EQ(TypeWord(engine, L"xueer", IM_TELEX), L"xuể");
+}
+
+TEST_F(TelexTest, FeedContext_ReplaysCommittedWordForToneModifier) {
+    engine.FeedContext(L"tieeng", IM_TELEX);
+    EXPECT_EQ(engine.GetCompositionString(), L"tiêng");
+
+    ASSERT_TRUE(engine.ReplayContextKey(L"tieeng", L's', IM_TELEX));
+    EXPECT_EQ(engine.GetCompositionString(), L"tiếng");
 }
 
 // =============================================================================
@@ -383,6 +395,20 @@ TEST_F(BackspaceTest, WordTermination_Punctuation) {
     EXPECT_FALSE(engine.IsInWord());
 }
 
+TEST_F(BackspaceTest, WordTermination_Hyphen) {
+    engine.Clear();
+    engine.ProcessKey(L't', IM_TELEX);
+    engine.ProcessKey(L'i', IM_TELEX);
+    engine.ProcessKey(L'e', IM_TELEX);
+    engine.ProcessKey(L'e', IM_TELEX);
+    engine.ProcessKey(L'n', IM_TELEX);
+    engine.ProcessKey(L'g', IM_TELEX);
+    engine.ProcessKey(L's', IM_TELEX);
+    const bool eaten = engine.ProcessKey(L'-', IM_TELEX);
+    EXPECT_FALSE(eaten);
+    EXPECT_FALSE(engine.IsInWord());
+}
+
 // =============================================================================
 // Mixed Case
 // =============================================================================
@@ -443,6 +469,33 @@ TEST(EdgeCaseTest, IsWordChar_VIQR_Punctuation) {
     engine.ProcessKey(L'a', IM_VIQR);
     bool eaten = engine.ProcessKey(L'^', IM_VIQR);
     EXPECT_TRUE(eaten);
+}
+
+TEST(EdgeCaseTest, DelimiterPolicy_HyphenIsExplicitBoundary) {
+    EXPECT_TRUE(InputDelimiters::IsExplicitHyphenDelimiter(L'-'));
+    EXPECT_FALSE(InputDelimiters::IsReplayEligibleDelimiter(L'-'));
+    EXPECT_TRUE(InputDelimiters::IsReplayEligibleDelimiter(L' '));
+}
+
+TEST(KeyTranslateTest, ViqrShiftedCharactersTranslateOnUsLayout) {
+    HKL layout = LoadKeyboardLayoutW(L"00000409", KLF_NOTELLSHELL);
+    ASSERT_NE(layout, static_cast<HKL>(nullptr));
+
+    auto makeState = [](bool shiftDown = false) {
+        std::array<BYTE, 256> state{};
+        if (shiftDown) {
+            state[VK_SHIFT] = 0x80;
+            state[VK_LSHIFT] = 0x80;
+        }
+        return state;
+    };
+
+    EXPECT_EQ(TranslateVkToWchar(VK_OEM_3, MapVirtualKeyExW(VK_OEM_3, MAPVK_VK_TO_VSC, layout), makeState(false).data(), layout), L'`');
+    EXPECT_EQ(TranslateVkToWchar(VK_OEM_3, MapVirtualKeyExW(VK_OEM_3, MAPVK_VK_TO_VSC, layout), makeState(true).data(), layout), L'~');
+    EXPECT_EQ(TranslateVkToWchar('6', MapVirtualKeyExW('6', MAPVK_VK_TO_VSC, layout), makeState(true).data(), layout), L'^');
+    EXPECT_EQ(TranslateVkToWchar('9', MapVirtualKeyExW('9', MAPVK_VK_TO_VSC, layout), makeState(true).data(), layout), L'(');
+    EXPECT_EQ(TranslateVkToWchar(VK_OEM_PLUS, MapVirtualKeyExW(VK_OEM_PLUS, MAPVK_VK_TO_VSC, layout), makeState(true).data(), layout), L'+');
+    EXPECT_EQ(TranslateVkToWchar(VK_OEM_2, MapVirtualKeyExW(VK_OEM_2, MAPVK_VK_TO_VSC, layout), makeState(true).data(), layout), L'?');
 }
 
 // =============================================================================
@@ -527,6 +580,8 @@ TEST(PotentialModifierTest, Telex_ToneKeys) {
     EXPECT_TRUE(engine.IsPotentialModifier(L'j', IM_TELEX));
     EXPECT_TRUE(engine.IsPotentialModifier(L'z', IM_TELEX));
     EXPECT_TRUE(engine.IsPotentialModifier(L'w', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'd', IM_TELEX));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'D', IM_TELEX));
 }
 
 TEST(PotentialModifierTest, VIQR_Marks) {
@@ -539,6 +594,8 @@ TEST(PotentialModifierTest, VIQR_Marks) {
     EXPECT_TRUE(engine.IsPotentialModifier(L'^', IM_VIQR));
     EXPECT_TRUE(engine.IsPotentialModifier(L'(', IM_VIQR));
     EXPECT_TRUE(engine.IsPotentialModifier(L'+', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'd', IM_VIQR));
+    EXPECT_TRUE(engine.IsPotentialModifier(L'D', IM_VIQR));
 }
 
 TEST(PotentialModifierTest, Alpha_ReturnsFalse) {
@@ -550,4 +607,123 @@ TEST(PotentialModifierTest, Alpha_ReturnsFalse) {
     EXPECT_FALSE(engine.IsPotentialModifier(L'a', IM_TELEX));
     EXPECT_FALSE(engine.IsPotentialModifier(L'b', IM_TELEX));
     EXPECT_FALSE(engine.IsPotentialModifier(L'n', IM_TELEX));
+}
+
+TEST(VniRegressionTest, StrokeD9_AfterSpaceRestoreReplay) {
+    VnEngine engine;
+    engine.Clear();
+
+    EXPECT_TRUE(engine.ProcessKey(L'd', IM_VNI));
+    EXPECT_EQ(engine.GetCompositionString(), L"d");
+
+    EXPECT_FALSE(engine.ProcessKey(L' ', IM_VNI));
+    EXPECT_FALSE(engine.IsInWord());
+
+    EXPECT_TRUE(engine.ProcessKey(L'd', IM_VNI));
+    EXPECT_TRUE(engine.ProcessKey(L'9', IM_VNI));
+    EXPECT_EQ(engine.GetCompositionString(), L"đ");
+}
+TEST(VniRegressionTest, DisplayTextReplay_Truong1_BecomesTruongSac) {
+    VnEngine engine;
+    engine.Clear();
+
+    EXPECT_TRUE(engine.ProcessKey(L't', IM_VNI));
+    EXPECT_TRUE(engine.ProcessKey(L'r', IM_VNI));
+    EXPECT_TRUE(engine.ProcessKey(L'\x1B0', IM_VNI));
+    EXPECT_TRUE(engine.ProcessKey(L'\x1EDD', IM_VNI));
+    EXPECT_TRUE(engine.ProcessKey(L'n', IM_VNI));
+    EXPECT_TRUE(engine.ProcessKey(L'g', IM_VNI));
+    EXPECT_TRUE(engine.ProcessKey(L'1', IM_VNI));
+
+    EXPECT_EQ(engine.GetCompositionString(), L"tr\x1B0\x1EDBng");
+}
+
+TEST(ReconversionWordTest, TrailingSpaceTargetsPreviousWord) {
+    const Reconversion::WordSpan span = Reconversion::ExtractWordSpanAroundCaret(
+        L"tr\x1B0\x1EDDng ",
+        L"",
+        IM_VNI,
+        true);
+
+    EXPECT_EQ(span.word, L"tr\x1B0\x1EDDng");
+    EXPECT_EQ(span.leftEditableCount, 6);
+    EXPECT_EQ(span.rightEditableCount, 0);
+    EXPECT_EQ(span.leftDelimiterCount, 1);
+    EXPECT_TRUE(span.hasTrailingWhitespaceDelimiter);
+    EXPECT_TRUE(span.usedTrailingLeftWord);
+    EXPECT_EQ(span.ReplacementStartShift(), -7);
+    EXPECT_EQ(span.ReplacementEndShift(), -1);
+}
+
+TEST(ReconversionWordTest, DeletedSpaceKeepsWordAtCaretEnd) {
+    const Reconversion::WordSpan span = Reconversion::ExtractWordSpanAroundCaret(
+        L"tr\x1B0\x1EDDng",
+        L"",
+        IM_VNI,
+        true);
+
+    EXPECT_EQ(span.word, L"tr\x1B0\x1EDDng");
+    EXPECT_EQ(span.leftEditableCount, 6);
+    EXPECT_EQ(span.rightEditableCount, 0);
+    EXPECT_EQ(span.leftDelimiterCount, 0);
+    EXPECT_FALSE(span.usedTrailingLeftWord);
+    EXPECT_EQ(span.ReplacementStartShift(), -6);
+    EXPECT_EQ(span.ReplacementEndShift(), 0);
+}
+
+TEST(ReconversionWordTest, CaretInsideWordReturnsWholeWord) {
+    const Reconversion::WordSpan span = Reconversion::ExtractWordSpanAroundCaret(
+        L"tr\x1B0\x1EDD",
+        L"ng",
+        IM_VNI,
+        true);
+
+    EXPECT_EQ(span.word, L"tr\x1B0\x1EDDng");
+    EXPECT_EQ(span.leftEditableCount, 4);
+    EXPECT_EQ(span.rightEditableCount, 2);
+    EXPECT_EQ(span.leftDelimiterCount, 0);
+    EXPECT_FALSE(span.usedTrailingLeftWord);
+    EXPECT_EQ(span.ReplacementStartShift(), -4);
+    EXPECT_EQ(span.ReplacementEndShift(), 2);
+}
+
+TEST(ReconversionWordTest, PunctuationBoundaryDoesNotReplayPreviousWord) {
+    const Reconversion::WordSpan span = Reconversion::ExtractWordSpanAroundCaret(
+        L"tr\x1B0\x1EDDng,",
+        L"",
+        IM_VNI,
+        true);
+
+    EXPECT_FALSE(span.HasWord());
+    EXPECT_EQ(span.leftDelimiterCount, 0);
+}
+
+TEST(ReconversionWordTest, EmptyTextReturnsNoWord) {
+    const Reconversion::WordSpan span = Reconversion::ExtractWordSpanAroundCaret(
+        L"",
+        L"",
+        IM_VNI,
+        true);
+
+    EXPECT_FALSE(span.HasWord());
+}
+
+TEST(ReconversionWordTest, ReplayDecisionRejectsNonEmptySelection) {
+    const Reconversion::WordSpan span = Reconversion::ExtractWordSpanAroundCaret(
+        L"tr\x1B0\x1EDDng ",
+        L"",
+        IM_VNI,
+        true);
+
+    EXPECT_FALSE(Reconversion::CanReplayCommittedModifier(span, false, true));
+}
+
+TEST(ReconversionWordTest, ReplayDecisionRejectsExpiredWindow) {
+    const Reconversion::WordSpan span = Reconversion::ExtractWordSpanAroundCaret(
+        L"tr\x1B0\x1EDDng ",
+        L"",
+        IM_VNI,
+        true);
+
+    EXPECT_FALSE(Reconversion::CanReplayCommittedModifier(span, true, false));
 }

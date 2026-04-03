@@ -1,9 +1,14 @@
 #include "hook_manager.h"
+#include "input_routing.h"
+#include "per_app_input_state.h"
 #include <vector>
 #include <string>
-#include <map>
+#include <array>
 #include "vn_engine.h"
 #include "macro.h"
+#include "delimiter_policy.h"
+#include "key_translate.h"
+#include "typing_settings.h"
 #include "../config/blacklist.h"
 #include "../config/ipc_manager.h"
 #include "../ui/tray_icon.h"
@@ -11,7 +16,6 @@
 #include "../resource.h"
 
 // --- Globals (Internal) ---
-static std::map<DWORD, bool> g_appInputStates;  // Per-app Vietnamese input on/off state
 static HHOOK        g_hKeyboardHook = nullptr;
 static HHOOK        g_hMouseHook    = nullptr;
 static VnEngine     g_engine;
@@ -20,9 +24,15 @@ static bool         g_bInjecting   = false;
 static int          g_rawCharCount = 0;
 static std::wstring g_lastComposition = L"";
 static std::wstring g_lastCommittedWord = L"";  // Reconversion cache: last word before space
+static ULONGLONG    g_lastCommittedTick = 0;
+static wchar_t      g_lastCommitDelimiter = 0;
 static bool         g_bBlacklisted = false;
 static HWND         g_hLastForeground = nullptr;
+static std::wstring g_currentAppId;
 static bool         g_suppressedKeys[256] = { false };
+static InputRoutingOwner g_lastRoutingOwner = ROUTING_OWNER_HOOK;
+static UniKeyConfig g_lastAppliedConfig = {};
+static bool g_hasLastAppliedConfig = false;
 
 // --- Toggle hotkey detection ---
 static bool g_bCtrlDown  = false;
@@ -32,6 +42,51 @@ static bool g_bOtherKeyPressed = false;
 
 // --- Window handle of the main app (for PostMessage) ---
 static HWND g_hMainWnd = nullptr;
+static constexpr ULONGLONG kRestoreReplayTimeoutMs = 1000;
+
+static void TraceRoutingDecision(const RoutingDecision& decision)
+{
+    wchar_t buffer[192] = {};
+    wsprintfW(buffer,
+        L"[UniKeyTSF][Routing][Hook] mode=%s owner=%s reason=%s seq=%lu\n",
+        InputRoutingModeToString(decision.mode),
+        InputRoutingOwnerToString(decision.owner),
+        InputRoutingReasonToString(decision.reason),
+        static_cast<unsigned long>(decision.decisionSequence));
+    OutputDebugStringW(buffer);
+}
+
+static void ClearHookEngineState()
+{
+    g_engine.Clear();
+    g_rawCharCount = 0;
+    g_lastComposition.clear();
+    g_lastCommittedWord.clear();
+    g_lastCommittedTick = 0;
+    g_lastCommitDelimiter = 0;
+}
+
+static void RefreshHookTypingSettingsFromConfig()
+{
+    if (!g_pConfig) {
+        return;
+    }
+
+    ApplyTypingSettingsToEngine(*g_pConfig, g_engine);
+
+    const MacroConfigDelta macroDelta = EvaluateMacroConfigDelta(
+        g_hasLastAppliedConfig ? &g_lastAppliedConfig : nullptr,
+        *g_pConfig);
+    if (macroDelta.shouldClear) {
+        g_macroEngine.Clear();
+    }
+    if (macroDelta.shouldReload) {
+        g_macroEngine.Load(macroDelta.macroFilePath);
+    }
+
+    g_lastAppliedConfig = *g_pConfig;
+    g_hasLastAppliedConfig = true;
+}
 
 // =============================================================================
 // Atomic Text Replacement
@@ -126,31 +181,51 @@ static void ReplaceText(const std::wstring& oldText, const std::wstring& newText
     }
 }
 
-static wchar_t VkToChar(UINT vk)
+static wchar_t VkToChar(const KBDLLHOOKSTRUCT& keyInfo)
 {
-    if (vk >= 'A' && vk <= 'Z') {
-        bool shift = (GetAsyncKeyState(VK_SHIFT) & 0x8000) != 0;
-        bool caps  = (GetKeyState(VK_CAPITAL) & 0x0001) != 0;
-        bool upper = shift ^ caps;
-        return upper ? (wchar_t)vk : (wchar_t)(vk + 32);
-    }
-    if (vk >= '0' && vk <= '9') {
-        bool shift = (GetAsyncKeyState(VK_SHIFT) & 0x8000) != 0;
-        if (!shift) return (wchar_t)vk;
+    BYTE keyboardState[256] = {};
+    if (!GetKeyboardState(keyboardState)) {
         return 0;
     }
-    if (vk == VK_OEM_PERIOD) return L'.';
-    if (vk == VK_OEM_COMMA) return L',';
-    if (vk == VK_OEM_1) return L';';
-    if (vk == VK_OEM_2) return L'/';
-    if (vk == VK_OEM_7) return L'\'';
-    if (vk == VK_OEM_4) return L'[';
-    if (vk == VK_OEM_6) return L']';
-    if (vk == VK_OEM_MINUS) return L'-';
-    if (vk == VK_OEM_PLUS) return L'=';
-    if (vk == VK_SPACE) return L' ';
-    if (vk == VK_RETURN) return L'\r';
-    if (vk == VK_TAB) return L'\t';
+
+    const auto applyPressedState = [&](int vkCode) {
+        if ((GetAsyncKeyState(vkCode) & 0x8000) != 0) {
+            keyboardState[vkCode] |= 0x80;
+        } else {
+            keyboardState[vkCode] &= static_cast<BYTE>(~0x80);
+        }
+    };
+
+    applyPressedState(VK_SHIFT);
+    applyPressedState(VK_LSHIFT);
+    applyPressedState(VK_RSHIFT);
+    applyPressedState(VK_CONTROL);
+    applyPressedState(VK_LCONTROL);
+    applyPressedState(VK_RCONTROL);
+    applyPressedState(VK_MENU);
+    applyPressedState(VK_LMENU);
+    applyPressedState(VK_RMENU);
+
+    if (keyInfo.vkCode < 256) {
+        keyboardState[keyInfo.vkCode] |= 0x80;
+    }
+
+    HKL layout = GetKeyboardLayout(0);
+    if (g_hLastForeground) {
+        DWORD threadId = GetWindowThreadProcessId(g_hLastForeground, nullptr);
+        if (threadId != 0) {
+            layout = GetKeyboardLayout(threadId);
+        }
+    }
+
+    const wchar_t translated = TranslateVkToWchar(keyInfo.vkCode, keyInfo.scanCode, keyboardState, layout);
+    if (translated != 0) {
+        return translated;
+    }
+
+    if (keyInfo.vkCode == VK_SPACE) return L' ';
+    if (keyInfo.vkCode == VK_RETURN) return L'\r';
+    if (keyInfo.vkCode == VK_TAB) return L'\t';
     return 0;
 }
 
@@ -180,22 +255,30 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
         if (vk == VK_LCONTROL || vk == VK_RCONTROL || vk == VK_CONTROL) {
             if (isKeyDown) { g_bCtrlDown = true; }
             if (isKeyUp) {
-                if (g_bCtrlDown && g_bShiftDown && !g_bOtherKeyPressed) {
-                    if (g_hMainWnd) PostMessage(g_hMainWnd, WM_COMMAND, IDM_TOGGLE_VE, 0);
+                // Only fire toggle if ALL control keys are released
+                if (!(GetAsyncKeyState(VK_LCONTROL) & 0x8000) &&
+                    !(GetAsyncKeyState(VK_RCONTROL) & 0x8000)) {
+                    if (g_bCtrlDown && g_bShiftDown && !g_bOtherKeyPressed) {
+                        if (g_hMainWnd) PostMessage(g_hMainWnd, WM_COMMAND, IDM_TOGGLE_VE, 0);
+                    }
+                    g_bCtrlDown = false;
+                    g_bOtherKeyPressed = false;
                 }
-                g_bCtrlDown = false;
-                g_bOtherKeyPressed = false;
             }
             return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
         }
         if (vk == VK_LSHIFT || vk == VK_RSHIFT || vk == VK_SHIFT) {
             if (isKeyDown) { g_bShiftDown = true; }
             if (isKeyUp) {
-                if (g_bCtrlDown && g_bShiftDown && !g_bOtherKeyPressed) {
-                    if (g_hMainWnd) PostMessage(g_hMainWnd, WM_COMMAND, IDM_TOGGLE_VE, 0);
+                // Only fire toggle if ALL shift keys are released
+                if (!(GetAsyncKeyState(VK_LSHIFT) & 0x8000) &&
+                    !(GetAsyncKeyState(VK_RSHIFT) & 0x8000)) {
+                    if (g_bCtrlDown && g_bShiftDown && !g_bOtherKeyPressed) {
+                        if (g_hMainWnd) PostMessage(g_hMainWnd, WM_COMMAND, IDM_TOGGLE_VE, 0);
+                    }
+                    g_bShiftDown = false;
+                    g_bOtherKeyPressed = false;
                 }
-                g_bShiftDown = false;
-                g_bOtherKeyPressed = false;
             }
             return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
         }
@@ -226,17 +309,14 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
     {
         HWND hFgNow = GetForegroundWindow();
         if (hFgNow != g_hLastForeground) {
-            if (g_pConfig && g_pConfig->perAppInputState && g_hLastForeground) {
-                DWORD oldPid = 0;
-                GetWindowThreadProcessId(g_hLastForeground, &oldPid);
-                if (oldPid) g_appInputStates[oldPid] = (g_pConfig->inputEnabled == 1);
-            }
-
             g_hLastForeground = hFgNow;
+            g_currentAppId = NormalizeAppId(ResolveForegroundAppId());
             g_engine.Clear();
             g_rawCharCount = 0;
             g_lastComposition.clear();
             g_lastCommittedWord.clear();  // Window changed, invalidate reconversion cache
+            g_lastCommittedTick = 0;
+            g_lastCommitDelimiter = 0;
             
             // Query blacklist only when window changes
             g_bBlacklisted = false; // Default to false if we can't determine
@@ -244,24 +324,12 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
                 DWORD pid = 0;
                 GetWindowThreadProcessId(hFgNow, &pid);
                 if (pid) {
-                    if (g_pConfig && g_pConfig->perAppInputState) {
-                        auto it = g_appInputStates.find(pid);
-                        if (it != g_appInputStates.end()) {
-                            if (g_pConfig->inputEnabled != (it->second ? 1 : 0)) {
-                                g_pConfig->inputEnabled = it->second ? 1 : 0;
-                                // Need to update tray icon to reflect new input mode
-                                if (g_hMainWnd) PostMessage(g_hMainWnd, WM_TIMER, 5001, 0); // 5001 is theoretically IDT_TRAY_WATCHDOG
-                            }
-                        }
-                    }
-
                     HANDLE hProc = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
                     if (hProc) {
                         wchar_t exePath[MAX_PATH] = {};
                         DWORD sz = MAX_PATH;
                         if (QueryFullProcessImageNameW(hProc, 0, exePath, &sz)) {
-                            wchar_t* name = wcsrchr(exePath, L'\\');
-                            g_bBlacklisted = IsProcessBlacklisted(name ? name + 1 : exePath);
+                            g_bBlacklisted = IsProcessBlacklisted(NormalizeAppId(exePath));
                         }
                         CloseHandle(hProc);
                     }
@@ -269,22 +337,42 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
             }
         }
     }
-    if (g_bBlacklisted)
-        return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
-
     if ((GetAsyncKeyState(VK_CONTROL) & 0x8000) || (GetAsyncKeyState(VK_MENU) & 0x8000)) {
-        g_engine.Clear();
-        g_rawCharCount = 0;
-        g_lastComposition.clear();
-        g_lastCommittedWord.clear();  // Ctrl/Alt combo, invalidate reconversion cache
+        ClearHookEngineState();
+        return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
+    }
+
+    RoutingDecision routingDecision = RefreshHookRoutingDecision(g_hLastForeground != nullptr, g_bBlacklisted);
+    if (routingDecision.owner != g_lastRoutingOwner || routingDecision.reason != ROUTING_REASON_HOOK_PRIMARY_DEFAULT) {
+        TraceRoutingDecision(routingDecision);
+    }
+    g_lastRoutingOwner = routingDecision.owner;
+
+    if (routingDecision.owner != ROUTING_OWNER_HOOK) {
+        ClearHookEngineState();
+        return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
+    }
+
+    RefreshHookTypingSettingsFromConfig();
+
+    if (g_pConfig && ResolveEffectiveInputEnabled(*g_pConfig, g_currentAppId) == 0) {
+        ClearHookEngineState();
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
 
     if (vk == VK_BACK) {
         if (g_engine.IsInWord()) {
+            const std::wstring oldComposition = g_lastComposition;
             g_engine.RemoveLastChar();
-            if (g_rawCharCount > 0) g_rawCharCount--;
-            if (!g_lastComposition.empty()) g_lastComposition.pop_back();
+            const std::wstring newComposition = g_engine.GetCompositionString();
+            ReplaceText(oldComposition, newComposition);
+            g_rawCharCount = static_cast<int>(newComposition.length());
+            g_lastComposition = newComposition;
+            g_lastCommittedWord.clear();
+            g_lastCommittedTick = 0;
+            g_lastCommitDelimiter = 0;
+            g_suppressedKeys[vk] = true;
+            return 1;
         }
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
@@ -299,31 +387,44 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
         // Don't clear g_lastCommittedWord on Left/Right — user may be moving back to edit
         if (vk != VK_LEFT && vk != VK_RIGHT) {
             g_lastCommittedWord.clear();
+            g_lastCommittedTick = 0;
+            g_lastCommitDelimiter = 0;
         }
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
     }
 
-    wchar_t ch = VkToChar(vk);
+    wchar_t ch = VkToChar(*pKb);
     if (ch == 0)
         return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
 
+    const InputMethod inputMethod = g_pConfig
+        ? static_cast<InputMethod>(g_pConfig->inputMethod)
+        : IM_VNI;
+
     int oldRawCount = g_rawCharCount;
 
-    // Reconversion: if engine is empty and key is a potential modifier, re-feed the last committed word
+    if (!g_lastCommittedWord.empty() &&
+        (g_lastCommittedTick == 0 || (GetTickCount64() - g_lastCommittedTick) > kRestoreReplayTimeoutMs)) {
+        g_lastCommittedWord.clear();
+        g_lastCommittedTick = 0;
+        g_lastCommitDelimiter = 0;
+    }
+
+    // Reconversion: if engine is empty and key is a recent post-space modifier, re-feed the last committed word
     if (!g_engine.IsInWord() && !g_lastCommittedWord.empty() &&
         (!g_pConfig || g_pConfig->restoreKeyEnabled) &&
-        g_engine.IsPotentialModifier(ch, (InputMethod)g_pConfig->inputMethod)) {
-        std::wstring wordToRestore = g_lastCommittedWord;
-        g_engine.Clear();
-        for (wchar_t c : wordToRestore) {
-            g_engine.ProcessKey(c, (InputMethod)g_pConfig->inputMethod);
-        }
+        InputDelimiters::IsReplayEligibleDelimiter(g_lastCommitDelimiter) &&
+        g_engine.IsPotentialModifier(ch, inputMethod)) {
+        g_engine.FeedContext(g_lastCommittedWord, inputMethod);
         g_rawCharCount = (int)g_engine.GetCompositionString().length();
         g_lastComposition = g_engine.GetCompositionString();
     }
 
-    if (g_engine.ProcessKey(ch, (InputMethod)g_pConfig->inputMethod)) {
+    if (g_engine.ProcessKey(ch, inputMethod)) {
         std::wstring newComposition = g_engine.GetCompositionString();
+        g_lastCommittedWord.clear();
+        g_lastCommittedTick = 0;
+        g_lastCommitDelimiter = 0;
         if (g_engine.DidTransform()) {
             ReplaceText(g_lastComposition, newComposition);
             g_rawCharCount = (int)newComposition.length();
@@ -346,13 +447,21 @@ static LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lP
                     g_engine.Clear();
                     g_lastComposition.clear();
                     g_lastCommittedWord.clear();
+                    g_lastCommittedTick = 0;
+                    g_lastCommitDelimiter = 0;
                     return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
                 }
             }
         }
         // Save the committed word for reconversion before clearing
-        if (!g_lastComposition.empty()) {
+        if (!g_lastComposition.empty() && InputDelimiters::IsReplayEligibleDelimiter(ch)) {
             g_lastCommittedWord = g_engine.GetRawString();
+            g_lastCommittedTick = GetTickCount64();
+            g_lastCommitDelimiter = ch;
+        } else {
+            g_lastCommittedWord.clear();
+            g_lastCommittedTick = 0;
+            g_lastCommitDelimiter = 0;
         }
         g_rawCharCount = 0;
         g_lastComposition.clear();
@@ -368,6 +477,8 @@ static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lPara
             g_rawCharCount = 0;
             g_lastComposition.clear();
             g_lastCommittedWord.clear();  // Mouse click, invalidate reconversion cache
+            g_lastCommittedTick = 0;
+            g_lastCommitDelimiter = 0;
         }
     }
     return CallNextHookEx(g_hMouseHook, nCode, wParam, lParam);
@@ -383,9 +494,9 @@ bool InstallHooks(HINSTANCE hInstance, HWND hWnd)
     g_hKeyboardHook = SetWindowsHookExW(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
     g_hMouseHook = SetWindowsHookExW(WH_MOUSE_LL, LowLevelMouseProc, hInstance, 0);
 
-    // Load macros if enabled
-    if (g_pConfig && g_pConfig->macroEnabled && g_pConfig->macroFilePath[0] != L'\0') {
-        g_macroEngine.Load(g_pConfig->macroFilePath);
+    g_hasLastAppliedConfig = false;
+    if (g_pConfig) {
+        RefreshHookTypingSettingsFromConfig();
     }
 
     return g_hKeyboardHook != nullptr;
@@ -401,6 +512,8 @@ void UninstallHooks()
         UnhookWindowsHookEx(g_hMouseHook);
         g_hMouseHook = nullptr;
     }
+
+    g_hasLastAppliedConfig = false;
 }
 
 void HandleHotkey(WPARAM wParam)
@@ -416,8 +529,5 @@ void HandleHotkey(WPARAM wParam)
 
 void ResetEngine()
 {
-    g_engine.Clear();
-    g_rawCharCount = 0;
-    g_lastComposition.clear();
-    g_lastCommittedWord.clear();
+    ClearHookEngineState();
 }

@@ -4,6 +4,7 @@
 #include "../resource.h"
 #include "settings_dialog.h"
 #include "../config/ipc_manager.h"
+#include "../engine/per_app_input_state.h"
 
 // --- Constants ---
 static const COLORREF MENU_BG        = RGB(30, 30, 30);
@@ -19,6 +20,7 @@ static HICON          g_hIconV       = nullptr;
 static HICON          g_hIconE       = nullptr;
 static NOTIFYICONDATAW g_nid          = {};
 static HFONT          s_hMenuFont    = nullptr;
+static bool           g_trayIconAdded = false;
 
 struct MenuItemData {
     wchar_t text[64];
@@ -126,6 +128,7 @@ bool InitTrayIcon(HWND hWnd)
     StringCchCopyW(g_nid.szTip, ARRAYSIZE(g_nid.szTip), L"UniKey TSF - Ti\x1ebfng Vi\x1ec7t (V)");
 
     bool success = Shell_NotifyIconW(NIM_ADD, &g_nid) != FALSE;
+    g_trayIconAdded = success;
     if (success) UpdateTrayIcon();
     return success;
 }
@@ -134,7 +137,15 @@ void UpdateTrayIcon()
 {
     if (!g_pConfig) return;
 
-    bool isVietnamese = (g_pConfig->inputEnabled != 0);
+    if (!g_trayIconAdded) {
+        g_trayIconAdded = Shell_NotifyIconW(NIM_ADD, &g_nid) != FALSE;
+        if (!g_trayIconAdded) {
+            return;
+        }
+    }
+
+    const std::wstring focusedAppId = ResolveForegroundAppId();
+    const bool isVietnamese = ResolveEffectiveInputEnabled(*g_pConfig, focusedAppId) != 0;
     g_nid.hIcon = isVietnamese ? g_hIconV : g_hIconE;
 
     const wchar_t* methodName = L"Telex";
@@ -148,12 +159,17 @@ void UpdateTrayIcon()
         StringCchCopyW(g_nid.szTip, ARRAYSIZE(g_nid.szTip), L"UniKey - English (E)");
     }
 
-    Shell_NotifyIconW(NIM_MODIFY, &g_nid);
+    if (Shell_NotifyIconW(NIM_MODIFY, &g_nid) == FALSE) {
+        g_trayIconAdded = false;
+    }
 }
 
 void RemoveTrayIcon()
 {
-    Shell_NotifyIconW(NIM_DELETE, &g_nid);
+    if (g_trayIconAdded) {
+        Shell_NotifyIconW(NIM_DELETE, &g_nid);
+        g_trayIconAdded = false;
+    }
 }
 
 void CleanupTrayResources()
@@ -168,7 +184,7 @@ void CleanupTrayResources()
 void ToggleInputState()
 {
     if (LockConfig()) {
-        g_pConfig->inputEnabled = g_pConfig->inputEnabled ? 0 : 1;
+        ToggleInputEnabledForApp(g_pConfig, ResolveForegroundAppId());
         UnlockConfig();
     }
     UpdateTrayIcon();
@@ -203,7 +219,7 @@ void ShowContextMenu(HWND hWnd)
     HMENU hMenu = CreatePopupMenu();
     if (!hMenu) return;
 
-    bool isViet = (g_pConfig->inputEnabled != 0);
+    const bool isViet = ResolveEffectiveInputEnabled(*g_pConfig, ResolveForegroundAppId()) != 0;
 
     auto addItem = [&](HMENU hM, const wchar_t* text, UINT id, bool checked = false) {
         MenuItemData* item = AllocMenuItem(text, id, checked);

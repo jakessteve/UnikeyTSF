@@ -2,8 +2,8 @@
 // =============================================================================
 // UniKey TSF Reborn â€” Text Service (ITfTextInputProcessorEx)
 // =============================================================================
-// Stub TSF Text Input Processor. Activates/deactivates with the thread manager
-// but does not process keystrokes yet (that's Phase 3).
+// TSF Text Input Processor. Activates/deactivates with the thread manager,
+// processes keystrokes, and now participates in routing arbitration.
 // =============================================================================
 
 #include <windows.h>
@@ -13,6 +13,7 @@
 #include "../engine/vn_engine.h"
 #include "../engine/macro.h"
 #include "composition.h"
+#include "../engine/input_routing.h"
 #include "../shared_config.h"
 
 using Microsoft::WRL::ComPtr;
@@ -78,5 +79,11 @@ private:
     HANDLE                _hMapFile;
     HANDLE                _hMutex;
     UniKeyConfig          _config;
+    UniKeyConfig          _lastAppliedConfig;
+    bool                  _hasLastAppliedConfig;
     bool                  _isBlacklisted;
+    std::wstring          _currentAppId;
+    ULONGLONG             _lastCommittedTick;
+    bool                  _tsfContextActive;
+    InputRoutingOwner     _lastRoutingOwner;
 };

@@ -42,22 +42,15 @@ jobs:
       - name: Build C++ (${{ matrix.config }})
         run: cmake --build build64 --config ${{ matrix.config }}
 
-      - name: Run Unit Tests
-        working-directory: build64
-        run: |
-          $testExe = Get-ChildItem -Recurse -Filter "UniKeyTSFTests.exe" | Select-Object -First 1
-          if ($testExe) {
-            & $testExe.FullName --gtest_output=xml:test-results.xml
-          } else {
-            Write-Warning "Test executable not found, skipping tests"
-          }
+      - name: Run Regression Test Graph
+        run: ctest --test-dir build64 -C ${{ matrix.config }} --output-on-failure --output-junit build64/test-results.xml
 
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.arch }}
-          path: build64/**/test-results.xml
+          path: build64/test-results.xml
           if-no-files-found: ignore
 
       - name: Package Release Artifact

@@ -16,20 +16,37 @@ static std::wstring TypeWord(VnEngine& eng, const std::wstring& input, InputMeth
 // =============================================================================
 TEST(SmartRestorationTest, Telex_ToneBeforeVowel) {
     VnEngine engine;
+    engine.SetFreeToneMarking(true);
     // "hso" -> "hó". 's' is a tone mark typed before the vowel 'o'.
     EXPECT_EQ(TypeWord(engine, L"hso", IM_TELEX), L"h\xF3");
 }
 
 TEST(SmartRestorationTest, Vni_ToneBeforeVowel) {
     VnEngine engine;
+    engine.SetFreeToneMarking(true);
     // "h1o" -> "hó". '1' is a tone mark typed before the vowel 'o'.
     EXPECT_EQ(TypeWord(engine, L"h1o", IM_VNI), L"h\xF3");
 }
 
 TEST(SmartRestorationTest, Viqr_ToneBeforeVowel) {
     VnEngine engine;
+    engine.SetFreeToneMarking(true);
     // "h'o" -> "hó". ''' is a tone mark typed before the vowel 'o'.
     EXPECT_EQ(TypeWord(engine, L"h'o", IM_VIQR), L"h\xF3");
+}
+
+TEST(SmartRestorationTest, ToneBeforeVowel_RequiresFreeToneMarking) {
+    VnEngine telex;
+    telex.SetFreeToneMarking(false);
+    EXPECT_EQ(TypeWord(telex, L"hso", IM_TELEX), L"hso");
+
+    VnEngine vni;
+    vni.SetFreeToneMarking(false);
+    EXPECT_EQ(TypeWord(vni, L"h1o", IM_VNI), L"h1o");
+
+    VnEngine viqr;
+    viqr.SetFreeToneMarking(false);
+    EXPECT_EQ(TypeWord(viqr, L"h'o", IM_VIQR), L"h'o");
 }
 
 TEST(SmartRestorationTest, Telex_InitialNotATone) {

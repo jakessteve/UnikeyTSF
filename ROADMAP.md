@@ -1,33 +1,54 @@
 # UniKey TSF Reborn — Roadmap
 
-This document outlines the strategic phases for developing and stabilizing **UniKey TSF Reborn**. The project aims for 100% feature parity with classic UniKey while utilizing the modern Windows Text Services Framework (TSF).
+This roadmap tracks the modernization of **UniKey TSF Reborn** from its current **hook-primary hybrid** runtime toward a **TSF-primary** future state.
 
-## Phase 1: Core TSF Infrastructure & IPC 
-- [x] Set up MSBuild/CMake environment for dual architecture (x86 & x64).
-- [x] Implement Pure C++17 TSF COM servers (`uktsf_core64.dll`, `uktsf_core32.dll`).
-- [x] Establish zero-overhead Shared Memory IPC (`Local\UniKeyTSF_SharedConfig`).
-- [x] Implement system tray manager UI (`UniKeyTSF.exe`) using Win32 API.
+The current repo already contains substantial typing, TSF, shared-memory, UI, and test infrastructure. The remaining work is mainly about making runtime ownership, contracts, validation, and support claims coherent enough for a safe TSF-primary rollout.
 
-## Phase 2: Typing Engine Implementation 
-- [ ] Implement Telex, VNI, and VIQR algorithms.
-- [ ] Integrate TCVN3 and VNI Windows character sets.
-- [ ] Support free tone marking and modern/classic tone placement (e.g., oà vs. òa).
-- [ ] Add smart typo restoration and spell checking.
-- [ ] Test `ITfComposition` inline rendering fidelity.
+## Current Runtime Truth
 
-## Phase 3: Legacy Features & Advanced Support 
-- [ ] Implement `.ukm` macro file reading and dynamic expansion.
-- [ ] Develop the Clipboard Toolkit (charset conversion, accent stripping) via global hotkeys (`Ctrl+Shift+F6/F9`).
-- [ ] Apply AppContainer ACLs (`S-1-15-2-1`) for UWP compatibility.
-- [ ] Refine `ITfThreadMgrEventSink` for process blacklisting (gaming mode).
+- `UniKeyTSF.exe` is still the long-lived manager process.
+- The hook path remains the effective primary typing authority in current builds.
+- The TSF service is implemented and registered, but it is not yet the sole routing authority.
+- Shared memory and the WebView-backed settings UI are already present and in active use.
 
-## Phase 4: Quality Assurance & Optimization 
-- [ ] Comprehensive unit and integration testing.
-- [ ] Validate memory safety boundaries (`ComPtr<T>` enforcement).
-- [ ] Resolve cross-process registry/ACL synchronization issues.
-- [ ] Verify latency / input lag improvements over legacy hooks.
+## Milestone 1 — Truth Alignment + CI Correctness
 
-## Phase 5: Production Release 
-- [ ] Finalize documentation.
-- [ ] Prepare deployment scripts / installer framework.
-- [ ] Launch v1.0.0.
+- [ ] Align `README.md`, `ROADMAP.md`, and engineering docs to the current hybrid runtime.
+- [ ] Remove UI/runtime copy that incorrectly claims pure TSF.
+- [ ] Fix CI to run the actual regression graph declared by CMake.
+
+## Milestone 2 — Canonical Config Contract
+
+- [ ] Unify the native and frontend understanding of `UniKeyConfig`.
+- [ ] Define clear versioning and compatibility rules for config persistence and UI messaging.
+- [ ] Document the config and settings contract as a single source of truth.
+
+## Milestone 3 — WebView/Runtime Bridge Hardening
+
+- [ ] Replace fragile string-based message parsing with explicit typed message handling.
+- [ ] Add payload validation and negative-path handling.
+- [ ] Add round-trip tests for settings propagation.
+
+## Milestone 4 — Routing Ownership Hardening
+
+- [ ] Enforce one authoritative input path per focused context.
+- [ ] Stabilize routing diagnostics and fallback behavior.
+- [ ] Prevent hook and TSF dual-processing regressions.
+
+## Milestone 5 — Validation Matrix Consolidation
+
+- [ ] Keep the regression suites green under the modernized runtime.
+- [ ] Treat the blocking app matrix as release-gating evidence: Notepad, Edge textarea, VS Code, Windows Terminal, elevated Notepad, and WordPad/RichEdit.
+- [ ] Require explicit routing and propagation evidence before any default flip.
+
+## Milestone 6 — Shared Engine Semantics + Guarded TSF Rollout
+
+- [ ] Align hook and TSF paths around shared reset/context/rewrite semantics.
+- [ ] Enable TSF-primary behind a guarded rollout path with rollback.
+- [ ] Promote TSF-primary only after validation evidence is complete.
+
+## Non-Goals for the Current Program
+
+- No big-bang rewrite.
+- No cross-platform expansion.
+- No “pure TSF” claim until runtime ownership and fallback policy actually support it.

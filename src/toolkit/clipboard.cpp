@@ -82,11 +82,20 @@ static const CharsetMapping g_UnicodeTcvn3[] = {
     {L'ỳ', 0xF4}, {L'ý', 0xF6}, {L'ỷ', 0xF5}, {L'ỹ', 0xF8}, {L'ỵ', 0xF7},
     // d
     {L'đ', 0xAE},
-    // Uppercase
-    {L'À', 0xB5 - 0x20}, {L'Á', 0xB8 - 0x20}, {L'Ả', 0xB6 - 0x20}, {L'Ã', 0xB7 - 0x20}, {L'Ạ', 0xB9 - 0x20},
-    {L'Ă', 0xA8 - 0x20}, {L'Ằ', 0xBB - 0x20}, {L'Ắ', 0xBE - 0x20}, {L'Ẳ', 0xBC - 0x20}, {L'Ẵ', 0xBD - 0x20}, {L'Ặ', 0xC6 - 0x20},
-    {L'Â', 0xA9 - 0x20}, {L'Ầ', 0xC7 - 0x20}, {L'Ấ', 0xCA - 0x20}, {L'Ẩ', 0xC8 - 0x20}, {L'Ẫ', 0xC9 - 0x20}, {L'Ậ', 0xCB - 0x20},
-    {L'Đ', 0xAE - 0x20},
+    // Uppercase — derived by subtracting 0x20 from lowercase TCVN3 values (VPS convention)
+    {L'À', 0x95}, {L'Á', 0x98}, {L'Ả', 0x96}, {L'Ã', 0x97}, {L'Ạ', 0x99},
+    {L'Ă', 0x88}, {L'Ằ', 0x9B}, {L'Ắ', 0x9E}, {L'Ẳ', 0x9C}, {L'Ẵ', 0x9D}, {L'Ặ', 0xA6},
+    {L'Â', 0x89}, {L'Ầ', 0xA7}, {L'Ấ', 0xAA}, {L'Ẩ', 0xA8}, {L'Ẫ', 0xA9}, {L'Ậ', 0xAB},
+    {L'È', 0xAC}, {L'É', 0xAE}, {L'Ẻ', 0xAD}, {L'Ẽ', 0xB0}, {L'Ẹ', 0xAF},
+    {L'Ê', 0x8A}, {L'Ề', 0xB1}, {L'Ế', 0xB4}, {L'Ể', 0xB2}, {L'Ễ', 0xB3}, {L'Ệ', 0xB5},
+    {L'Ì', 0xB6}, {L'Í', 0xB8}, {L'Ỉ', 0xB7}, {L'Ĩ', 0xB9}, {L'Ị', 0xBA},
+    {L'Ò', 0xBB}, {L'Ó', 0xBD}, {L'Ỏ', 0xBC}, {L'Õ', 0xBE}, {L'Ọ', 0xBF},
+    {L'Ô', 0x8B}, {L'Ồ', 0xC0}, {L'Ố', 0xC3}, {L'Ổ', 0xC1}, {L'Ỗ', 0xC2}, {L'Ộ', 0xC4},
+    {L'Ơ', 0x8C}, {L'Ờ', 0xC5}, {L'Ớ', 0xC8}, {L'Ở', 0xC6}, {L'Ỡ', 0xC7}, {L'Ợ', 0xC9},
+    {L'Ù', 0xCA}, {L'Ú', 0xCC}, {L'Ủ', 0xCB}, {L'Ũ', 0xCD}, {L'Ụ', 0xCE},
+    {L'Ư', 0x8F}, {L'Ừ', 0xCF}, {L'Ứ', 0xD2}, {L'Ử', 0xD0}, {L'Ữ', 0xD1}, {L'Ự', 0xD3},
+    {L'Ỳ', 0xD4}, {L'Ý', 0xD6}, {L'Ỷ', 0xD5}, {L'Ỹ', 0xD8}, {L'Ỵ', 0xD7},
+    {L'Đ', 0x8E},
 };
 
 static const size_t g_NumMappings = sizeof(g_UnicodeTcvn3) / sizeof(g_UnicodeTcvn3[0]);
@@ -270,11 +279,22 @@ bool ModifyClipboardText(const std::wstring& newText) {
     }
 
     void* pGlobal = GlobalLock(hGlobal);
-    if (pGlobal) {
-        memcpy(pGlobal, newText.c_str(), cbStr);
-        GlobalUnlock(hGlobal);
-        SetClipboardData(CF_UNICODETEXT, hGlobal);
+    if (!pGlobal) {
+        GlobalFree(hGlobal);
+        CloseClipboard();
+        return false;
     }
+    memcpy(pGlobal, newText.c_str(), cbStr);
+    GlobalUnlock(hGlobal);
+    
+    // SetClipboardData takes ownership of hGlobal on success
+    // If it fails, we need to free the memory
+    if (!SetClipboardData(CF_UNICODETEXT, hGlobal)) {
+        GlobalFree(hGlobal);
+        CloseClipboard();
+        return false;
+    }
+    
     CloseClipboard();
     return true;
 }

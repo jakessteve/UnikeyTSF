@@ -1,13 +1,17 @@
 #include "settings_webview.h"
+#include "settings_message_contract.h"
 #include "../config/ipc_manager.h"
 #include "../config/blacklist.h"
+#include "../engine/per_app_input_state.h"
 #include <wrl/event.h>
 #include <string>
 #include <sstream>
 #include <iomanip>
 #include <vector>
+#include <filesystem>
 
 using namespace Microsoft::WRL;
+namespace fs = std::filesystem;
 
 // Static cached environment
 ComPtr<ICoreWebView2Environment> SettingsWebView::s_cachedEnvironment;
@@ -21,6 +25,74 @@ SettingsWebView::~SettingsWebView() {
         _webview->remove_WebMessageReceived(_webMessageToken);
     }
 }
+
+namespace {
+
+std::wstring GetModuleDirectory()
+{
+    wchar_t exePath[MAX_PATH] = {};
+    GetModuleFileNameW(nullptr, exePath, ARRAYSIZE(exePath));
+    std::wstring exeDir(exePath);
+    size_t pos = exeDir.find_last_of(L"\\/");
+    if (pos != std::wstring::npos) {
+        exeDir.resize(pos);
+    }
+    return exeDir;
+}
+
+std::wstring ResolveFrontendDirectory()
+{
+    const std::wstring exeDir = GetModuleDirectory();
+    const std::vector<std::wstring> candidates = {
+        exeDir + L"\\frontend",
+        exeDir + L"\\..\\frontend",
+        exeDir + L"\\..\\..\\src\\ui\\dist",
+        exeDir + L"\\src\\ui\\dist"
+    };
+
+    for (const auto& candidate : candidates) {
+        std::error_code ec;
+        fs::path dir = fs::weakly_canonical(fs::path(candidate), ec);
+        if (ec) {
+            dir = fs::path(candidate);
+        }
+        fs::path indexPath = dir / "index.html";
+        if (fs::exists(indexPath, ec) && !ec) {
+            return dir.wstring();
+        }
+    }
+
+    return L"";
+}
+
+std::wstring GetMissingFrontendHtml()
+{
+    return LR"HTML(
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>UniKey TSF Settings</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; background: #1f1f1f; color: #f3f3f3; margin: 0; }
+    main { max-width: 640px; margin: 48px auto; padding: 24px 28px; background: #2a2a2a; border-radius: 12px; }
+    h1 { margin-top: 0; font-size: 24px; }
+    p { line-height: 1.5; color: #d0d0d0; }
+    code { background: #161616; padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Settings UI assets were not found</h1>
+    <p>The native host started correctly, but the packaged frontend files are missing.</p>
+    <p>Build or copy the frontend into <code>frontend\\index.html</code> next to the executable, or generate <code>src\\ui\\dist</code> for local development builds.</p>
+  </main>
+</body>
+</html>
+)HTML";
+}
+
+} // namespace
 
 // =============================================================================
 // Pre-initialize environment at app startup (async, non-blocking)
@@ -77,14 +149,11 @@ HRESULT SettingsWebView::Initialize(HWND parentHwnd) {
                                 &navToken);
 
                             // 6. Map virtual host to the frontend folder
-                            wchar_t exePath[MAX_PATH];
-                            GetModuleFileNameW(nullptr, exePath, MAX_PATH);
-                            std::wstring exeDir(exePath);
-                            size_t pos = exeDir.find_last_of(L"\\/");
-                            if (pos != std::wstring::npos) {
-                                exeDir = exeDir.substr(0, pos);
+                            std::wstring frontendDir = ResolveFrontendDirectory();
+                            if (frontendDir.empty()) {
+                                _webview->NavigateToString(GetMissingFrontendHtml().c_str());
+                                return S_OK;
                             }
-                            std::wstring frontendDir = exeDir + L"\\frontend";
 
                             // Use ICoreWebView2_3 for virtual host mapping
                             Microsoft::WRL::ComPtr<ICoreWebView2_3> webview3;
@@ -141,22 +210,25 @@ static bool IsAutoStartEnabled() {
     return exists;
 }
 
-static void SetAutoStart(bool enable) {
+static bool SetAutoStart(bool enable) {
     HKEY hKey;
     if (RegOpenKeyExW(HKEY_CURRENT_USER, AUTOSTART_REG_KEY, 0, KEY_WRITE, &hKey) != ERROR_SUCCESS)
-        return;
+        return false;
+    bool success = false;
     if (enable) {
         wchar_t exePath[MAX_PATH];
         GetModuleFileNameW(nullptr, exePath, MAX_PATH);
         std::wstring quotedPath = L"\"";
         quotedPath += exePath;
         quotedPath += L"\"";
-        RegSetValueExW(hKey, AUTOSTART_VALUE_NAME, 0, REG_SZ,
-            (const BYTE*)quotedPath.c_str(), (DWORD)((quotedPath.length() + 1) * sizeof(wchar_t)));
+        success = RegSetValueExW(hKey, AUTOSTART_VALUE_NAME, 0, REG_SZ,
+            (const BYTE*)quotedPath.c_str(), (DWORD)((quotedPath.length() + 1) * sizeof(wchar_t))) == ERROR_SUCCESS;
     } else {
-        RegDeleteValueW(hKey, AUTOSTART_VALUE_NAME);
+        const LONG deleteResult = RegDeleteValueW(hKey, AUTOSTART_VALUE_NAME);
+        success = (deleteResult == ERROR_SUCCESS || deleteResult == ERROR_FILE_NOT_FOUND);
     }
     RegCloseKey(hKey);
+    return success;
 }
 
 void SettingsWebView::Resize(const RECT& bounds) {
@@ -165,54 +237,9 @@ void SettingsWebView::Resize(const RECT& bounds) {
     }
 }
 
-// =============================================================================
-// Simple JSON helpers (no external lib)
-// =============================================================================
-
-static bool jsonExtractBool(const std::wstring& json, const wchar_t* key, bool def = false) {
-    std::wstring needle = std::wstring(L"\"" ) + key + L"\":";
-    size_t pos = json.find(needle);
-    if (pos == std::wstring::npos) return def;
-    pos += needle.length();
-    while (pos < json.length() && json[pos] == L' ') pos++;
-    if (pos + 4 <= json.length() && json.substr(pos, 4) == L"true") return true;
-    return false;
-}
-
-static int jsonExtractInt(const std::wstring& json, const wchar_t* key, int def = 0) {
-    std::wstring needle = std::wstring(L"\"" ) + key + L"\":";
-    size_t pos = json.find(needle);
-    if (pos == std::wstring::npos) return def;
-    pos += needle.length();
-    while (pos < json.length() && json[pos] == L' ') pos++;
-    return _wtoi(json.c_str() + pos);
-}
-
-static std::wstring jsonExtractString(const std::wstring& json, const wchar_t* key) {
-    std::wstring needle = std::wstring(L"\"" ) + key + L"\":\"";
-    size_t pos = json.find(needle);
-    if (pos == std::wstring::npos) return L"";
-    pos += needle.length();
-    std::wstring result;
-    while (pos < json.length() && json[pos] != L'"') {
-        if (json[pos] == L'\\' && pos + 1 < json.length()) {
-            result += json[pos + 1];
-            pos += 2;
-        } else {
-            result += json[pos];
-            pos++;
-        }
-    }
-    return result;
-}
-
 HRESULT SettingsWebView::PostConfigMessage(const UniKeyConfig& config) {
     if (!_webview) return E_FAIL;
-
-    // Wrap in {"type":"SET_CONFIG","payload":{...}} envelope
-    std::wstring json = L"{\"type\":\"SET_CONFIG\",\"payload\":";
-    json += SerializeConfigToJson(config);
-    json += L"}";
+    const std::wstring json = BuildSettingsConfigMessage(config);
     return _webview->PostWebMessageAsJson(json.c_str());
 }
 
@@ -227,116 +254,88 @@ HRESULT SettingsWebView::OnWebMessageReceived(
     std::wstring message(messageRaw);
     CoTaskMemFree(messageRaw);
 
-    if (message.find(L"\"type\":\"UPDATE_CONFIG\"") != std::wstring::npos) {
-        HANDLE hMutex = OpenMutexW(SYNCHRONIZE, FALSE, UNIKEY_SHARED_MUTEX_NAME);
-        if (hMutex) {
-            WaitForSingleObject(hMutex, INFINITE);
+    SettingsHostMessage parsedMessage;
+    if (!ParseSettingsHostMessage(message, &parsedMessage)) {
+        return E_INVALIDARG;
+    }
+
+    if (parsedMessage.type == SettingsHostMessageType::UpdateConfig) {
+        if (!LockConfig()) {
+            return HRESULT_FROM_WIN32(ERROR_TIMEOUT);
+        }
+
+        HRESULT updateHr = S_OK;
+        if (!g_pConfig) {
+            updateHr = E_UNEXPECTED;
+        } else {
+            const uint8_t requestedInputEnabled = parsedMessage.config.inputEnabled;
+            const bool previousPerAppInputState = g_pConfig->perAppInputState != 0;
+            const bool nextPerAppInputState = parsedMessage.config.perAppInputState != 0;
+            g_pConfig->version = parsedMessage.config.version;
+            g_pConfig->inputMethod    = parsedMessage.config.inputMethod;
+            g_pConfig->charset        = parsedMessage.config.charset;
+            g_pConfig->toneType       = parsedMessage.config.toneType;
+            g_pConfig->spellCheck     = parsedMessage.config.spellCheck;
+            g_pConfig->macroEnabled   = parsedMessage.config.macroEnabled;
+            g_pConfig->freeToneMarking= parsedMessage.config.freeToneMarking;
+            g_pConfig->toggleKey      = parsedMessage.config.toggleKey;
+            g_pConfig->restoreKeyEnabled = parsedMessage.config.restoreKeyEnabled;
+            g_pConfig->useClipboardForUnicode = parsedMessage.config.useClipboardForUnicode;
+            g_pConfig->showDialogOnStartup = parsedMessage.config.showDialogOnStartup;
+            g_pConfig->perAppInputState = nextPerAppInputState ? 1 : 0;
+            wcsncpy_s(g_pConfig->macroFilePath, parsedMessage.config.macroFilePath, _TRUNCATE);
+
+            const std::wstring focusedAppId = ResolveForegroundAppId();
+            if (!nextPerAppInputState) {
+                g_pConfig->inputEnabled = requestedInputEnabled;
+                SetPerAppInputStateSeed(requestedInputEnabled);
+            } else {
+                if (!previousPerAppInputState) {
+                    SetPerAppInputStateSeed(g_pConfig->inputEnabled);
+                }
+                SetInputEnabledForApp(g_pConfig, focusedAppId, requestedInputEnabled);
+            }
+
+            if (!SaveConfigToFile(g_pConfig)) {
+                updateHr = E_FAIL;
+            }
+        }
+        UnlockConfig();
+        return updateHr;
+    } else if (parsedMessage.type == SettingsHostMessageType::UpdateBlacklist) {
+        SaveBlacklist(parsedMessage.blacklist);
+        ReloadBlacklist();
+    } else if (parsedMessage.type == SettingsHostMessageType::RequestConfig ||
+               parsedMessage.type == SettingsHostMessageType::UiReady) {
+        UniKeyConfig configSnapshot = {};
+        bool hasConfigSnapshot = false;
+        if (LockConfig()) {
             if (g_pConfig) {
-                g_pConfig->inputEnabled   = jsonExtractBool(message, L"inputEnabled") ? 1 : 0;
-                g_pConfig->inputMethod    = (uint8_t)jsonExtractInt(message, L"inputMethod");
-                g_pConfig->charset        = (uint8_t)jsonExtractInt(message, L"charset");
-                g_pConfig->toneType       = (uint8_t)jsonExtractInt(message, L"toneType");
-                g_pConfig->spellCheck     = jsonExtractBool(message, L"spellCheck") ? 1 : 0;
-                g_pConfig->macroEnabled   = jsonExtractBool(message, L"macroEnabled") ? 1 : 0;
-                g_pConfig->freeToneMarking= jsonExtractBool(message, L"freeToneMarking") ? 1 : 0;
-                g_pConfig->toggleKey      = (uint8_t)jsonExtractInt(message, L"toggleKey");
-                g_pConfig->restoreKeyEnabled = jsonExtractBool(message, L"restoreKeyEnabled") ? 1 : 0;
-                g_pConfig->useClipboardForUnicode = jsonExtractBool(message, L"useClipboardForUnicode") ? 1 : 0;
-                g_pConfig->showDialogOnStartup = jsonExtractBool(message, L"showDialogOnStartup") ? 1 : 0;
-                g_pConfig->perAppInputState = jsonExtractBool(message, L"perAppInputState") ? 1 : 0;
-
-                std::wstring macroPath = jsonExtractString(message, L"macroFilePath");
-                wcsncpy_s(g_pConfig->macroFilePath, macroPath.c_str(), 259);
-
-                SaveConfigToFile(g_pConfig);
+                configSnapshot = *g_pConfig;
+                hasConfigSnapshot = true;
             }
-            ReleaseMutex(hMutex);
-            CloseHandle(hMutex);
+            UnlockConfig();
         }
-    }
-    else if (message.find(L"\"type\":\"UPDATE_BLACKLIST\"") != std::wstring::npos) {
-        size_t vpos = message.find(L"\"value\":[");
-        if (vpos != std::wstring::npos) {
-            std::vector<std::wstring> list;
-            size_t start = vpos + 9;
-            while (start < message.length()) {
-                size_t quote1 = message.find(L"\"", start);
-                if (quote1 == std::wstring::npos) break;
-                size_t quote2 = message.find(L"\"", quote1 + 1);
-                if (quote2 == std::wstring::npos) break;
-                
-                std::wstring procName = message.substr(quote1 + 1, quote2 - quote1 - 1);
-                if (!procName.empty()) {
-                    list.push_back(procName);
-                }
-                
-                start = quote2 + 1;
-                size_t comma = message.find(L",", start);
-                size_t bracket = message.find(L"]", start);
-                if (bracket != std::wstring::npos && (comma == std::wstring::npos || bracket < comma)) {
-                    break;
-                }
+        if (hasConfigSnapshot) {
+            if (configSnapshot.perAppInputState) {
+                configSnapshot.inputEnabled = ResolveEffectiveInputEnabled(configSnapshot, ResolveForegroundAppId());
             }
-            SaveBlacklist(list);
-            ReloadBlacklist();
-        }
-    }
-    else if (message.find(L"\"type\":\"REQ_CONFIG\"") != std::wstring::npos ||
-             message.find(L"\"type\":\"UI_READY\"") != std::wstring::npos) {
-        if (g_pConfig) {
-            PostConfigMessage(*g_pConfig);
+            PostConfigMessage(configSnapshot);
         }
         // Also send auto-start state
         bool autoStart = IsAutoStartEnabled();
-        std::wstring autoJson = L"{\"type\":\"AUTOSTART_STATE\",\"enabled\":";
-        autoJson += autoStart ? L"true" : L"false";
-        autoJson += L"}";
-        _webview->PostWebMessageAsJson(autoJson.c_str());
-    }
-    else if (message.find(L"\"type\":\"SET_AUTOSTART\"") != std::wstring::npos) {
-        bool enable = jsonExtractBool(message, L"enabled");
-        SetAutoStart(enable);
-    }
-    else if (message.find(L"\"type\":\"REQ_BLACKLIST\"") != std::wstring::npos) {
-        std::vector<std::wstring> list = LoadBlacklist();
-        std::wstringstream ss;
-        ss << L"{\"type\":\"BLACKLIST_DATA\",\"value\":[";
-        for (size_t i = 0; i < list.size(); ++i) {
-            ss << L"\"" << list[i] << L"\"";
-            if (i < list.size() - 1) ss << L",";
+        const std::wstring autoJson = BuildAutostartStateMessage(autoStart);
+        return _webview->PostWebMessageAsJson(autoJson.c_str());
+    } else if (parsedMessage.type == SettingsHostMessageType::SetAutostart) {
+        if (!SetAutoStart(parsedMessage.enabled)) {
+            return E_FAIL;
         }
-        ss << L"]}";
-        _webview->PostWebMessageAsJson(ss.str().c_str());
+    } else if (parsedMessage.type == SettingsHostMessageType::RequestBlacklist) {
+        const std::vector<std::wstring> list = LoadBlacklist();
+        const std::wstring blacklistJson = BuildBlacklistDataMessage(list);
+        return _webview->PostWebMessageAsJson(blacklistJson.c_str());
     }
 
     return S_OK;
 
-}
-
-std::wstring SettingsWebView::SerializeConfigToJson(const UniKeyConfig& config) {
-    std::wstringstream ss;
-    ss << L"{"
-       << L"\"version\":" << config.version << L","
-       << L"\"inputEnabled\":" << (config.inputEnabled ? L"true" : L"false") << L","
-       << L"\"inputMethod\":" << (int)config.inputMethod << L","
-       << L"\"charset\":" << (int)config.charset << L","
-       << L"\"toneType\":" << (int)config.toneType << L","
-       << L"\"spellCheck\":" << (config.spellCheck ? L"true" : L"false") << L","
-       << L"\"macroEnabled\":" << (config.macroEnabled ? L"true" : L"false") << L","
-       << L"\"freeToneMarking\":" << (config.freeToneMarking ? L"true" : L"false") << L","
-       << L"\"toggleKey\":" << (int)config.toggleKey << L","
-       << L"\"restoreKeyEnabled\":" << (config.restoreKeyEnabled ? L"true" : L"false") << L","
-       << L"\"useClipboardForUnicode\":" << (config.useClipboardForUnicode ? L"true" : L"false") << L","
-       << L"\"showDialogOnStartup\":" << (config.showDialogOnStartup ? L"true" : L"false") << L","
-       << L"\"perAppInputState\":" << (config.perAppInputState ? L"true" : L"false") << L","
-       << L"\"macroFilePath\":\"";
-
-    // Basic escaping for the path (only backslashes for now)
-    for (size_t i = 0; i < 260 && config.macroFilePath[i] != L'\0'; ++i) {
-        if (config.macroFilePath[i] == L'\\') ss << L"\\\\";
-        else ss << config.macroFilePath[i];
-    }
-
-    ss << L"\"}";
-    return ss.str();
 }

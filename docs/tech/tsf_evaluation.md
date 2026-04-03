@@ -37,21 +37,23 @@ The keyboard hook (`WH_KEYBOARD_LL`) provides:
 
 ## Recommendation
 
-**Keep the hybrid architecture.** The keyboard hook should remain the primary input mechanism for reliability and user experience. The TSF DLL should be maintained as an optional component for:
+**Keep the current hybrid architecture as the present-day runtime truth, while modernizing toward a TSF-primary target state only behind evidence-backed gates.** The keyboard hook remains the current primary mechanism today for reliability and startup simplicity, while the TSF DLL remains an active integration path that should continue to mature.
 
-1. **Future UWP deep integration** — when/if the Windows input model stabilizes
-2. **System language bar presence** — showing UniKey in the language bar for discoverability
-3. **Composition window** — for applications that benefit from a candidate list UI
+In the current repo state, TSF should be maintained as a first-class migration target rather than treated as a permanently secondary feature. That means:
+
+1. **Current truth:** hook-primary hybrid runtime
+2. **Near-term objective:** harden contracts, validation, and routing ownership
+3. **Long-term objective:** allow TSF-primary rollout only after app-matrix and regression evidence is complete
 
 ### Roadmap
 
 | Phase | Action | Priority |
 |---|---|---|
 | **Now** | Maintain TSF DLL compiled + registered, but hook does the work | ✅ Done |
-| **Next** | Add per-app mode memory (remember E/V state per application) | Medium |
-| **Future** | Explore `ITfFnReconversion` for richer TSF integration | Low |
-| **Long-term** | Evaluate `InputPane` API for touch/tablet input | Low |
+| **Next** | Unify config contracts, harden the WebView bridge, and make routing ownership explicit | High |
+| **Future** | Reach evidence-backed hook/TSF parity across the blocking app matrix | High |
+| **Long-term** | Flip to guarded TSF-primary only when fallback and diagnostics are proven | High |
 
 ## Conclusion
 
-The keyboard hook is the correct primary mechanism for a Vietnamese IME on Windows. TSF adds value as a supplementary channel but should **not** be the sole input path due to the activation UX barrier and COM reliability issues. The current hybrid design gives the best of both worlds: instant activation via hook, plus TSF registration for system integration.
+The current hybrid design is the truthful description of the repo **today**. It should not be treated as proof that hybrid is the final architecture forever. The correct next step is to keep current reliability while reducing contract drift, improving routing control, and earning any future TSF-primary claim with explicit validation evidence.

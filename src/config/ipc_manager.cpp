@@ -1,4 +1,5 @@
 #include "ipc_manager.h"
+#include "../engine/per_app_input_state.h"
 #include <shlobj.h>
 #include <sddl.h>
 #include <fstream>
@@ -52,7 +53,8 @@ bool SaveConfigToFile(const UniKeyConfig* pConfig)
     std::ofstream file(path, std::ios::binary | std::ios::trunc);
     if (!file.is_open()) return false;
 
-    file.write(reinterpret_cast<const char*>(pConfig), sizeof(UniKeyConfig));
+    const UniKeyConfig persisted = BuildPersistedConfigSnapshot(*pConfig);
+    file.write(reinterpret_cast<const char*>(&persisted), sizeof(UniKeyConfig));
     return file.good();
 }
 
@@ -109,6 +111,13 @@ bool InitSharedMemory()
 
     // Mutex must also have the Security Descriptor so UWP can open/wait it
     g_hSharedMutex = CreateMutexW(&sa, FALSE, UNIKEY_SHARED_MUTEX_NAME);
+    if (!g_hSharedMutex) {
+        UnmapViewOfFile(g_pConfig);
+        g_pConfig = nullptr;
+        CloseHandle(g_hMapFile);
+        g_hMapFile = nullptr;
+        return false;
+    }
 
     // Initial load (shared mutex is already created)
     if (LockConfig()) {
@@ -130,6 +139,7 @@ bool InitSharedMemory()
                 g_pConfig->perAppInputState = 0;
                 g_pConfig->macroFilePath[0] = L'\0';
             }
+            SetPerAppInputStateSeed(g_pConfig->inputEnabled);
         }
         UnlockConfig();
     }
@@ -163,11 +173,13 @@ bool LockConfig()
     if (g_hSharedMutex) {
         // Use timeout to prevent deadlock if another process crashes while holding lock
         DWORD waitResult = WaitForSingleObject(g_hSharedMutex, 500);
+        if (waitResult == WAIT_OBJECT_0 || waitResult == WAIT_ABANDONED) {
+            return true;
+        }
         if (waitResult == WAIT_TIMEOUT || waitResult == WAIT_FAILED) {
             // Lock acquisition failed, do not barge into critical section
             return false;
         }
-        return true;
     }
     return false;
 }
