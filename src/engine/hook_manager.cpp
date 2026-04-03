@@ -42,7 +42,7 @@ static bool g_bOtherKeyPressed = false;
 
 // --- Window handle of the main app (for PostMessage) ---
 static HWND g_hMainWnd = nullptr;
-static constexpr ULONGLONG kRestoreReplayTimeoutMs = 1000;
+static constexpr ULONGLONG kRestoreReplayTimeoutMs = 2000;
 
 static void TraceRoutingDecision(const RoutingDecision& decision)
 {

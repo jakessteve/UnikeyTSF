@@ -28,7 +28,20 @@ struct SafeSvcRef {
     ~SafeSvcRef() { if(p) p->Release(); }
 };
 
-static constexpr ULONGLONG kCommittedEditTimeoutMs = 1000;
+static constexpr ULONGLONG kCommittedEditTimeoutMs = 2000;
+
+// Thread-safe tick accessors for _lastCommittedTick
+// Uses Interlocked operations to safely access from async edit sessions
+inline ULONGLONG CUniKeyTextService::_GetLastCommittedTick() const {
+    // Volatile read - on x64, aligned ULONGLONG reads are atomic
+    return _lastCommittedTick;
+}
+
+inline void CUniKeyTextService::_SetLastCommittedTick(ULONGLONG tick) {
+    // Use InterlockedExchange64 for atomic write
+    InterlockedExchange64(
+        reinterpret_cast<volatile LONG64*>(&const_cast<ULONGLONG&>(_lastCommittedTick)), tick);
+}
 
 static HRESULT RequestEditSessionWithFallback(
     ITfContext* pContext,
@@ -116,6 +129,7 @@ CUniKeyTextService::CUniKeyTextService()
     , _hasLastAppliedConfig(false)
     , _tsfContextActive(false)
     , _lastRoutingOwner(ROUTING_OWNER_NONE)
+    , _editSessionInProgress(false)
 {
     InterlockedIncrement(&g_cDllRef); // Keep DLL from unloading while active
 
@@ -272,7 +286,7 @@ STDMETHODIMP CUniKeyTextService::OnSetFocus(
 
     if (_lastRoutingOwner != ROUTING_OWNER_TSF) {
         _engine.Clear();
-        _lastCommittedTick = 0;
+        _SetLastCommittedTick(0);
     }
 
     return S_OK;
@@ -348,31 +362,38 @@ HRESULT CUniKeyTextService::OnKeyDown(
     _lastRoutingOwner = routingDecision.owner;
     if (routingDecision.owner != ROUTING_OWNER_TSF) {
         _engine.Clear();
-        _lastCommittedTick = 0;
+        _SetLastCommittedTick(0);
         return S_OK;
     }
 
-    if (_engine.IsInWord()) {
-        _lastCommittedTick = 0;
+    // Debounce: skip if an edit session is already in progress (prevents fast typing race conditions)
+    if (_editSessionInProgress) {
+        return S_OK;
     }
 
     // Handle backspace
     if (wParam == VK_BACK) {
         if (_engine.IsInWord()) {
             _engine.RemoveLastChar();
-            
+
+            std::shared_ptr<bool> sessionDone = std::make_shared<bool>(false);
+            _editSessionInProgress = true;
             ComPtr<CEditSession> pEditSession;
             if (_engine.IsInWord()) {
-                pEditSession.Attach(new CEditSession([this, pContext, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                pEditSession.Attach(new CEditSession([this, pContext, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                    *sessionDone = true;
+                    _editSessionInProgress = false;
                     return _composition.UpdateComposition(ec, pContext, _engine.GetCompositionString());
                 }));
             } else {
-                pEditSession.Attach(new CEditSession([this, pContext, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                pEditSession.Attach(new CEditSession([this, pContext, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                    *sessionDone = true;
+                    _editSessionInProgress = false;
                     _composition.UpdateComposition(ec, pContext, L"");
                     return _composition.EndComposition(ec);
                 }));
             }
-            
+
             RequestEditSessionWithFallback(pContext, _tfClientId, pEditSession.Get(), TF_ES_READWRITE);
             if (pfEaten) *pfEaten = TRUE;
             return S_OK;
@@ -383,11 +404,15 @@ HRESULT CUniKeyTextService::OnKeyDown(
     // Handle Escape
     if (wParam == VK_ESCAPE) {
         if (_composition.IsComposing()) {
+            std::shared_ptr<bool> sessionDone = std::make_shared<bool>(false);
+            _editSessionInProgress = true;
             ComPtr<CEditSession> pEditSession;
-            pEditSession.Attach(new CEditSession([this, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+            pEditSession.Attach(new CEditSession([this, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                *sessionDone = true;
+                _editSessionInProgress = false;
                 return _composition.EndComposition(ec);
             }));
-            
+
             RequestEditSessionWithFallback(pContext, _tfClientId, pEditSession.Get(), TF_ES_READWRITE);
             _engine.Clear();
             if (pfEaten) *pfEaten = TRUE;
@@ -397,8 +422,12 @@ HRESULT CUniKeyTextService::OnKeyDown(
 
     if (_engine.IsInWord() && IsNonTextCommitKey(wParam)) {
         if (_composition.IsComposing()) {
+            std::shared_ptr<bool> sessionDone = std::make_shared<bool>(false);
+            _editSessionInProgress = true;
             ComPtr<CEditSession> pEditSession;
-            pEditSession.Attach(new CEditSession([this, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+            pEditSession.Attach(new CEditSession([this, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                *sessionDone = true;
+                _editSessionInProgress = false;
                 return _composition.EndComposition(ec);
             }));
             RequestEditSessionWithFallback(pContext, _tfClientId, pEditSession.Get(), TF_ES_READWRITE);
@@ -415,19 +444,24 @@ HRESULT CUniKeyTextService::OnKeyDown(
     if (ToUnicodeEx((UINT)wParam, (UINT)(lParam >> 16) & 0xFF, keyboardState, &ch, 1, 4, GetKeyboardLayout(0)) > 0) {
         const InputMethod method = (InputMethod)_config.inputMethod;
         const bool isModifierKey = _engine.IsPotentialModifier(ch, method);
+        const ULONGLONG lastCommitted = _GetLastCommittedTick();
         const bool withinRecentCommitWindow =
-            _lastCommittedTick != 0 &&
-            (GetTickCount64() - _lastCommittedTick) <= kCommittedEditTimeoutMs;
+            lastCommitted != 0 &&
+            (GetTickCount64() - lastCommitted) <= kCommittedEditTimeoutMs;
 
         if (!_engine.IsInWord() &&
             _config.restoreKeyEnabled &&
             withinRecentCommitWindow &&
             isModifierKey) {
             std::shared_ptr<EditSessionFlag> updatedCommittedWord = std::make_shared<EditSessionFlag>();
+            std::shared_ptr<bool> sessionDone = std::make_shared<bool>(false);
+            _editSessionInProgress = true;
             ComPtr<ITfContext> committedContext = pContext;
             ComPtr<CEditSession> pCommittedEditSession;
             pCommittedEditSession.Attach(new CEditSession(
-                [this, committedContext, ch, method, withinRecentCommitWindow, updatedCommittedWord, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                [this, committedContext, ch, method, withinRecentCommitWindow, updatedCommittedWord, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                    *sessionDone = true;
+                    _editSessionInProgress = false;
                     TF_SELECTION tfSelection = {};
                     ULONG fetched = 0;
                     if (FAILED(committedContext->GetSelection(ec, TF_DEFAULT_SELECTION, 1, &tfSelection, &fetched)) || fetched != 1) {
@@ -510,7 +544,7 @@ HRESULT CUniKeyTextService::OnKeyDown(
             HRESULT hrCommittedEdit = RequestEditSessionWithFallback(
                 pContext, _tfClientId, pCommittedEditSession.Get(), TF_ES_READWRITE);
             if (SUCCEEDED(hrCommittedEdit) && updatedCommittedWord->value) {
-                _lastCommittedTick = 0;
+                _SetLastCommittedTick(0);
                 if (pfEaten) *pfEaten = TRUE;
                 return S_OK;
             }
@@ -521,9 +555,13 @@ HRESULT CUniKeyTextService::OnKeyDown(
             _config.restoreKeyEnabled &&
             (_engine.IsWordChar(ch, method) || isModifierKey)) {
             std::shared_ptr<EditSessionFlag> reopenedWord = std::make_shared<EditSessionFlag>();
+            std::shared_ptr<bool> sessionDone = std::make_shared<bool>(false);
+            _editSessionInProgress = true;
             ComPtr<ITfContext> reconvertContext = pContext;
             ComPtr<CEditSession> pReconvertSession;
-            pReconvertSession.Attach(new CEditSession([this, reconvertContext, ch, method, isModifierKey, reopenedWord, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+            pReconvertSession.Attach(new CEditSession([this, reconvertContext, ch, method, isModifierKey, reopenedWord, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                *sessionDone = true;
+                _editSessionInProgress = false;
                 TF_SELECTION tfSelection = {};
                 ULONG fetched = 0;
                 if (FAILED(reconvertContext->GetSelection(ec, TF_DEFAULT_SELECTION, 1, &tfSelection, &fetched)) || fetched != 1) {
@@ -611,20 +649,25 @@ HRESULT CUniKeyTextService::OnKeyDown(
             HRESULT hrReconvert = RequestEditSessionWithFallback(
                 pContext, _tfClientId, pReconvertSession.Get(), TF_ES_READWRITE);
             if (SUCCEEDED(hrReconvert) && reopenedWord->value) {
-                _lastCommittedTick = 0;
+                _SetLastCommittedTick(0);
                 if (pfEaten) *pfEaten = TRUE;
                 return S_OK;
             }
         }
 
         if (_engine.ProcessKey(ch, method)) {
-            _lastCommittedTick = 0;
+            _SetLastCommittedTick(0);
             if (pfEaten) *pfEaten = TRUE;
 
             // Trigger Edit Session to update composition
+            // Use shared_ptr to clear flag when session completes
+            std::shared_ptr<bool> sessionDone = std::make_shared<bool>(false);
+            _editSessionInProgress = true;
             ComPtr<ITfContext> compositionContext = pContext;
             ComPtr<CEditSession> pEditSession;
-            pEditSession.Attach(new CEditSession([this, compositionContext, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+            pEditSession.Attach(new CEditSession([this, compositionContext, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                *sessionDone = true;
+                _editSessionInProgress = false;
                 return _composition.UpdateComposition(ec, compositionContext.Get(), _engine.GetCompositionString());
             }));
 
@@ -636,25 +679,31 @@ HRESULT CUniKeyTextService::OnKeyDown(
                 std::wstring currentWord = _engine.GetCompositionString();
                 std::wstring expanded = _config.macroEnabled ? _macroEngine.Expand(currentWord) : L"";
 
+                std::shared_ptr<bool> sessionDone = std::make_shared<bool>(false);
+                _editSessionInProgress = true;
                 ComPtr<ITfContext> compositionContext = pContext;
                 ComPtr<CEditSession> pEditSession;
                 if (!expanded.empty()) {
-                    pEditSession.Attach(new CEditSession([this, compositionContext, expanded, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                    pEditSession.Attach(new CEditSession([this, compositionContext, expanded, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                        *sessionDone = true;
+                        _editSessionInProgress = false;
                         _composition.UpdateComposition(ec, compositionContext.Get(), expanded);
                         return _composition.EndComposition(ec);
                     }));
                 } else {
-                    pEditSession.Attach(new CEditSession([this, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                    pEditSession.Attach(new CEditSession([this, sessionDone, self = SafeSvcRef(this)](TfEditCookie ec) -> HRESULT {
+                        *sessionDone = true;
+                        _editSessionInProgress = false;
                         return _composition.EndComposition(ec);
                     }));
                 }
                 
                 RequestEditSessionWithFallback(pContext, _tfClientId, pEditSession.Get(), TF_ES_READWRITE);
-                _lastCommittedTick = GetTickCount64();
+                _SetLastCommittedTick(GetTickCount64());
             } else if (hadCommittedWord) {
-                _lastCommittedTick = GetTickCount64();
+                _SetLastCommittedTick(GetTickCount64());
             } else {
-                _lastCommittedTick = 0;
+                _SetLastCommittedTick(0);
             }
             _engine.Clear();
             // DON'T eat the key — let the app handle the space/punctuation naturally

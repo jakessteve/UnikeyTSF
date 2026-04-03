@@ -63,6 +63,10 @@ private:
     // Helper to read shared config
     void _UpdateConfig();
 
+    // Thread-safe accessors for _lastCommittedTick (accessed from async edit sessions)
+    ULONGLONG _GetLastCommittedTick() const;
+    void _SetLastCommittedTick(ULONGLONG tick);
+
     LONG                  _refCount;
     ComPtr<ITfThreadMgr>  _pThreadMgr;
     TfClientId            _tfClientId;
@@ -83,7 +87,9 @@ private:
     bool                  _hasLastAppliedConfig;
     bool                  _isBlacklisted;
     std::wstring          _currentAppId;
-    ULONGLONG             _lastCommittedTick;
+    volatile ULONGLONG    _lastCommittedTick;
     bool                  _tsfContextActive;
     InputRoutingOwner     _lastRoutingOwner;
+    // Debounce flag to prevent concurrent edit sessions during fast typing
+    volatile bool         _editSessionInProgress;
 };
